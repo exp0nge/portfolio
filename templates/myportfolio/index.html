@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Index{% endblock %}
+
+{% block nav_block %}
+<li class="active"><a href="{% url 'index' %}">Home</a></li>
+<li><a href="{% url 'project_list' %}">Projects</a></li>
+<li><a href="#">Resume</a></li>
+<li><a href="#">Contact</a></li>
+{% endblock %}
+
+{% block body_block %}
+something
+{% endblock %}

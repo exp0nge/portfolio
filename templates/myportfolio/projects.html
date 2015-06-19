@@ -1,0 +1,17 @@
+{% if projects_list %}
+<ul class="nav nav-sidebar">
+    <li role="separator" class="divider"></li>
+    <li>Projects</li>
+    {% for c in projects_list %}
+        {% if c == act_project %}
+        <li  class="active" >
+        {% else  %}
+        <li>{% endif %}
+            <a href="{% url 'project'  c.slug %}">{{ c.title }}</a></li>
+    {% endfor %}
+
+{% else %}
+    <li> <strong >No projects available.</strong></li>
+
+    </ul>
+{% endif %}
