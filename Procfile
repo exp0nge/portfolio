@@ -1,1 +1,1 @@
-web: gunicorn myapp.wsgi
+web: cd myportfolio && gunicorn app.wsgi:application -b "0.0.0.0:$PORT" -w 2
