@@ -2,22 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="956e7313-c6d8-47d9-8a36-042eae735211" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/portfolio/.gitignore" />
-      <change type="DELETED" beforePath="C:\Users\unid\Desktop\portfolio\db.sqlite3" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\unid\Desktop\portfolio\portfolio\myportfolio\__init__.py" afterPath="$PROJECT_DIR$/myportfolio/__init__.py" />
-      <change type="MOVED" beforePath="C:\Users\unid\Desktop\portfolio\portfolio\myportfolio\admin.py" afterPath="$PROJECT_DIR$/myportfolio/admin.py" />
-      <change type="MOVED" beforePath="C:\Users\unid\Desktop\portfolio\portfolio\myportfolio\migrations\0001_initial.py" afterPath="$PROJECT_DIR$/myportfolio/migrations/0001_initial.py" />
-      <change type="MOVED" beforePath="C:\Users\unid\Desktop\portfolio\portfolio\myportfolio\migrations\0002_project_lang_type.py" afterPath="$PROJECT_DIR$/myportfolio/migrations/0002_project_lang_type.py" />
-      <change type="MOVED" beforePath="C:\Users\unid\Desktop\portfolio\portfolio\myportfolio\migrations\__init__.py" afterPath="$PROJECT_DIR$/myportfolio/migrations/__init__.py" />
-      <change type="MOVED" beforePath="C:\Users\unid\Desktop\portfolio\portfolio\myportfolio\models.py" afterPath="$PROJECT_DIR$/myportfolio/models.py" />
-      <change type="MOVED" beforePath="C:\Users\unid\Desktop\portfolio\portfolio\myportfolio\templatetags\__init__.py" afterPath="$PROJECT_DIR$/myportfolio/templatetags/__init__.py" />
-      <change type="MOVED" beforePath="C:\Users\unid\Desktop\portfolio\portfolio\myportfolio\templatetags\portfolio_extras.py" afterPath="$PROJECT_DIR$/myportfolio/templatetags/portfolio_extras.py" />
-      <change type="MOVED" beforePath="C:\Users\unid\Desktop\portfolio\portfolio\myportfolio\tests.py" afterPath="$PROJECT_DIR$/myportfolio/tests.py" />
-      <change type="MOVED" beforePath="C:\Users\unid\Desktop\portfolio\portfolio\myportfolio\urls.py" afterPath="$PROJECT_DIR$/myportfolio/urls.py" />
-      <change type="MOVED" beforePath="C:\Users\unid\Desktop\portfolio\portfolio\myportfolio\views.py" afterPath="$PROJECT_DIR$/myportfolio/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/images/GitHub-Mark-64px.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/images/avatar.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/images/bg-cyan.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/myportfolio/index.html" afterPath="$PROJECT_DIR$/templates/myportfolio/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/portfolio/settings.py" afterPath="$PROJECT_DIR$/portfolio/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="portfolio.iws" />
@@ -92,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6057971">
-              <caret line="60" column="107" selection-start-line="60" selection-start-column="107" selection-end-line="60" selection-end-column="107" />
+            <state vertical-scroll-proportion="-5.230769">
+              <caret line="53" column="160" selection-start-line="53" selection-start-column="160" selection-end-line="53" selection-end-column="160" />
               <folding />
             </state>
           </provider>
@@ -132,11 +121,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/myportfolio/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.730769">
-              <caret line="15" column="122" selection-start-line="15" selection-start-column="122" selection-end-line="15" selection-end-column="122" />
+            <state vertical-scroll-proportion="0.24709302">
+              <caret line="5" column="62" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -184,8 +173,8 @@
         <option value="$PROJECT_DIR$/myportfolio/urls.py" />
         <option value="$PROJECT_DIR$/portfolio/settings.py" />
         <option value="$PROJECT_DIR$/myportfolio/views.py" />
-        <option value="$PROJECT_DIR$/templates/myportfolio/index.html" />
         <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/templates/myportfolio/index.html" />
       </list>
     </option>
   </component>
@@ -562,21 +551,29 @@
       <option name="number" value="Default" />
       <updated>1434729861686</updated>
     </task>
+    <task id="LOCAL-00001" summary="Changing basic layout, adding fixed-navbar, addinb labels.">
+      <created>1436141582308</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1436141582308</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26096824" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26096824" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3316583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33221477" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -599,6 +596,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changing basic layout, adding fixed-navbar, addinb labels." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changing basic layout, adding fixed-navbar, addinb labels." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -823,11 +824,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/images/zed.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myportfolio/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -878,18 +874,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/myportfolio/index.html">
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.730769">
-          <caret line="15" column="122" selection-start-line="15" selection-start-column="122" selection-end-line="15" selection-end-column="122" />
+        <state vertical-scroll-proportion="-5.230769">
+          <caret line="53" column="160" selection-start-line="53" selection-start-column="160" selection-end-line="53" selection-end-column="160" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
+    <entry file="file://$PROJECT_DIR$/templates/myportfolio/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6057971">
-          <caret line="60" column="107" selection-start-line="60" selection-start-column="107" selection-end-line="60" selection-end-column="107" />
+        <state vertical-scroll-proportion="0.24709302">
+          <caret line="5" column="62" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
           <folding />
         </state>
       </provider>
