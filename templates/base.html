@@ -5,6 +5,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>MD Islam - Portfolio - {% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
 
      <!-- Bootstrap core CSS -->
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -36,6 +37,7 @@
             <li><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
             <li><a href="#project_anchor"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Projects</a></li>
             <li><a href="#resume"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>Resume</a></li>
+              <li><a href="#contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -63,6 +65,13 @@
                     {% block resume_block %}{% endblock %}
                 </div>
             </div>
+            <a name="contact"></a>
+        <div class="container">
+            <div align="center"><span class="label label-info"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</span></div>
+            <div class="well">
+                {% block contact %}{% endblock %}
+            </div>
+        </div>
 
 
 <!-- Bootstrap core JavaScript
