@@ -1,13 +1,41 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block title %}Index{% endblock %}
 
-{% block nav_block %}
-<li class="active"><a href="{% url 'index' %}">Home</a></li>
-<li><a href="{% url 'project_list' %}">Projects</a></li>
-<li><a href="#">Resume</a></li>
-<li><a href="#">Contact</a></li>
+{% block about_me_block %}
+
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis accumsan sem, id condimentum diam dignissim
+et. Nunc tempor eros vestibulum leo consequat, sed molestie odio gravida. Nullam dignissim ex sit amet finibus dictum.
+Maecenas et urna mauris. Nam pellentesque suscipit lorem, quis placerat metus vehicula tempus. Nam non neque massa.
+Donec nec odio in ante volutpat laoreet sit amet vitae leo. Morbi facilisis est interdum ante sagittis malesuada.
+Sed sed tortor id quam eleifend pharetra. Morbi urna eros, lobortis quis lacus a, tempor semper nulla. Morbi eu accumsan
+metus, quis suscipit lacus. Cras imperdiet a purus sed feugiat. Integer nisl est, consectetur et vestibulum in,
+eleifend quis dolor. In sagittis quam vel felis cursus vulputate.
+</p>
+<a href="https://github.com/exp0nge"> <div align="center"><img src="{% static 'images/GitHub-Mark-64px.png' %}"></div></a>
 {% endblock %}
 
-{% block body_block %}
-something
+{% block projects_block %}
+{% if projects %}
+{% for p in projects %}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="page-header">
+        <h3>{{ p.title }}
+            <a href="{{ p.github_url }}" role="button" class="btn btn-primary">
+                <i class="glyphicon glyphicon-share-alt"></i> GitHub Link</a></h3>
+    </div>
+    <div >{{ p.description }}</div>
+      </div>
+    </div>
+    {% endfor %}
+{% endif %}
 {% endblock %}
+
+{% block resume_block %}
+      <div align="center">
+          <iframe src="https://drive.google.com/file/d/0B9XWpLcVdKtjM09FRkJTbUgyREU/preview" width="640" height="480"></iframe>
+      </div>
+
+      {% endblock %}

@@ -1,10 +1,17 @@
 from django.shortcuts import render
-from models import Project
+
+from myportfolio.models import Project
 
 def index(request):
     context_dict = {}
-    project_list = Project.objects.all()
-    context_dict['projects'] = project_list
+    p_list = Project.objects.all()
+    context_dict['projects'] = p_list
+    projects = {}
+    for p in p_list:
+        projects['project_title'] = p.title
+        projects['description'] = p.description
+        projects['github_url'] = p.github_url
+        projects['a_project'] = p
 
     return render(request, 'myportfolio/index.html', context_dict)
 
