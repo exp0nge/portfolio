@@ -13,7 +13,7 @@ def index(request):
         projects['github_url'] = p.github_url
         projects['a_project'] = p
 
-    return render(request, 'myportfolio/index.html', context_dict)
+    return render(request, 'myportfolio/material.html', context_dict)
 
 def project(request, project_title_slug):
     context_dict = {}

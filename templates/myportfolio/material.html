@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MD R. Islam | Portfolio</title>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.indigo-pink.min.css">
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <style>
+  .demo-card-wide.mdl-card {
+    width: 512px;
+  }
+  .demo-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+    background: url("{% static 'images/bg-cyan.png' %}") center / cover;
+  }
+  .demo-card-wide > .mdl-card__menu {
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+<!-- Simple header with fixed tabs. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+            mdl-layout--fixed-tabs">
+    <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">MD R. Islam | Portfolio</span>
+    </div>
+    <!-- Tabs -->
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+      <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Home</a>
+      <a href="#fixed-tab-2" class="mdl-layout__tab">Projects</a>
+      <a href="#fixed-tab-3" class="mdl-layout__tab">Resume</a>
+    </div>
+  </header>
+
+  <main class="mdl-layout__content">
+    <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+      <div class="page-content">
+          <div align="center"><img src="{% static 'images/avatar.png' %}"></div>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis accumsan sem, id condimentum diam dignissim
+et. Nunc tempor eros vestibulum leo consequat, sed molestie odio gravida. Nullam dignissim ex sit amet finibus dictum.
+Maecenas et urna mauris. Nam pellentesque suscipit lorem, quis placerat metus vehicula tempus. Nam non neque massa.
+Donec nec odio in ante volutpat laoreet sit amet vitae leo. Morbi facilisis est interdum ante sagittis malesuada.
+Sed sed tortor id quam eleifend pharetra. Morbi urna eros, lobortis quis lacus a, tempor semper nulla. Morbi eu accumsan
+metus, quis suscipit lacus. Cras imperdiet a purus sed feugiat. Integer nisl est, consectetur et vestibulum in,
+eleifend quis dolor. In sagittis quam vel felis cursus vulputate.
+</p>
+
+      </div>
+    </section>
+    <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+      <div class="page-content">
+{% if projects %}
+          <div align="center">
+{% for p in projects %}
+
+          </br>
+<div class="mdl-card mdl-shadow--2dp demo-card-wide">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">{{ p.title }}</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+    {{ p.description }}
+      </div>
+        <div class="mdl-card__actions mdl-card--border">
+        <a href="{{ p.github_url }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    <img src="{% static 'images/Github-Mark-32px.png' %}">
+        </a>
+      </div>
+    </div>
+          </br>
+    {% endfor %}
+              </div>
+{% endif %}
+      </div>
+    </section>
+    <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+      <div class="page-content">
+          <div align="center">
+          <iframe src="https://drive.google.com/file/d/0B9XWpLcVdKtjM09FRkJTbUgyREU/preview" height="500"></iframe>
+      </div>
+      </div>
+    </section>
+  </main>
+    <footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer--left-section">
+      <a href="https://github.com/exp0nge"> <img src="{% static 'images/GitHub-Mark-32px.png' %}"></a>
+  </div>
+        <div class="mdl-mini-footer--right-section">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">Email</button>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
