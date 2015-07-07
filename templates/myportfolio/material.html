@@ -20,6 +20,9 @@
   .demo-card-wide > .mdl-card__menu {
     color: #fff;
   }
+  .layout-bg{
+      background: url("{% static 'images/bg-black.png' %}");
+  }
 </style>
 </head>
 <body>
@@ -27,12 +30,12 @@
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
             mdl-layout--fixed-tabs">
     <header class="mdl-layout__header">
-    <div class="mdl-layout__header-row">
+    <div class="mdl-layout__header-row layout-bg">
       <!-- Title -->
       <span class="mdl-layout-title">MD R. Islam | Portfolio</span>
     </div>
     <!-- Tabs -->
-    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect layout-bg">
       <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Home</a>
       <a href="#fixed-tab-2" class="mdl-layout__tab">Projects</a>
       <a href="#fixed-tab-3" class="mdl-layout__tab">Resume</a>
@@ -89,12 +92,13 @@ eleifend quis dolor. In sagittis quam vel felis cursus vulputate.
       </div>
     </section>
   </main>
-    <footer class="mdl-mini-footer">
+    <footer class="mdl-mini-footer layout-bg">
   <div class="mdl-mini-footer--left-section">
       <a href="https://github.com/exp0nge"> <img src="{% static 'images/GitHub-Mark-32px.png' %}"></a>
   </div>
         <div class="mdl-mini-footer--right-section">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">Email</button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">LinkedIn</button>
         </div>
     </footer>
 </div>
