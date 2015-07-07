@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="956e7313-c6d8-47d9-8a36-042eae735211" name="Default" comment="Adding language type for projects">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/images/card-bg.jpg" />
+    <list default="true" id="956e7313-c6d8-47d9-8a36-042eae735211" name="Default" comment="Adding stock photo for card.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/myportfolio/material.html" afterPath="$PROJECT_DIR$/templates/myportfolio/material.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -39,8 +38,8 @@
       <file leaf-file-name="material.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/myportfolio/material.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4857143">
-              <caret line="86" column="82" selection-start-line="86" selection-start-column="82" selection-end-line="86" selection-end-column="82" />
+            <state vertical-scroll-proportion="4.0591836">
+              <caret line="117" column="125" selection-start-line="117" selection-start-column="125" selection-end-line="117" selection-end-column="125" />
               <folding />
             </state>
           </provider>
@@ -617,7 +616,13 @@
       <option name="project" value="LOCAL" />
       <updated>1436231038033</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Adding stock photo for card.">
+      <created>1436232426602</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1436232426602</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -667,7 +672,8 @@
     <MESSAGE value="Switching to material layout" />
     <MESSAGE value="Changing background to bg-black." />
     <MESSAGE value="Adding language type for projects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding language type for projects" />
+    <MESSAGE value="Adding stock photo for card." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding stock photo for card." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -929,14 +935,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/portfolio/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myportfolio/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -979,10 +977,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/portfolio/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/myportfolio/material.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4857143">
-          <caret line="86" column="82" selection-start-line="86" selection-start-column="82" selection-end-line="86" selection-end-column="82" />
+        <state vertical-scroll-proportion="4.0591836">
+          <caret line="117" column="125" selection-start-line="117" selection-start-column="125" selection-end-line="117" selection-end-column="125" />
           <folding />
         </state>
       </provider>
