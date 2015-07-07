@@ -15,14 +15,21 @@
   .demo-card-wide > .mdl-card__title {
     color: #fff;
     height: 176px;
-    background: url("{% static 'images/bg-cyan.png' %}") center / cover;
+    background: url("{% static 'images/card-bg.jpg' %}") center / cover;
   }
   .demo-card-wide > .mdl-card__menu {
     color: #fff;
   }
-  .layout-bg{
+  .layout-bg {
       background: url("{% static 'images/bg-black.png' %}");
   }
+  .card-image{
+      background: url("{% static 'images/avatar.png' %}");
+      width: 210px;
+      height: 210px;
+      margin-left: auto;
+      margin-right: auto;
+  }      
 </style>
 </head>
 <body>
@@ -45,7 +52,13 @@
   <main class="mdl-layout__content">
     <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
       <div class="page-content">
-          <div align="center"><img src="{% static 'images/avatar.png' %}"></div>
+          
+          <div class="mdl-card mdl-shadow--2dp card-image">
+          <div class="mdl-card__title mdl-card--expand"></div>
+          <div class="mdl-card__actions">
+           
+          </div>
+        </div>
 <p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis accumsan sem, id condimentum diam dignissim
 et. Nunc tempor eros vestibulum leo consequat, sed molestie odio gravida. Nullam dignissim ex sit amet finibus dictum.
@@ -67,13 +80,15 @@ eleifend quis dolor. In sagittis quam vel felis cursus vulputate.
           </br>
 <div class="mdl-card mdl-shadow--2dp demo-card-wide">
   <div class="mdl-card__title">
-    <h2 class="mdl-card__title-text">{{ p.title }}</h2>
+    <h2 class="mdl-card__title-text">{{ p.title }} </h2>
+
   </div>
   <div class="mdl-card__supporting-text">
-    {{ p.description }}
+      <button class="mdl-button mdl-js-button" disabled>{{ p.lang_type }}</button>
+    <p>{{ p.description }}</p>
       </div>
         <div class="mdl-card__actions mdl-card--border">
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">{{ p.lang_type }}</button>
+
         <a href="{{ p.github_url }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                     <img src="{% static 'images/Github-Mark-32px.png' %}">
         </a>
@@ -99,7 +114,9 @@ eleifend quis dolor. In sagittis quam vel felis cursus vulputate.
   </div>
         <div class="mdl-mini-footer--right-section">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">Email</button>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">LinkedIn</button>
+            <a href="https://www.linkedin.com/in/mdislamr">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">LinkedIn</button>
+            </a>
         </div>
     </footer>
 </div>

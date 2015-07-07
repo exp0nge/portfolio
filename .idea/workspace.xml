@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="956e7313-c6d8-47d9-8a36-042eae735211" name="Default" comment="Changing background to bg-black.">
+    <list default="true" id="956e7313-c6d8-47d9-8a36-042eae735211" name="Default" comment="Adding language type for projects">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/images/card-bg.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/myportfolio/material.html" afterPath="$PROJECT_DIR$/templates/myportfolio/material.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -38,8 +39,8 @@
       <file leaf-file-name="material.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/myportfolio/material.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.51428574">
-              <caret line="75" column="108" selection-start-line="75" selection-start-column="108" selection-end-line="75" selection-end-column="108" />
+            <state vertical-scroll-proportion="0.4857143">
+              <caret line="86" column="82" selection-start-line="86" selection-start-column="82" selection-end-line="86" selection-end-column="82" />
               <folding />
             </state>
           </provider>
@@ -610,7 +611,13 @@
       <option name="project" value="LOCAL" />
       <updated>1436230730328</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Adding language type for projects">
+      <created>1436231038033</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1436231038033</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -659,7 +666,8 @@
     <MESSAGE value="Code cleanup" />
     <MESSAGE value="Switching to material layout" />
     <MESSAGE value="Changing background to bg-black." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changing background to bg-black." />
+    <MESSAGE value="Adding language type for projects" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding language type for projects" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -973,8 +981,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/myportfolio/material.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51428574">
-          <caret line="75" column="108" selection-start-line="75" selection-start-column="108" selection-end-line="75" selection-end-column="108" />
+        <state vertical-scroll-proportion="0.4857143">
+          <caret line="86" column="82" selection-start-line="86" selection-start-column="82" selection-end-line="86" selection-end-column="82" />
           <folding />
         </state>
       </provider>
