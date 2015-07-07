@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>MD R. Islam | Portfolio</title>
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.blue-light_blue.min.css">
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -89,7 +90,7 @@
         <div class="mdl-card__actions mdl-card--border">
 
         <a href="{{ p.github_url }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    <img src="{% static 'images/Github-Mark-32px.png' %}">
+                    <img src="{% static 'images/GitHub-Mark-32px.png' %}" alt="GitHub URL">
         </a>
       </div>
     </div>
@@ -103,14 +104,14 @@
       <div class="page-content">
           <div align="center">
               <a href="#save"> <i class="material-icons">save</i></a>
-          <iframe src="https://drive.google.com/file/d/0B9XWpLcVdKtjM09FRkJTbUgyREU/preview"height="400"></iframe>
+          <iframe src="https://drive.google.com/file/d/0B9XWpLcVdKtjM09FRkJTbUgyREU/preview" height="400"></iframe>
       </div>
       </div>
     </section>
   </main>
     <footer class="mdl-mini-footer ">
   <div class="mdl-mini-footer--left-section">
-      <a href="https://github.com/exp0nge"> <img src="{% static 'images/GitHub-Mark-32px.png' %}"></a>
+      <a href="https://github.com/exp0nge"> <img src="{% static 'images/GitHub-Mark-32px.png' %}" alt="GitHub Profile"></a>
   </div>
         <div class="mdl-mini-footer--right-section">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect material-icons">email</button>
