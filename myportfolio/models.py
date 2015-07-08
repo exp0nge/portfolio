@@ -8,6 +8,7 @@ class Project(models.Model):
     slug = models.SlugField(unique=True)
     github_url = models.URLField(default='https://github.com')
     lang_type = models.CharField(max_length=50)
+    site_url = models.URLField(blank=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)

@@ -18,6 +18,8 @@ class Migration(migrations.Migration):
                 ('description', models.CharField(max_length=500)),
                 ('slug', models.SlugField(unique=True)),
                 ('github_url', models.URLField(default=b'https://github.com')),
+                ('lang_type', models.CharField(max_length=50)),
+                ('site_url', models.URLField(blank=True)),
             ],
         ),
     ]

@@ -12,6 +12,7 @@ def index(request):
         projects['description'] = p.description
         projects['github_url'] = p.github_url
         projects['a_project'] = p
+        projects['site_url'] = p.site_url
 
     return render(request, 'myportfolio/material.html', context_dict)
 

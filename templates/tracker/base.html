@@ -23,7 +23,7 @@
     <div class="parallax"><img src="{% static 'images/parallax.png' %}"></div>
   </div>
   <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red">
+    <a class="btn-floating btn-large red {% if not user.is_authenticated %}disabled{% endif %}">
       <i class="large material-icons">more_vert</i>
     </a>
     <ul>
@@ -51,6 +51,6 @@
 <!-- Compiled and minified JavaScript -->
    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-   -<script src="http://materializecss.com/js/init.js"></script>
+   <script src="http://materializecss.com/js/init.js"></script>
 </body>
 </html>
