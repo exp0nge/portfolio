@@ -1,11 +1,9 @@
 from django import forms
-from django.contrib.auth.models import User
 
 from tracker.models import Series
 
-class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
 
+class SeriesForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ('username', 'email', 'password')
+        model = Series
+        fields = ('title', 'description', 'release_day', 'stream_site', 'cover_image_url')

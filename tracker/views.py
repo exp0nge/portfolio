@@ -1,56 +1,27 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 from tracker.models import Series
-from tracker.forms import UserForm
+from tracker.forms import SeriesForm
 
-# Create your views here.
+
+@login_required()
 def index(request):
-    context_dict = {}
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect('/tracker/login')
-    else:
-        all_series = Series.objects.all()
-        context_dict['all'] = all_series
-        return render(request, 'tracker/index.html', context_dict)
-        
-def user_login(request):
+    context_dict = {'username': request.user.username}
+    all_series = Series.objects.filter(submitted_user=request.user)
+    context_dict['series_list'] = all_series
+    return render(request, 'tracker/index.html', context_dict)
+
+@login_required()
+def add_series(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
-        if user:
-            login(request, user)
+        form = SeriesForm(request.POST)
+        if form.is_valid():
+            series = form.save(commit=False)
+            series.submitted_user = request.user
+            series.save()
             return HttpResponseRedirect('/tracker/')
-        else:
-            return HttpResponse('Invalid credentials')
     else:
-        return render(request, 'tracker/login.html', {})
-        
+        form = SeriesForm()
 
-def register(request):
-    registered = False
-    
-    if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
-        if user_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            registered = True
-        else:
-            print user_form.errors()
-
-    else:
-        user_form = UserForm()
-
-    return render(request, 'rango/register.html', {'user_form': user_form, 'registered': registered})
-        
-        
-        
-@login_required
-def user_logout(request):
-    logout(request)
-    return HttpResponseRedirect('/tracker/')
+    return render(request, 'tracker/add_series.html', {'form': form})
