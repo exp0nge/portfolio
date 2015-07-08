@@ -27,8 +27,4 @@ class Series(models.Model):
     class Meta:
         verbose_name_plural = 'series'
 
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        # TODO: Google API search for cover img
-        super(Series, self).save()
 

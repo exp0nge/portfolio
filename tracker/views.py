@@ -1,8 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect
+
 from django.contrib.auth.decorators import login_required
 
 from tracker.models import Series
 from tracker.forms import SeriesForm
+import image_search
 
 
 @login_required()
@@ -19,6 +21,9 @@ def add_series(request):
         if form.is_valid():
             series = form.save(commit=False)
             series.submitted_user = request.user
+            if not form.cleaned_data['cover_image_url']:
+                img_url = image_search.search(form.cleaned_data['title'])
+                series.cover_image_url = img_url
             series.save()
             return HttpResponseRedirect('/tracker/')
     else:
