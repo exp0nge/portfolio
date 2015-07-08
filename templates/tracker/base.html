@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MD R. Islam | > Series Tracker</title>
+      <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body>
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Series Tracker</a>
+
+    </div>
+  </nav>
+    </div>
+  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">more_vert</i>
+    </a>
+    <ul>
+      <li><a class="waves-effect waves-circle waves-light btn-floating red"><i class="material-icons">add</i></a></li>
+        {% if user.is_authenticated %}
+      <li><a href="{% url 'auth_logout' %}?next=/tracker/" class="waves-effect waves-circle waves-light btn-floating red"><i class="material-icons">directions_walk</i></a></li>
+        {% endif %}
+    </ul>
+  </div>
+
+  <div class="container">
+    <div class="section">
+       {% block main_content %}{% endblock %}
+        </div>
+      </div>
+
+<footer class="page-footer">
+  <div class="footer-copyright">
+    <div class="container">
+    <a href="/myportfolio/" class="waves-effect waves-light btn"><i class="material-icons right">tag_faces</i>&copy; 2015 MD R. Islam</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Compiled and minified JavaScript -->
+       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+</body>
+</html>
