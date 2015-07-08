@@ -1,16 +1,29 @@
 {% extends 'tracker/base.html' %}
 
 {% block main_content %}
-
+{% if new %}
+<script type="text/javascript">
+window.onload = function(){
+  Materialize.toast('<span>Hover over the button on the bottom-right, and click the plus to add a series. Swipe to dismiss.</span>', 9000, 'rounded')
+  
+};
+{% endif %}
+</script>
 
     <div class="row">
       <div class="col s12 m5">
         <div class="card-panel red">
           <span class="white-text">Hello, {{username}}!
-          </br>{% if new %}You can add a series with the + at the bottom-right. {% endif %}
+          <a class=" dropdown-button btn right" data-activates='filter'>Sort</a>
           </span>
+    
         </div>
       </div>
+    <ul id='filter' class='dropdown-content'>
+    <li><a href="/tracker/">All</a></li>
+    <li class="divider"></li>
+    <li><a href="?sort=Today">Today</a></li>
+  </ul>
     </div>
 <div class="row">
 {% for series in series_list %}
@@ -28,12 +41,12 @@
             </div>
 
             <div class="card-action">
-              <a href="{{series.stream_site}}" class="btn waves-effect waves-red red"><i class="material-icons">play_arrow</i></a>
+              <a href="{{series.stream_site}}" class="waves-effect btn red"><i class="material-icons">play_arrow</i></a>
             </div>
 
           </div>
 
-          <ul class="collapsible hoverable" data-collapsible="accordion">
+          <ul class="collapsible popout hoverable" data-collapsible="accordion">
     <li>
       <div class="collapsible-header"><i class="material-icons">description</i>Description</div>
       <div class="collapsible-body"><p>{{series.description}}</p></div>
