@@ -28,7 +28,7 @@
     </a>
     <ul>
         {% if user.is_authenticated %}
-        <li><a href="{% url 'add_series' %}" class="waves-effect waves-circle waves-light btn-floating red"><i class="material-icons">add</i></a></li>
+        <li><a href="#add_series_modal" class="waves-effect waves-circle waves-light btn-floating modal-trigger red"><i class="material-icons">add</i></a></li>
       <li><a href="{% url 'auth_logout' %}?next=/tracker/" class="waves-effect waves-circle waves-light btn-floating red"><i class="material-icons">directions_walk</i></a></li>
         {% endif %}
     </ul>
@@ -47,6 +47,26 @@
     </div>
   </div>
 </footer>
+
+<!-- Modal Structure -->
+<div id="add_series_modal" class="modal bottom-sheet">
+<div class="modal-content">
+  <h4>Add Series</h4>
+  <p>Fill out the form below to add a series</p>
+<form role="form" method="post" action=".">
+{% csrf_token %}
+{% for field in form.visible_fields %}
+{{ field.errors }}
+{{ field.help_text }}<br/>
+{{ field }}<br/>
+{% endfor %}
+
+</div>
+<div class="modal-footer">
+  <button type="submit" value="Submit" class="modal-action modal-close waves-effect waves-green btn-flat" />Add</button>
+</div>
+</form>
+</div>
 
 <!-- Compiled and minified JavaScript -->
    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
