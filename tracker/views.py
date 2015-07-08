@@ -10,6 +10,12 @@ import image_search
 @login_required()
 def index(request):
     context_dict = {'username': request.user.username}
+    
+    new = request.GET.get('new')
+    print new
+    if new is not None:
+        context_dict['new'] = new
+    
     all_series = Series.objects.filter(submitted_user=request.user)
     context_dict['series_list'] = all_series
     return render(request, 'tracker/index.html', context_dict)

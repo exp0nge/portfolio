@@ -7,6 +7,7 @@
       <div class="col s12 m5">
         <div class="card-panel red">
           <span class="white-text">Hello, {{username}}!
+          </br>{% if new %}You can add a series with the + at the bottom-right. {% endif %}
           </span>
         </div>
       </div>
@@ -46,5 +47,5 @@
     {% endif %}
 {% endfor %}
 </div>
-
+<div style="clear: both"></div>
 {% endblock %}

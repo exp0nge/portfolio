@@ -20,7 +20,7 @@ class Series(models.Model):
     submitted_user = models.ForeignKey(User)
     stream_site = models.URLField(blank=True, help_text='URL to view this series.')
     cover_image_url = models.URLField(blank=True, help_text='Cover image URL.')
-
+    
     def __unicode__(self):
         return self.title
 
