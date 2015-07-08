@@ -15,19 +15,19 @@
 {% for series in series_list %}
     <div class="col s4">
         <div class="card medium card-panel hoverable">
-            <div class="card-image" style="background-color: teal">
+            <div class="card-image" style="background-color: red">
                 <img src="{{series.cover_image_url}}" height="200px">
                 <span class="card-title white-text">{{series.title}}</span>
             </div>
             <div class="card-content">
-                {{series.release_day}}]
+                {{series.release_day}}
                 <a class="waves-effect waves-circle waves-light btn-floating secondary-content right">
                 <i class="material-icons right">more_vert</i></a>
 
             </div>
 
             <div class="card-action">
-              <a href="{{series.stream_site}}" class="btn waves-effect waves-red"><i class="material-icons">play_arrow</i></a>
+              <a href="{{series.stream_site}}" class="btn waves-effect waves-red red"><i class="material-icons">play_arrow</i></a>
             </div>
 
           </div>
