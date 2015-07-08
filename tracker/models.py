@@ -24,6 +24,11 @@ class Series(models.Model):
     def __unicode__(self):
         return self.title
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.title = self.title[0].upper() + self.title[1:]
+        super(Series, self).save()
+
     class Meta:
         verbose_name_plural = 'series'
 
