@@ -34,6 +34,9 @@ def index(request):
     else:
         context_dict['series_list'] = all_series
         
+    if request.GET.get('newCard'):
+        context_dict['newCard'] = request.GET.get('newCard')
+        
     # Check if user is trying to submit a series
     if request.method == 'POST':
         form = SeriesForm(request.POST)
@@ -44,7 +47,7 @@ def index(request):
                 img_url = image_search.search(request, form.cleaned_data['title'])
                 series.cover_image_url = img_url
             series.save()
-            return HttpResponseRedirect('/tracker/')
+            return HttpResponseRedirect('/tracker/?newCard=' + series.title)
     else:
         form = SeriesForm()
     
