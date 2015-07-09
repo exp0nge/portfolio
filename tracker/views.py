@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.views.generic.edit import UpdateView
 
 from tracker.models import Series
 from tracker.forms import SeriesForm
@@ -17,7 +18,7 @@ def index(request):
     context_dict = {'username': request.user.username}
                     
     if request.GET.get('new') == 'True':
-        context_dict['new'] = True
+        context_dict['newUser'] = True
     
     all_series = Series.objects.filter(submitted_user=request.user)
     
@@ -47,6 +48,8 @@ def index(request):
                 series.cover_image_url = img_url
             series.save()
             return HttpResponseRedirect('/tracker/?newCard=' + series.title)
+        else:
+            context_dict['form_errors'] = True
     else:
         form = SeriesForm()
     
@@ -79,3 +82,15 @@ def delete_series(request, pk):
         series.delete()
         return HttpResponseRedirect('/tracker/?deleted=' + series_title)
     return HttpResponseRedirect('/tracker/?deleted=Failed')
+    
+    
+class SeriesUpdate(UpdateView):
+    model = Series
+    success_url = '/tracker/'
+    form_class = SeriesForm
+    template_url = 'add_series_modal'
+
+    def get_object(self, queryset=None):
+        series = Series.objects.filter(pk=self.kwargs['pk']).get(submitted_user=self.request.user)
+        return series
+            
