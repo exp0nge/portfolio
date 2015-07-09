@@ -22,6 +22,7 @@ class Series(models.Model):
     submitted_user = models.ForeignKey(User, default=temp_user)
     stream_site = models.URLField(blank=True, help_text='URL to view this series.')
     cover_image_url = models.URLField(blank=True, help_text='Cover image URL.')
+    current_episode = models.IntegerField(help_text='Current episode you are on.', default=1)
     
     def __unicode__(self):
         return self.title

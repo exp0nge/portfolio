@@ -8,6 +8,7 @@ window.onload = function(){
   
 };
 {% endif %}
+
 </script>
 
     <div class="row">
@@ -28,27 +29,27 @@ window.onload = function(){
 <div class="row">
 {% for series in series_list %}
     <div class="col s4">
-        <div class="card medium card-panel hoverable">
+        <div class="card medium hoverable">
             <div class="card-image" style="background-color: red">
-                <img src="{{series.cover_image_url}}" height="200px">
-                <span class="card-title white-text">{{series.title}}</span>
+                <img src="{{series.cover_image_url}}" height="250px">
+                <span class="card-title white-text">{{series.release_day}}</span>
             </div>
             <div class="card-content">
-                {{series.release_day}}
-                <a class="waves-effect waves-circle waves-light btn-floating secondary-content right">
+              <a class="waves-effect waves-circle waves-light btn-floating secondary-content right">
                 <i class="material-icons right">more_vert</i></a>
-
+                <p>{{series.title}}</p>
+                
             </div>
+            
 
             <div class="card-action">
               <a href="{{series.stream_site}}" class="waves-effect btn red"><i class="material-icons">play_arrow</i></a>
             </div>
-
           </div>
 
           <ul class="collapsible popout hoverable" data-collapsible="accordion">
     <li>
-      <div class="collapsible-header"><i class="material-icons">description</i>Description</div>
+      <div class="collapsible-header hoverable"><i class="material-icons">description</i>Description</div>
       <div class="collapsible-body"><p>{{series.description}}</p></div>
     </li>
   </ul>

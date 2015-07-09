@@ -33,14 +33,15 @@ def index(request):
         context_dict['series_list'] = all_series
     else:
         context_dict['series_list'] = all_series
-    
+        
+    # Check if user is trying to submit a series
     if request.method == 'POST':
         form = SeriesForm(request.POST)
         if form.is_valid():
             series = form.save(commit=False)
             series.submitted_user = request.user
             if not form.cleaned_data['cover_image_url']:
-                img_url = image_search.search(form.cleaned_data['title'])
+                img_url = image_search.search(request, form.cleaned_data['title'])
                 series.cover_image_url = img_url
             series.save()
             return HttpResponseRedirect('/tracker/')
@@ -59,7 +60,7 @@ def add_series(request):
             series = form.save(commit=False)
             series.submitted_user = request.user
             if not form.cleaned_data['cover_image_url']:
-                img_url = image_search.search(form.cleaned_data['title'])
+                img_url = image_search.search(request, form.cleaned_data['title'])
                 series.cover_image_url = img_url
             series.save()
             return HttpResponseRedirect('/tracker/')

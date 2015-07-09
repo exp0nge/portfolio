@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
 <div class="navbar-fixed">
@@ -55,15 +55,48 @@
   <p>Fill out the form below to add a series</p>
 <form role="form" method="post" action=".">
 {% csrf_token %}
-{% for field in form.visible_fields %}
-{{ field.errors }}
-{{ field.help_text }}<br/>
-{{ field }}<br/>
-{% endfor %}
+{{ form.non_field_errors }}
+
+<div class="row">
+  <div class="input-field col s6">
+    {{ form.title.errors }}
+    {{ form.title }}
+    <label for="{{ form.title.id_for_label }}">Title</label>
+  </div>
+  <div class="input-field col s6">
+    {{ form.release_day.errors }}
+    {{ form.release_day }}
+    <label for="{{ form.release_day.id_for_label }}">Day</label>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s6">
+    {{ form.current_episode.errors }}
+    {{ form.current_episode }}
+    <label for="{{ form.current_episode.id_for_label }}">Episode #</label>
+  </div>
+  <div class="input-field col s6">
+    {{ form.cover_image_url.errors }}
+    {{ form.cover_image_url }}
+    <label for="{{ form.cover_image_url.id_for_label }}">Image URL</label>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s6">
+    {{ form.stream_site.errors }}
+    {{ form.stream_site }}
+    <label for="{{ form.stream_site.id_for_label }}">Stream Site</label>
+  </div>
+  <div class="input-field col s6">
+    {{ form.description.errors }}
+    {{ form.description }}
+    <label for="{{ form.description.id_for_label }}">Description</label>
+  </div>
+</div>
 
 </div>
 <div class="modal-footer">
-  <button type="submit" value="Submit" class="modal-action modal-close waves-effect waves-green btn-flat" />Add</button>
+  <button type="submit" value="Submit" class="modal-action modal-close waves-effect waves-green btn-large" /><i class="material-icons">check</i></button>
 </div>
 </form>
 </div>
