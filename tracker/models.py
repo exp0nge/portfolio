@@ -7,7 +7,7 @@ temp_user = User
 class Series(models.Model):
     DAYS_CHOICES = (
         ('MONDAY', 'Monday'),
-        ('TUEDAY', 'Tuesday'),
+        ('TUESDAY', 'Tuesday'),
         ('WEDNESDAY', 'Wednesday'),
         ('THURSDAY', 'Thursday'),
         ('FRIDAY', 'Friday'),

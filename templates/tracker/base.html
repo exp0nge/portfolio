@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>MD R. Islam | > Series Tracker</title>
       <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+  <link rel="stylesheet" href="{% static 'css/materialize.css' %}" media="screen,projection">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -15,7 +15,6 @@
   <nav>
     <div class="nav-wrapper red">
       <a href="{% url 'index' %}" class="brand-logo center">Series Tracker</a>
-
     </div>
   </nav>
     </div>
@@ -28,9 +27,12 @@
     </a>
     <ul>
         {% if user.is_authenticated %}
-        <li><a href="#add_series_modal" class="waves-effect waves-circle waves-light btn-floating modal-trigger red"><i class="material-icons">add</i></a></li>
-      <li><a href="{% url 'auth_logout' %}?next=/tracker/" class="waves-effect waves-circle waves-light btn-floating red"><i class="material-icons">directions_walk</i></a></li>
-          <li><a href="#" class="waves-effect waves-circle waves-light btn-floating red"><i class="material-icons">vertical_align_top</i></a></li>
+        <li><a href="#add_series_modal" class="waves-effect waves-circle waves-light btn-floating modal-trigger red">
+            <i class="material-icons">add</i></a></li>
+      <li><a href="{% url 'auth_logout' %}?next=/tracker/" class="waves-effect waves-circle waves-light btn-floating red">
+          <i class="material-icons">directions_walk</i></a></li>
+          <li><a href="#" class="waves-effect waves-circle waves-light btn-floating red">
+              <i class="material-icons">vertical_align_top</i></a></li>
     
         {% endif %}
     </ul>
@@ -41,21 +43,12 @@
        {% block main_content %}{% endblock %}
         </div>
       </div>
-
-<footer class="page-footer black">
-  <div class="footer-copyright">
-    <div class="container">
-    <a href="/myportfolio/" class="waves-effect btn red"><i class="material-icons">tag_faces</i></a>
-    </div>
-  </div>
-</footer>
-
 <!-- Modal Structure -->
-<div id="add_series_modal" class="modal bottom-sheet">
+<div id="add_series_modal" class="modal">
 <div class="modal-content">
   <h4>Add Series</h4>
   <p>Fill out the form below to add a series</p>
-<form role="form" method="post" action=".">
+<form class="col s12 form" role="form"  method="post" action=".">
 {% csrf_token %}
 {{ form.non_field_errors }}
 
@@ -95,15 +88,21 @@
     <label for="{{ form.description.id_for_label }}">Description</label>
   </div>
 </div>
-</div>
 
+  <button type="submit" value="Submit" class="modal-action modal-close waves-effect waves-green btn-large right" />
+  <i class="material-icons">check</i></button>
 
-<div class="modal-footer">
-  <button type="submit" value="Submit" class="modal-action modal-close waves-effect waves-green btn-large" /><i class="material-icons">check</i></button>
-</div>
 </form>
-</div>
+ </div>
+    </div>
 
+<footer class="page-footer black">
+  <div class="footer-copyright">
+    <div class="container">
+    <a href="/myportfolio/" class="waves-effect btn red"><i class="material-icons">tag_faces</i></a>
+    </div>
+  </div>
+</footer>
 <!-- Compiled and minified JavaScript -->
    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>

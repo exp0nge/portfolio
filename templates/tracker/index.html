@@ -17,25 +17,11 @@ window.onload = function(){
 };
 </script>
 {% endif %}
-
-
-<script type="text/javascript">
-    $('.dropdown-button').dropdown({
-      inDuration: 300,
-      outDuration: 225,
-      constrain_width: false, // Does not change width of dropdown to that of the activator
-      hover: true, // Activate on hover
-      gutter: 0, // Spacing from edge
-      belowOrigin: true // Displays dropdown below the button
-    }
-  );
-      
-</script>
     <div class="row">
+        <a class="btn-floating dropdown-button btn right" data-activates='filter'><i class="material-icons">sort</i></a>
       <div class="col s12 m5">
         <div class="card-panel red">
           <span class="white-text">Hello, {{username}}!</span>
-          <a class="btn-floating dropdown-button btn right" data-activates='filter'><i class="material-icons">sort</i></a>
         </div>
       </div>
     <ul id='filter' class='dropdown-content'>
@@ -51,7 +37,7 @@ window.onload = function(){
     <div class="col s4">
         <div class="card medium hoverable">
             <div class="card-image">
-                <img src="{{series.cover_image_url}}" height="250px">
+                <img src="{{series.cover_image_url}}" width="300" height="250px">
                 <span class="card-title grey-text text-lighten-4">{{series.release_day}}</span>
             </div>
             <div class="card-content">
@@ -69,6 +55,7 @@ window.onload = function(){
       <div class="collapsible-header hoverable"><i class="material-icons">description</i>Description</div>
       <div class="collapsible-body">
         <p>{{series.description}}
+            <a href="{% url 'delete_series' series.id %}">Delete</a>
       <i class="material-icons right">edit</i></a></p>
       </div>
     </li>

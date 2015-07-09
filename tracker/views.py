@@ -1,12 +1,11 @@
-from django.shortcuts import render, HttpResponseRedirect
+from datetime import datetime
 
+from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 from tracker.models import Series
 from tracker.forms import SeriesForm
 import image_search
-
-from datetime import datetime
 
 day_converter = {0: 'MONDAY', 1: 'TUESDAY', 2: 'WEDNESDAY', 3: 'THURSDAY',
                  4: 'FRIDAY', 5: 'SATURDAY', 6: 'SUNDAY'}
@@ -71,3 +70,12 @@ def add_series(request):
         form = SeriesForm()
 
     return render(request, 'tracker/add_series.html', {'form': form})
+
+@login_required()
+def delete_series(request, pk):
+    series = Series.objects.filter(pk=pk)
+    series_title = series[0].title
+    if series[0].submitted_user == request.user:
+        series.delete()
+        return HttpResponseRedirect('/tracker/?deleted=' + series_title)
+    return HttpResponseRedirect('/tracker/?deleted=Failed')
