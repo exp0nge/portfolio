@@ -45,10 +45,9 @@ window.onload = function(){
 {% for series in series_list %}
     <div class="col s4">
         <a class="waves-effect waves-light dropdown-button btn" data-activates='series_options' ><i class="material-icons">settings</i></a>
-
           <!-- Dropdown Structure -->
           <ul id='series_options' class='dropdown-content'>
-            <li><a href="#!" class="tooltipped material-icons" data-delay="50" data-tooltip="Edit entry.">edit</a></li>
+            <li><a href="{% url 'update_series' series.id %}" class="tooltipped material-icons" data-delay="50" data-tooltip="Edit entry.">edit</a></li>
             <li><a href="#!" class="tooltipped material-icons" data-delay="50" data-tooltip="Share">share</a></li>
             <li class="divider"></li>
             <li><a href="{% url 'delete_series' series.id %}" class="tooltipped material-icons red" data-position="bottom" data-delay="50" data-tooltip="Delete (cannot undo!)">delete</a></li>
@@ -72,8 +71,7 @@ window.onload = function(){
     <li>
       <div class="collapsible-header hoverable"><i class="material-icons">description</i>Description</div>
       <div class="collapsible-body">
-        <p>{{series.description}} <a href="{% url 'update_series' series.id %}">Update</a>
-      <i class="material-icons right">edit</i></a></p>
+        <p>{{series.description}}</p>
       </div>
     </li>
   </ul>

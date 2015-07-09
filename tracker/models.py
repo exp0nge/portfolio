@@ -23,6 +23,7 @@ class Series(models.Model):
     stream_site = models.URLField(blank=True, help_text='URL to view this series.')
     cover_image_url = models.URLField(blank=True, help_text='Cover image URL.')
     current_episode = models.IntegerField(help_text='Current episode you are on.', default=1)
+    tag = models.CharField(max_length=30, help_text='Relevent tag for the series, e.g., anime. Helps with generating a cover image.', default='anime')
     
     def __unicode__(self):
         return self.title

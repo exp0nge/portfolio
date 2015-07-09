@@ -54,7 +54,8 @@
 <div class="row">
   <div class="input-field col s6">
     {{ form.title.errors }}
-    {{ form.title }}
+    <i class="material-icons prefix">account_circle</i>
+    <input placeholder="* Title of the series" id="id_title" name="title" type="text" class="validate required">
     <label for="{{ form.title.id_for_label }}">Title</label>
   </div>
   <div class="input-field col s6">
@@ -87,10 +88,16 @@
     <label for="{{ form.description.id_for_label }}">Description</label>
   </div>
 </div>
-
-  <button type="submit" value="Submit" class="modal-action modal-close waves-effect waves-green btn-large right" />
+<div class="row">
+  <div class="input-field col s6">
+    {{ form.tag.errors }}
+    {{ form.tag }}
+    <label for="{{ form.tag.id_for_label }}">Tag</label>
+    <button type="submit" value="Submit" class="modal-action waves-effect waves-green btn-large right" />
   <i class="material-icons">check</i></button>
-
+  </div>
+  
+</div>
 </form>
  </div>
     </div>

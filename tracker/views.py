@@ -44,7 +44,7 @@ def index(request):
             series = form.save(commit=False)
             series.submitted_user = request.user
             if not form.cleaned_data['cover_image_url']:
-                img_url = image_search.search(request, form.cleaned_data['title'])
+                img_url = image_search.search(request, form.cleaned_data['title'] + form.cleaned_data['tag'])
                 series.cover_image_url = img_url
             series.save()
             return HttpResponseRedirect('/tracker/?newCard=' + series.title)
@@ -65,7 +65,7 @@ def add_series(request):
             series = form.save(commit=False)
             series.submitted_user = request.user
             if not form.cleaned_data['cover_image_url']:
-                img_url = image_search.search(request, form.cleaned_data['title'])
+                img_url = image_search.search(request, form.cleaned_data['title'] + form.cleaned_data['tag'])
                 series.cover_image_url = img_url
             series.save()
             return HttpResponseRedirect('/tracker/')
@@ -88,7 +88,6 @@ class SeriesUpdate(UpdateView):
     model = Series
     success_url = '/tracker/'
     form_class = SeriesForm
-    template_url = 'add_series_modal'
 
     def get_object(self, queryset=None):
         series = Series.objects.filter(pk=self.kwargs['pk']).get(submitted_user=self.request.user)
