@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+import urllib, json
+
 temp_user = User
 
 # Create your models here.
@@ -16,7 +18,7 @@ class Series(models.Model):
         ('UNKNOWN', 'Unknown'),
     )
     title = models.CharField(max_length=200, help_text='The title of the series.')
-    description = models.TextField(max_length=500, blank=True, help_text='Optional: Description of the series',
+    description = models.TextField(max_length=200, blank=True, help_text='Optional: Description of the series',
                                    default='No description provided.')
     release_day = models.CharField(max_length=10, help_text='Release day, e.g., Monday', choices=DAYS_CHOICES)
     submitted_user = models.ForeignKey(User, default=temp_user)
@@ -31,9 +33,21 @@ class Series(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         self.title = self.title[0].upper() + self.title[1:]
+        if self.description == 'No description provided.':
+            self.description = get_wiki_description(self.title)
         super(Series, self).save()
 
     class Meta:
         verbose_name_plural = 'series'
 
 
+def get_wiki_description(title):
+    url = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + urllib.quote(title)
+    response = urllib.urlopen(url)
+    data = json.loads(response.read())
+    description = 'No description provided. I was unable to autogenerate one.'
+    try:
+        description = data['query']['pages'].values()[0]['extract']
+    except KeyError:
+        pass
+    return description
