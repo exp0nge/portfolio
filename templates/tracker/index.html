@@ -19,14 +19,14 @@
     </div>
 <div class="row">
 {% for series in series_list %}
-    <div class="col s4">
+    <div class="col s4" id="{{series.id}}-div">
         <a class="waves-effect waves-light dropdown-button btn-flat" data-activates='{{series.id}}_options' ><i class="material-icons gray">settings</i></a>
           <!-- Dropdown Structure -->
           <ul id='{{series.id}}_options' class='dropdown-content'>
             <li><a href="{% url 'update_series' series.id %}" class="tooltipped material-icons" data-delay="50" data-tooltip="Edit entry.">edit</a></li>
             <li><a href="#!" class="tooltipped material-icons" data-delay="50" data-tooltip="Share">share</a></li>
             <li class="divider"></li>
-            <li><a href="{% url 'delete_series' series.id %}" class="tooltipped material-icons red" data-position="bottom" data-delay="50" data-tooltip="Delete (cannot undo!)">delete</a></li>
+            <li><a class="material-icons series-delete red" series-id="{{series.id}}">delete</a></li>
           </ul>
         <div class="card medium hoverable">
             <div class="card-image">

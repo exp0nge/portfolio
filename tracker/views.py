@@ -1,4 +1,5 @@
 from datetime import datetime
+import json
 
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -61,6 +62,7 @@ def index(request):
 def add_series(request):
     if request.method == 'POST':
         form = SeriesForm(request.POST)
+        
         if form.is_valid():
             series = form.save(commit=False)
             series.submitted_user = request.user
@@ -79,7 +81,7 @@ def delete_series(request, pk):
     series = Series.objects.filter(submitted_user=request.user).get(pk=pk)
     series_title = series.title
     series.delete()
-    return HttpResponseRedirect('/tracker/?deleted=' + series_title)
+    return HttpResponse(series_title)
     
 
 @login_required()
