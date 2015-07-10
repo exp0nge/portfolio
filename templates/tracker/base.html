@@ -10,6 +10,7 @@
     <link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
 </head>
 <body>
+  {% block iframe_block %}
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper red">
@@ -19,22 +20,6 @@
     </div>
   <div class="parallax-container">
     <div class="parallax"><img src="{% static 'images/parallax.png' %}"></div>
-  </div>
-  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red {% if not user.is_authenticated %}disabled{% endif %}">
-      <i class="large material-icons">more_vert</i>
-    </a>
-    <ul>
-        {% if user.is_authenticated %}
-        <li><a href="#add_series_modal" class="waves-effect waves-circle waves-light btn-floating modal-trigger red" id='add_series_button'>
-            <i class="material-icons">add</i></a></li>
-      <li><a href="{% url 'auth_logout' %}?next=/tracker/" class="waves-effect waves-circle waves-light btn-floating red">
-          <i class="material-icons">directions_walk</i></a></li>
-          <li><a href="#" class="waves-effect waves-circle waves-light btn-floating red">
-              <i class="material-icons">vertical_align_top</i></a></li>
-    
-        {% endif %}
-    </ul>
   </div>
 
   <div class="container">
@@ -114,10 +99,27 @@
     </div>
   </div>
 </footer>
-    
+    {% endblock %}
    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
    <script src="http://materializecss.com/js/init.js"></script>
-   
+   <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red {% if not user.is_authenticated %}disabled{% endif %}">
+      <i class="large material-icons">more_vert</i>
+    </a>
+    <ul>
+        {% if user.is_authenticated %}
+        <li><a href="#add_series_modal" class="waves-effect waves-circle waves-light btn-floating modal-trigger red" id='add_series_button'>
+            <i class="material-icons">add</i></a></li>
+      <li><a href="{% url 'auth_logout' %}?next=/tracker/" class="waves-effect waves-circle waves-light btn-floating red">
+          <i class="material-icons">directions_walk</i></a></li>
+          <li><a href="#" class="waves-effect waves-circle waves-light btn-floating red">
+              <i class="material-icons">vertical_align_top</i></a></li>
+        {% block iframe_nav %}{% endblock %}
+        
+    
+        {% endif %}
+    </ul>
+  </div>
 </body>
 </html>

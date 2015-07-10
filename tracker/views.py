@@ -89,6 +89,14 @@ def update_episode(request, pk):
     series.save()
     return HttpResponseRedirect('/tracker/')
     
+    
+@login_required()
+def watch_episode(request, pk):
+    series = Series.objects.filter(submitted_user=request.user).get(pk=pk)
+    context_dict = {'series': series}
+    
+    return render(request, 'tracker/watch_episode.html', context_dict)
+    
 class SeriesUpdate(UpdateView):
     model = Series
     success_url = '/tracker/'
