@@ -50,53 +50,58 @@
 <form class="col s12 form" role="form"  method="post" action=".">
 {% csrf_token %}
 {{ form.non_field_errors }}
+{% if form.errors %}
+<ul class="collection red">
+{% for error in form.errors.values %}
+<li class="collection-item">{{ error }}</li>
+{% endfor %}
+</ul>
+{% endif %}
 
 <div class="row">
   <div class="input-field col s6">
-    {{ form.title.errors }}
-    <i class="material-icons prefix">account_circle</i>
-    <input placeholder="* Title of the series" id="id_title" name="title" type="text" class="validate required">
-    <label for="{{ form.title.id_for_label }}">Title</label>
+    <i class="material-icons prefix">star</i>
+    {{ form.title }}
+    <label for="{{ form.title.id_for_label }}">Title*</label>
   </div>
   <div class="input-field col s6">
-    {{ form.release_day.errors }}
     {{ form.release_day }}
-    <label for="{{ form.release_day.id_for_label }}">Day</label>
+    <label for="{{ form.release_day.id_for_label }}">Day*</label>
+    
   </div>
 </div>
 <div class="row">
   <div class="input-field col s6">
-    {{ form.current_episode.errors }}
+    <i class="material-icons prefix">bookmark</i>
     {{ form.current_episode }}
     <label for="{{ form.current_episode.id_for_label }}">Episode #</label>
   </div>
   <div class="input-field col s6">
-    {{ form.cover_image_url.errors }}
+    <i class="material-icons prefix">wallpaper</i>
     {{ form.cover_image_url }}
-    <label for="{{ form.cover_image_url.id_for_label }}">Image URL</label>
+    <label for="{{ form.cover_image_url.id_for_label }}">Cover Image URL</label>
   </div>
 </div>
 <div class="row">
   <div class="input-field col s6">
-    {{ form.stream_site.errors }}
+    <i class="material-icons prefix">videocam</i>
     {{ form.stream_site }}
     <label for="{{ form.stream_site.id_for_label }}">Stream Site</label>
   </div>
   <div class="input-field col s6">
-    {{ form.description.errors }}
-    {{ form.description }}
-    <label for="{{ form.description.id_for_label }}">Description</label>
+    <i class="material-icons prefix">local_offer</i>
+    {{ form.tag }}
+    <label for="{{ form.tag.id_for_label }}">Tag</label>
   </div>
 </div>
 <div class="row">
   <div class="input-field col s6">
-    {{ form.tag.errors }}
-    {{ form.tag }}
-    <label for="{{ form.tag.id_for_label }}">Tag</label>
-    <button type="submit" value="Submit" class="modal-action waves-effect waves-green btn-large right" />
-  <i class="material-icons">check</i></button>
+    <i class="material-icons prefix">subject</i>
+    {{ form.description }}
+   
   </div>
-  
+   <button type="submit" value="Submit" class="modal-action waves-effect waves-green btn-large right" />
+  <i class="material-icons">check</i></button>
 </div>
 </form>
  </div>
