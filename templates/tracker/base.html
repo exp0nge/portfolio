@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>MD R. Islam | > Series Tracker</title>
-      <!-- Compiled and minified CSS -->
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
   <link rel="stylesheet" href="{% static 'css/tracker.css' %}" type="text/css" />
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -123,14 +123,9 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
    <script src="http://materializecss.com/js/init.js"></script>
+   <script type="text/javascript" src="{% static 'js/tracker.js' %}"></script>
 <script type='text/javascript'>
 $(document).ready(function(){
-    var loc = window.location.pathname;
-    var dir = loc.substring(0, loc.lastIndexOf('/'));
-    if (dir === '/tracker/watch_episode'){
-      $('#floaty-side-nav').append('<li><a href="{% url 'index' %}" class="waves-effect waves-circle waves-light btn-floating blue" id="home"><i class="material-icons">home</i></a></li>');
-    }
-    
     {% if form_errors %}
     document.getElementById("add_series_button").click()
     {% endif %}
@@ -142,7 +137,6 @@ $(document).ready(function(){
     {% if newUser %}
     Materialize.toast('<span>Hover over the button on the bottom-right, and click the plus to add a series. Swipe to dismiss.</span>', 9000);
     {% endif %}
-    
 });
 </script>
 </body>

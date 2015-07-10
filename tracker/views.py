@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView
 
@@ -87,7 +87,7 @@ def update_episode(request, pk):
     series = Series.objects.filter(submitted_user=request.user).get(pk=pk)
     series.current_episode = series.current_episode + 1
     series.save()
-    return HttpResponseRedirect('/tracker/')
+    return HttpResponse(series.current_episode)
     
     
 @login_required()

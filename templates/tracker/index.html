@@ -39,7 +39,7 @@
              <!-- Dropdown Structure -->
             <div class="card-action">
               <a href="{% url 'watch_episode' series.id %}" class="waves-effect btn modal-trigger red"><i class="material-icons">play_arrow</i></a>
-              <a href="{% url 'update_episode' series.id %}" class="waves-effect waves-light btn right">#{{series.current_episode}}<i class="material-icons left">done</i></a>
+              <a class="waves-effect waves-light btn right ep-done" series-id="{{series.id}}">#<strong id="ep-number-{{series.id}}">{{series.current_episode}}</strong><i class="material-icons left">done</i></a>
             </div>
           </div>
 
