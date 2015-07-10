@@ -1,16 +1,8 @@
 {% extends 'tracker/base.html' %}
 
 {% block main_content %}
-{% if newUser %}
-<script type="text/javascript">
 
-window.onload = Materialize.toast('<span>Hover over the button on the bottom-right, and click the plus to add a series. Swipe to dismiss.</span>', 9000);
-  
-</script>
-{% endif %}
-
-
-    <div class="row">
+<div class="row">
         <a class="btn-floating dropdown-button btn right" data-activates='filter'><i class="material-icons">sort</i></a>
       <div class="col s12 m5">
         <div class="card-panel red">
@@ -27,7 +19,7 @@ window.onload = Materialize.toast('<span>Hover over the button on the bottom-rig
     </div>
 <div class="row">
 {% for series in series_list %}
-    <div class="col s4 card-drag">
+    <div class="col s4">
         <a class="waves-effect waves-light dropdown-button btn-flat" data-activates='{{series.id}}_options' ><i class="material-icons gray">settings</i></a>
           <!-- Dropdown Structure -->
           <ul id='{{series.id}}_options' class='dropdown-content'>
