@@ -61,7 +61,7 @@ window.onload = function(){
              <!-- Dropdown Structure -->
             <div class="card-action">
               <a href="{{series.stream_site}}" class="waves-effect btn red"><i class="material-icons">play_arrow</i></a>
-              <a class="waves-effect waves-light btn right">#{{series.current_episode}}<i class="material-icons left">done</i></a>
+              <a href="{% url 'update_episode' series.id %}" class="waves-effect waves-light btn right">#{{series.current_episode}}<i class="material-icons left">done</i></a>
             </div>
           </div>
 

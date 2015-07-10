@@ -76,12 +76,18 @@ def add_series(request):
 
 @login_required()
 def delete_series(request, pk):
-    print Series.objects.filter(submitted_user=request.user)
     series = Series.objects.filter(submitted_user=request.user).get(pk=pk)
     series_title = series.title
     series.delete()
     return HttpResponseRedirect('/tracker/?deleted=' + series_title)
     
+
+@login_required()
+def update_episode(request, pk):
+    series = Series.objects.filter(submitted_user=request.user).get(pk=pk)
+    series.current_episode = series.current_episode + 1
+    series.save()
+    return HttpResponseRedirect('/tracker/')
     
 class SeriesUpdate(UpdateView):
     model = Series
