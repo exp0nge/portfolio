@@ -69,7 +69,10 @@ window.onload = function(){
     <li>
       <div class="collapsible-header hoverable"><i class="material-icons">description</i>Description</div>
       <div class="collapsible-body">
-        <p>{{series.description}}</p>
+        
+        <p><a href="{% url 'update_series' series.id %}" class="tooltipped material-icons" data-delay="50" data-tooltip="Edit entry.">edit</a>
+        </br>
+        {{series.description}}</p>
       </div>
     </li>
   </ul>
