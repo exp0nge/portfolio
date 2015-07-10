@@ -76,12 +76,11 @@ def add_series(request):
 
 @login_required()
 def delete_series(request, pk):
-    series = Series.objects.filter(pk=pk)
-    series_title = series[0].title
-    if series[0].submitted_user == request.user:
-        series.delete()
-        return HttpResponseRedirect('/tracker/?deleted=' + series_title)
-    return HttpResponseRedirect('/tracker/?deleted=Failed')
+    print Series.objects.filter(submitted_user=request.user)
+    series = Series.objects.filter(submitted_user=request.user).get(pk=pk)
+    series_title = series.title
+    series.delete()
+    return HttpResponseRedirect('/tracker/?deleted=' + series_title)
     
     
 class SeriesUpdate(UpdateView):
@@ -90,6 +89,5 @@ class SeriesUpdate(UpdateView):
     form_class = SeriesForm
 
     def get_object(self, queryset=None):
-        series = Series.objects.filter(pk=self.kwargs['pk']).get(submitted_user=self.request.user)
+        series = Series.objects.filter(submitted_user=self.request.user).get(pk=self.kwargs['pk'])
         return series
-            
