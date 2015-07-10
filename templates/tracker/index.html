@@ -9,21 +9,7 @@ window.onload = function(){
 };
 </script>
 {% endif %}
-{% if newCard %}
-<script type="text/javascript">
-window.onload = function(){
-  Materialize.toast('<span>New series, {{newCard}}, added!</span>', 6000)
-  
-};
-</script>
-{% endif %}
-{% if form_errors %}
-<script type="text/javascript">
-  window.onload = function(){
-    document.getElementById("add_series_button").click()
-  }
-</script>
-{% endif %}
+
     <div class="row">
         <a class="btn-floating dropdown-button btn right" data-activates='filter'><i class="material-icons">sort</i></a>
       <div class="col s12 m5">
@@ -32,7 +18,7 @@ window.onload = function(){
         </div>
       </div>
     <ul id='filter' class='dropdown-content'>
-      <li class="disable selected"><a>Sort by</a></li>
+      <li class="disabled"><a>Sort by</a></li>
       <li class="divider"></li>
     <li><a href="/tracker/">All</a></li>
     <li><a href="?sort=Today">Today</a></li>

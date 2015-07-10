@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="{% static 'css/materialize.css' %}" media="screen,projection">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
+    
 </head>
 <body>
   {% block iframe_block %}
@@ -27,12 +28,39 @@
        {% block main_content %}{% endblock %}
         </div>
       </div>
-<!-- Modal Structure -->
+    </div>
+<footer class="page-footer black">
+  <div class="footer-copyright">
+    <div class="container">
+    <a href="/myportfolio/" class="waves-effect btn red"><i class="material-icons">tag_faces</i></a>
+    </div>
+  </div>
+</footer>
+    {% endblock %}
+    
+    
+   
+   <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red {% if not user.is_authenticated %}disabled{% endif %}"><i class="large material-icons">more_vert</i></a>
+    <ul id='floaty-side-nav'>
+        {% if user.is_authenticated %}
+        <li><a href="#add_series_modal" class="waves-effect waves-circle waves-light btn-floating modal-trigger red" id='add_series_button'>
+            <i class="material-icons">add</i></a></li>
+      <li><a href="{% url 'auth_logout' %}?next=/tracker/" class="waves-effect waves-circle waves-light btn-floating red">
+          <i class="material-icons">directions_walk</i></a></li>
+          {% endif %}
+          <li><a href="#" class="waves-effect waves-circle waves-light btn-floating red">
+              <i class="material-icons">vertical_align_top</i></a></li>
+    </ul>
+    
+  </div>
+  
+  <!-- Modal Structure -->
 <div id="add_series_modal" class="modal">
 <div class="modal-content">
   <h4>Add Series</h4>
   <p>Fill out the form below to add a series</p>
-<form class="col s12 form" role="form"  method="post" action=".">
+<form class="col s12 form" role="form"  method="post" action="">
 {% csrf_token %}
 {{ form.non_field_errors }}
 {% if form.errors %}
@@ -70,7 +98,7 @@
 <div class="row">
   <div class="input-field col s6">
     <i class="material-icons prefix">videocam</i>
-    {{ form.stream_site }}
+     <input placeholder="http://" id="{{ id_stream_site }}" name="stream_site" type="url">
     <label for="{{ form.stream_site.id_for_label }}">Stream Site</label>
   </div>
   <div class="input-field col s6">
@@ -90,36 +118,24 @@
 </div>
 </form>
  </div>
-    </div>
-
-<footer class="page-footer black">
-  <div class="footer-copyright">
-    <div class="container">
-    <a href="/myportfolio/" class="waves-effect btn red"><i class="material-icons">tag_faces</i></a>
-    </div>
-  </div>
-</footer>
-    {% endblock %}
-   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
    <script src="http://materializecss.com/js/init.js"></script>
-   <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red {% if not user.is_authenticated %}disabled{% endif %}">
-      <i class="large material-icons">more_vert</i>
-    </a>
-    <ul>
-        {% if user.is_authenticated %}
-        <li><a href="#add_series_modal" class="waves-effect waves-circle waves-light btn-floating modal-trigger red" id='add_series_button'>
-            <i class="material-icons">add</i></a></li>
-      <li><a href="{% url 'auth_logout' %}?next=/tracker/" class="waves-effect waves-circle waves-light btn-floating red">
-          <i class="material-icons">directions_walk</i></a></li>
-          <li><a href="#" class="waves-effect waves-circle waves-light btn-floating red">
-              <i class="material-icons">vertical_align_top</i></a></li>
-        {% block iframe_nav %}{% endblock %}
-        
-    
-        {% endif %}
-    </ul>
-  </div>
+<script type='text/javascript'>
+$(document).ready(function(){
+    var loc = window.location.pathname;
+    var dir = loc.substring(0, loc.lastIndexOf('/'));
+    if (dir === '/tracker/watch_episode'){
+      $('#floaty-side-nav').append('<li><a href="/" class="waves-effect waves-circle waves-light btn-floating blue" id="home"><i class="material-icons">home</i></a></li>');
+    }
+    {% if form_errors %}
+    document.getElementById("add_series_button").click()
+    {% endif %}
+    {% if newCard %}
+      Materialize.toast('<span>New series, {{newCard}}, added!</span>', 6000)
+    {% endif %}
+});
+</script>
 </body>
 </html>

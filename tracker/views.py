@@ -95,6 +95,26 @@ def watch_episode(request, pk):
     series = Series.objects.filter(submitted_user=request.user).get(pk=pk)
     context_dict = {'series': series}
     
+    if request.GET.get('newCard'):
+        context_dict['newCard'] = request.GET.get('newCard')
+    
+    if request.method == 'POST':
+        form = SeriesForm(request.POST)
+        if form.is_valid():
+            series = form.save(commit=False)
+            series.submitted_user = request.user
+            if not form.cleaned_data['cover_image_url']:
+                img_url = image_search.search(request, form.cleaned_data['title'] + form.cleaned_data['tag'])
+                series.cover_image_url = img_url
+            series.save()
+            return HttpResponseRedirect('?newCard=' + series.title)
+        else:
+            context_dict['form_errors'] = True
+    else:
+        form = SeriesForm()
+    
+    context_dict['form'] = form
+    
     return render(request, 'tracker/watch_episode.html', context_dict)
     
 class SeriesUpdate(UpdateView):
