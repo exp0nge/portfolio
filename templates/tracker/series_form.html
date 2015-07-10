@@ -1,0 +1,65 @@
+{% extends 'tracker/base.html' %}
+
+{% block main_content %}
+<form class="col s12 form" role="form"  method="post" action="">
+{% csrf_token %}
+{{ form.non_field_errors }}
+{% if form.errors %}
+<ul class="collection red">
+{% for error in form.errors.values %}
+<li class="collection-item">{{ error }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+<div class="row">
+  <div class="input-field col s6">
+    <i class="material-icons prefix">star</i>
+    {{ form.title }}
+    <label for="{{ form.title.id_for_label }}">Title*</label>
+  </div>
+  <div class="input-field col s6">
+    {{ form.release_day }}
+    <label for="{{ form.release_day.id_for_label }}">Day*</label>
+    
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s6">
+    <i class="material-icons prefix">bookmark</i>
+    {{ form.current_episode }}
+    <label for="{{ form.current_episode.id_for_label }}">Episode #</label>
+  </div>
+  <div class="input-field col s6">
+    <i class="material-icons prefix">wallpaper</i>
+    {{ form.cover_image_url }}
+    <label for="{{ form.cover_image_url.id_for_label }}">Cover Image URL</label>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s6">
+    <i class="material-icons prefix">videocam</i>
+    {{ form.stream_site }}
+    <label for="{{ form.stream_site.id_for_label }}">Stream Site</label>
+  </div>
+  <div class="input-field col s6">
+    <i class="material-icons prefix">local_offer</i>
+    {{ form.tag }}
+    <label for="{{ form.tag.id_for_label }}">Tag</label>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s6">
+    <i class="material-icons prefix">subject</i>
+    {{ form.description }}
+   
+  </div>
+  {% if object %}
+<button type="submit" name="_save" value="Update" class="waves-effect waves-green btn-large right" /><i class="material-icons">check</i></button></button>
+{% else %}
+<button type="submit" value="Submit" class="waves-effect waves-green btn-large right" /><i class="material-icons">check</i></button></button>
+{% endif %}
+</div>
+
+    </form>
+
+{% endblock %}
