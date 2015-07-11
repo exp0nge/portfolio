@@ -66,6 +66,13 @@ form.submit(function(e){
 });
 
 
+$('#sort-today').on('click', function(){
+  var day = new Date().getDay();
+  alert(day);
+  window.location('/tracker/' + '?sort=' + day);
+});
+
+
 });
 
 

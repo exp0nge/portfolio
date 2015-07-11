@@ -1,4 +1,3 @@
-from datetime import datetime
 import json
 
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
@@ -10,8 +9,8 @@ from tracker.models import Series
 from tracker.forms import SeriesForm
 import image_search
 
-day_converter = {0: 'MONDAY', 1: 'TUESDAY', 2: 'WEDNESDAY', 3: 'THURSDAY',
-                 4: 'FRIDAY', 5: 'SATURDAY', 6: 'SUNDAY'}
+day_converter = {1: 'MONDAY', 2: 'TUESDAY', 3: 'WEDNESDAY', 4: 'THURSDAY',
+                 5: 'FRIDAY', 6: 'SATURDAY', 0: 'SUNDAY'}
 
 
 @login_required()
@@ -21,11 +20,9 @@ def index(request):
                     
     if request.GET.get('new') == 'True':
         context_dict['newUser'] = True
-    
     all_series = Series.objects.filter(submitted_user=request.user)
-    
-    if request.GET.get('sort') == 'Today':
-        weekday = day_converter[datetime.now().weekday()]
+    if request.GET.get('sort'):
+        weekday = day_converter[int(request.GET.get('sort'))]
         filtered_series = []
         for a_series in all_series:
             if a_series.release_day == weekday:
