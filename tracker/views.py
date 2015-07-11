@@ -60,9 +60,10 @@ def add_series(request):
                     img_url = image_search.search(request, form.cleaned_data['title'] + form.cleaned_data['tag'])
                     series.cover_image_url = img_url
             except:
-                pass
+                series.cover_image_url = '/static/images/avatar.png'
+
             series.save()
-            return HttpResponse(message)
+            return HttpResponse(json.dumps(series.as_json), mimetype="application/json")
     else:
         form = SeriesForm()
 

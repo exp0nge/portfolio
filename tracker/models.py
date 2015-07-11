@@ -36,6 +36,15 @@ class Series(models.Model):
         if self.description == 'No description provided.':
             self.description = get_wiki_description(self.title)
         super(Series, self).save()
+        
+    @property    
+    def as_json(self):
+        return dict(title=self.title,
+                    description=self.description,
+                    release_day=self.release_day,
+                    stream_site=self.stream_site,
+                    cover_image_url=self.cover_image_url,
+                    current_episode=self.current_episode)
 
     class Meta:
         verbose_name_plural = 'series'
