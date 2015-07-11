@@ -1,21 +1,4 @@
 {% extends 'tracker/base.html' %}
-{% if noiframe %}
-{% block main_content %} 
-      <div class="row">
-        <div class="col s12 m6">
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-              <span class="card-title">No Stream Site Defined</span>
-              <p>You didn't set a stream site for this anime.</p>
-            </div>
-            <div class="card-action">
-              <a href="{% url 'update_series' series.id %}" class="material-icons">edit</a>
-            </div>
-          </div>
-        </div>
-      </div>
-{% endblock %}
-{% else %}
 {% block iframe_block %}
 <style type="text/css">
 body {
@@ -32,5 +15,4 @@ body {
 </style>
 <iframe id="iframe1" src="{{series.stream_site}}" frameborder="0"></iframe>
 {% endblock %}
-{% endif %}
 

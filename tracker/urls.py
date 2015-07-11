@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^update/(?P<pk>[\w-]+)$', views.SeriesUpdate.as_view(), name='update_series'),
     url(r'^watched/(?P<pk>\d+)/$', views.update_episode, name='update_episode'),
     url(r'^watch_episode/(?P<pk>[\w-]+)$', views.watch_episode, name='watch_episode'),
+    url(r'^stream_missing/(?P<pk>[\w-]+)$', views.stream_missing, name='stream_missing')
 
 ]

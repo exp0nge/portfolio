@@ -25,7 +25,7 @@ def index(request):
     all_series = Series.objects.filter(submitted_user=request.user)
     
     if request.GET.get('sort') == 'Today':
-        weekday = day_converter[datetime.now().weekday() - 1]
+        weekday = day_converter[datetime.now().weekday()]
         filtered_series = []
         for a_series in all_series:
             if a_series.release_day == weekday:
@@ -86,13 +86,14 @@ def update_episode(request, pk):
 @login_required()
 def watch_episode(request, pk):
     series = Series.objects.filter(submitted_user=request.user).get(pk=pk)
+    
+    if len(series.stream_site) < 7:
+        return HttpResponseRedirect('/tracker/stream_missing/' + pk  + '?title=' + series.title)
+        
     context_dict = {'series': series}
     
     if request.GET.get('newCard'):
         context_dict['newCard'] = request.GET.get('newCard')
-    
-    if len(series.stream_site) < 7:
-        context_dict['noiframe'] = True
 
     form = SeriesForm()
     
@@ -104,7 +105,12 @@ class SeriesUpdate(UpdateView):
     model = Series
     success_url = '/tracker/'
     form_class = SeriesForm
-
+    
     def get_object(self, queryset=None):
         series = Series.objects.filter(submitted_user=self.request.user).get(pk=self.kwargs['pk'])
         return series
+
+@login_required()
+def stream_missing(request, pk):
+    context_dict = {'pk': pk, 'title': request.GET.get('title')}
+    return render(request, 'tracker/stream_missing.html', context_dict)
