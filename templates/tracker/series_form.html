@@ -4,6 +4,9 @@
 <form class="col s12 form" role="form"  method="post" action="">
 {% csrf_token %}
 {{ form.non_field_errors }}
+{% for hidden in form.hidden_fields %}
+{{ hidden }}
+{% endfor %}
 {% if form.errors %}
 <ul class="collection red">
 {% for error in form.errors.values %}

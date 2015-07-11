@@ -2,6 +2,7 @@ from datetime import datetime
 import json
 
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView
 
@@ -37,22 +38,9 @@ def index(request):
         
     if request.GET.get('newCard'):
         context_dict['newCard'] = request.GET.get('newCard')
-        
-    # Check if user is trying to submit a series
-    if request.method == 'POST':
-        form = SeriesForm(request.POST)
-        if form.is_valid():
-            series = form.save(commit=False)
-            series.submitted_user = request.user
-            if not form.cleaned_data['cover_image_url']:
-                img_url = image_search.search(request, form.cleaned_data['title'] + form.cleaned_data['tag'])
-                series.cover_image_url = img_url
-            series.save()
-            return HttpResponseRedirect('/tracker/?newCard=' + series.title)
-        else:
-            context_dict['form_errors'] = True
-    else:
-        form = SeriesForm()
+
+
+    form = SeriesForm()
     
     context_dict['form'] = form
         
@@ -61,20 +49,19 @@ def index(request):
 @login_required()
 def add_series(request):
     if request.method == 'POST':
+        message = None
         form = SeriesForm(request.POST)
-        
         if form.is_valid():
             series = form.save(commit=False)
+            message = request.POST['title']
             series.submitted_user = request.user
             if not form.cleaned_data['cover_image_url']:
                 img_url = image_search.search(request, form.cleaned_data['title'] + form.cleaned_data['tag'])
                 series.cover_image_url = img_url
             series.save()
-            return HttpResponseRedirect('/tracker/')
+            return HttpResponse(message)
     else:
         form = SeriesForm()
-
-    return render(request, 'tracker/add_series.html', {'form': form})
 
 @login_required()
 def delete_series(request, pk):

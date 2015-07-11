@@ -6,7 +6,9 @@
         <a class="btn-floating dropdown-button btn right" data-activates='filter'><i class="material-icons">sort</i></a>
       <div class="col s12 m5">
         <div class="card-panel red">
-          <span class="white-text">Hello, {{username}}!</span>
+          <span class="white-text">Hello, {{username}}!
+          
+          </span>
         </div>
       </div>
     <ul id='filter' class='dropdown-content'>
@@ -23,8 +25,8 @@
         <a class="waves-effect waves-light dropdown-button btn-flat" data-activates='{{series.id}}_options' ><i class="material-icons gray">settings</i></a>
           <!-- Dropdown Structure -->
           <ul id='{{series.id}}_options' class='dropdown-content'>
-            <li><a href="{% url 'update_series' series.id %}" class="tooltipped material-icons" data-delay="50" data-tooltip="Edit entry.">edit</a></li>
-            <li><a href="#!" class="tooltipped material-icons" data-delay="50" data-tooltip="Share">share</a></li>
+            <li><a href="{% url 'update_series' series.id %}" class="material-icons">edit</a></li>
+            <li><a href="#!" class="material-icons">share</a></li>
             <li class="divider"></li>
             <li><a class="material-icons series-delete red" series-id="{{series.id}}">delete</a></li>
           </ul>

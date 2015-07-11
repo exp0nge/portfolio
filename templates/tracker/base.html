@@ -61,12 +61,16 @@
 <div class="modal-content">
   <h4>Add Series</h4>
   <p>Fill out the form below to add a series</p>
-<form class="col s12 form" role="form"  method="post" action="">
+<form class="col s12 form" role="form"  method="post" action="" id="add-form">
 {% csrf_token %}
 {{ form.non_field_errors }}
 {% if form.errors %}
+{% for hidden in form.hidden_fields %}
+{{ hidden }}
+{% endfor %}
+<div id="message"></div>
 <ul class="collection red">
-  <div id="message"></div>
+  
 {% for error in form.errors.values %}
 <li class="collection-item">{{ error }}</li>
 {% endfor %}
@@ -115,8 +119,18 @@
     {{ form.description }}
    
   </div>
-   <button type="submit" value="Submit" class="waves-effect waves-green btn-large right" />
+   <button name="submit" type="submit" value="Submit" class="waves-effect waves-green btn-large right" />
   <i class="material-icons">check</i></button>
+  <div id="preloader-form"><div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div></div>
 </div>
 </form>
  </div>
@@ -128,7 +142,7 @@
 <script type='text/javascript'>
 $(document).ready(function(){
     {% if form_errors %}
-    document.getElementById("add_series_button").click()
+    document.getElementById("add_series_button").click();
     {% endif %}
     
     {% if newCard %}
