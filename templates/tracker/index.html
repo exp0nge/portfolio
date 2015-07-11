@@ -21,8 +21,9 @@
     </div>
 <div class="row">
 {% for series in series_list %}
-    <div class="col s4" id="{{series.id}}-div">
+    <div class="col s3" id="{{series.id}}-div">
         <a class="waves-effect waves-light dropdown-button btn-flat" data-activates='{{series.id}}_options' ><i class="material-icons gray">settings</i></a>
+          <a href="{% url 'watch_episode' series.id %}" class="waves-effect btn modal-trigger red"><i class="material-icons">play_arrow</i></a>
           <!-- Dropdown Structure -->
           <ul id='{{series.id}}_options' class='dropdown-content'>
             <li><a href="{% url 'update_series' series.id %}" class="material-icons">edit</a></li>
@@ -30,9 +31,9 @@
             <li class="divider"></li>
             <li><a class="material-icons series-delete red" series-id="{{series.id}}">delete</a></li>
           </ul>
-        <div class="card medium hoverable">
+        <div class="card small hoverable">
             <div class="card-image">
-                <img src="{{series.cover_image_url}}" width="300" height="250px">
+                <img src="{{series.cover_image_url}}" width="300" height="250">
                 <span class="card-title grey-text text-lighten-4">{{series.release_day}}</span>
             </div>
             <div class="card-content">
@@ -40,8 +41,7 @@
             </div>
              <!-- Dropdown Structure -->
             <div class="card-action">
-              <a href="{% url 'watch_episode' series.id %}" class="waves-effect btn modal-trigger red"><i class="material-icons">play_arrow</i></a>
-              <a class="waves-effect waves-light btn right ep-done" series-id="{{series.id}}">#<strong id="ep-number-{{series.id}}">{{series.current_episode}}</strong><i class="material-icons left">done</i></a>
+   <button class="waves-effect waves-light btn right ep-done left" series-id="{{series.id}}">#<strong id="ep-number-{{series.id}}">{{series.current_episode}}</strong><i class="material-icons left">done</i></button>
             </div>
           </div>
 
@@ -58,7 +58,7 @@
   </ul>
         </div>
 
-{% if forloop.counter|divisibleby:3 %}
+{% if forloop.counter|divisibleby:4 %}
     </div>
 <div class="row">
     {% endif %}
