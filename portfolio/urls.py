@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
-#from django.contrib import admin
+from django.contrib import admin
 from registration.backends.simple.views import RegistrationView
 
 # Create a new class that redirects the user to the index page, if successful at logging
@@ -24,7 +24,7 @@ class MyRegistrationView(RegistrationView):
 
 
 urlpatterns = [
-    #url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^myportfolio/', include('myportfolio.urls')),
     url(r'^tracker/', include('tracker.urls')),
     url(r'^accounts/register/$', MyRegistrationView.as_view(), name='registration_register'),
