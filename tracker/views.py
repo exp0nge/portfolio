@@ -25,7 +25,7 @@ def index(request):
     all_series = Series.objects.filter(submitted_user=request.user)
     
     if request.GET.get('sort') == 'Today':
-        weekday = day_converter[datetime.now().weekday()]
+        weekday = day_converter[datetime.now().weekday() - 1]
         filtered_series = []
         for a_series in all_series:
             if a_series.release_day == weekday:
@@ -63,7 +63,7 @@ def add_series(request):
                 series.cover_image_url = '/static/images/avatar.png'
 
             series.save()
-            return HttpResponse(json.dumps(series.as_json), mimetype="application/json")
+            return HttpResponse(series.title)
     else:
         form = SeriesForm()
 
@@ -91,20 +91,10 @@ def watch_episode(request, pk):
     if request.GET.get('newCard'):
         context_dict['newCard'] = request.GET.get('newCard')
     
-    if request.method == 'POST':
-        form = SeriesForm(request.POST)
-        if form.is_valid():
-            series = form.save(commit=False)
-            series.submitted_user = request.user
-            if not form.cleaned_data['cover_image_url']:
-                img_url = image_search.search(request, form.cleaned_data['title'] + form.cleaned_data['tag'])
-                series.cover_image_url = img_url
-            series.save()
-            return HttpResponseRedirect('?newCard=' + series.title)
-        else:
-            context_dict['form_errors'] = True
-    else:
-        form = SeriesForm()
+    if len(series.stream_site) < 7:
+        context_dict['noiframe'] = True
+
+    form = SeriesForm()
     
     context_dict['form'] = form
     

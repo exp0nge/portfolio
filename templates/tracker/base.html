@@ -12,6 +12,9 @@
     
 </head>
 <body>
+  <div class="progress" id="progress">
+      <div class="indeterminate"></div>
+      </div>
   {% block iframe_block %}
 <div class="navbar-fixed">
   <nav>
@@ -26,9 +29,7 @@
 
   <div class="container">
     <div class="section">
-      <div class="progress" id="progress">
-      <div class="indeterminate"></div>
-  </div>
+      
        {% block main_content %}{% endblock %}
         </div>
       </div>
@@ -41,9 +42,6 @@
   </div>
 </footer>
     {% endblock %}
-    
-    
-   
    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
     <a class="btn-floating btn-large red {% if not user.is_authenticated %}disabled{% endif %}"><i class="large material-icons">more_vert</i></a>
     <ul id='floaty-side-nav'>
@@ -53,7 +51,7 @@
       <li><a href="{% url 'auth_logout' %}?next=/tracker/" class="waves-effect waves-circle waves-light btn-floating red">
           <i class="material-icons">directions_walk</i></a></li>
           {% endif %}
-          <li><a href="#" class="waves-effect waves-circle waves-light btn-floating red">
+          <li><a href="#" class="waves-effect waves-circle waves-light btn-floating red" id="menu-up">
               <i class="material-icons">vertical_align_top</i></a></li>
     </ul>
     
