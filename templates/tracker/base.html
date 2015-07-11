@@ -26,6 +26,9 @@
 
   <div class="container">
     <div class="section">
+      <div class="progress" id="progress">
+      <div class="indeterminate"></div>
+  </div>
        {% block main_content %}{% endblock %}
         </div>
       </div>
@@ -70,7 +73,6 @@
 {% endfor %}
 <div id="message"></div>
 <ul class="collection red">
-  
 {% for error in form.errors.values %}
 <li class="collection-item">{{ error }}</li>
 {% endfor %}
