@@ -5,7 +5,9 @@ __pycache__/
 TODO.txt
 # C extensions
 *.so
-
+.idea
+.idea/*
+.gitignore
 # Distribution / packaging
 .Python
 env/
