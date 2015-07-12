@@ -19,7 +19,7 @@
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper red">
-      <a href="{% url 'index' %}" class="brand-logo center">Series Tracker</a>
+      <a href="{% url 'index' %}" id="home" class="brand-logo center">Series Tracker</a>
     </div>
   </nav>
     </div>
@@ -152,12 +152,26 @@ $(document).ready(function(){
     {% if newUser %}
     Materialize.toast('<span>Hover over the button on the bottom-right, and click the plus to add a series. Swipe to dismiss.</span>', 9000);
     {% endif %}
+    
+    var dayArray = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY','SATURDAY']
 
+    var day = new Date().getDay();
+    
     $("#sort-today").on("click", function() {
-      var day = new Date().getDay();
-      window.location.replace('/tracker/' + '?sort=' + day);
+      window.location.replace('/tracker/' + '?sort=' + dayArray[day]);
       
     });  
+
+    
+    $("#home").click(function(e){
+      e.preventDefault();
+      if(window.location == 'http://portfolio-exp0nge.c9.io/tracker/?sort=' + dayArray[day]){
+        window.location.replace('http://portfolio-exp0nge.c9.io/tracker/?sort=' + dayArray[day])
+      }
+      else{
+        window.location.replace('/tracker/')
+      }
+    });
 
 
 });

@@ -22,7 +22,7 @@ def index(request):
         context_dict['newUser'] = True
     all_series = Series.objects.filter(submitted_user=request.user)
     if request.GET.get('sort'):
-        weekday = day_converter[int(request.GET.get('sort'))]
+        weekday = request.GET.get('sort')
         filtered_series = []
         for a_series in all_series:
             if a_series.release_day == weekday or a_series.release_day == 'UNKNOWN':
