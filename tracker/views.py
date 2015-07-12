@@ -25,7 +25,7 @@ def index(request):
         weekday = day_converter[int(request.GET.get('sort'))]
         filtered_series = []
         for a_series in all_series:
-            if a_series.release_day == weekday:
+            if a_series.release_day == weekday or a_series.release_day == 'UNKNOWN':
                 filtered_series.append(a_series)
         context_dict['series_list'] = filtered_series
     elif request.GET.get('sort') == 'All':

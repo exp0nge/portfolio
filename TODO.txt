@@ -1,2 +1,4 @@
 http://racingtadpole.com/blog/django-ajax-and-jquery/
 http://jsfiddle.net/HP85j/8/
+
+-- FIX jQuery event handler for sort

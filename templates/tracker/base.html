@@ -152,6 +152,14 @@ $(document).ready(function(){
     {% if newUser %}
     Materialize.toast('<span>Hover over the button on the bottom-right, and click the plus to add a series. Swipe to dismiss.</span>', 9000);
     {% endif %}
+
+    $("#sort-today").on("click", function() {
+      var day = new Date().getDay();
+      window.location.replace('/tracker/' + '?sort=' + day);
+      
+    });  
+
+
 });
 </script>
 </body>
