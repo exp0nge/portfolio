@@ -26,5 +26,7 @@
         </form>
     </div>
 <div><a href="{% url 'registration_register' %}" class="waves-effect waves-light btn">Register</a></div>
+</br>
+<a href="{% url 'social:begin' 'google-oauth2' %}?next=/tracker/" role="button" class="btn btn-primary">Login with Google</a>
 <div style="clear: both"></div>
 {% endblock %}

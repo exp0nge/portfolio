@@ -20,14 +20,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = None
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = None
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = None
+
 with open('secret.txt') as f:
-    SECRET_KEY = f.read().strip()
+    content = f.readlines()
+    SECRET_KEY = content[0]
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = content[1].replace('\n', '')
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = content[2]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-
-
+AUTHENTICATION_BACKENDS = (
+    'social.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+    )
+    
 
 # Application definition
 
@@ -41,6 +51,7 @@ INSTALLED_APPS = (
     'myportfolio',
     'registration',
     'tracker',
+    'social.apps.django_app.default',
 )
 
 REGISTRATION_OPEN = True
@@ -48,6 +59,11 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = '/tracker/'
 LOGIN_URL = '/accounts/login/'
+
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/tracker/'
+SOCIAL_AUTH_LOGIN_URL = '/accounts/login/'
+
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
@@ -79,6 +95,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },

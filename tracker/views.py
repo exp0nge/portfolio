@@ -4,6 +4,7 @@ from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from django.http import HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView
+from django.contrib.auth import logout as auth_logout
 
 from tracker.models import Series
 from tracker.forms import SeriesForm
