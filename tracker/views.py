@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView
 from django.contrib.auth import logout as auth_logout
 
-from tracker.models import Series
+from tracker.models import Series, FavoriteSites
 from tracker.forms import SeriesForm
 import image_search
 
@@ -21,7 +21,9 @@ def index(request):
                     
     if request.GET.get('new') == 'True':
         context_dict['newUser'] = True
+        
     all_series = Series.objects.filter(submitted_user=request.user)
+    
     if request.GET.get('sort'):
         weekday = request.GET.get('sort')
         filtered_series = []
@@ -112,3 +114,12 @@ class SeriesUpdate(UpdateView):
 def stream_missing(request, pk):
     context_dict = {'pk': pk, 'title': request.GET.get('title')}
     return render(request, 'tracker/stream_missing.html', context_dict)
+    
+    
+@login_required()
+def add_favorite_site(request):
+    if request.method == 'POST':
+        site_url = request.GET.get('site')
+        favorite_site = FavoriteSites(submitted_user=request.user, site_url=site_url)
+        favorite_site.save()
+        return HttpResponse('Site added!')

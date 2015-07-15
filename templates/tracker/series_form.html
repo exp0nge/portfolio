@@ -33,10 +33,23 @@
     <label for="{{ form.current_episode.id_for_label }}">Episode #</label>
   </div>
   <div class="input-field col s6">
+    <i class="material-icons prefix">access_time</i>
+    {{ form.time }}
+    <label for="{{ form.time.id_for_label }}">Time</label>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s6">
+    <i class="material-icons prefix">brightness_3</i>
+    {{ form.season }}
+    <label for="{{ form.season.id_for_label }}">Season</label>
+  </div>
+  <div class="input-field col s6">
     <i class="material-icons prefix">wallpaper</i>
     {{ form.cover_image_url }}
     <label for="{{ form.cover_image_url.id_for_label }}">Cover Image URL</label>
   </div>
+</div>
 </div>
 <div class="row">
   <div class="input-field col s6">

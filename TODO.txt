@@ -1,4 +1,3 @@
-+ Season
 + Tag suggestions
 + Better image search
-+ Favorite site
++ View favs and select

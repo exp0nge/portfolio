@@ -66,6 +66,30 @@ form.submit(function(e){
 });
 
 
+$('#favorite_link').on('click', function(e) {
+    e.preventDefault();
+    var site_url = $('#stream_site_id').val();
+    if (site_url.length > 7 && site_url.includes("http://")){
+      $.ajax({
+        url: '/tracker/favorite_site/?site=' + site_url,
+        type: 'POST',
+        data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
+        success: function(response){
+          $('#add_fav_link').html('done')
+        },
+        error: function(response){
+          alert(response);
+          console.log(response);
+        }
+      });
+    }
+    else{
+      alert('Site url should include "http://"')
+    }
+    
+});
+
+
 });
 
 

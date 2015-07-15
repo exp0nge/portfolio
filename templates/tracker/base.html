@@ -96,16 +96,35 @@
     <label for="{{ form.current_episode.id_for_label }}">Episode #</label>
   </div>
   <div class="input-field col s6">
+    <i class="material-icons prefix">access_time</i>
+    {{ form.time }}
+    <label for="{{ form.time.id_for_label }}">Time</label>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s6">
+    <i class="material-icons prefix">brightness_3</i>
+    {{ form.season }}
+    <label for="{{ form.season.id_for_label }}">Season</label>
+  </div>
+  <div class="input-field col s6">
     <i class="material-icons prefix">wallpaper</i>
     {{ form.cover_image_url }}
     <label for="{{ form.cover_image_url.id_for_label }}">Cover Image URL</label>
   </div>
 </div>
 <div class="row">
+  
   <div class="input-field col s6">
     <i class="material-icons prefix">videocam</i>
-     <input placeholder="http://" id="{{ id_stream_site }}" name="stream_site" type="url">
+     <input placeholder="http://" id="stream_site_id" name="stream_site" type="url">
     <label for="{{ form.stream_site.id_for_label }}">Stream Site</label>
+    
+    <a id="add_from_favorite" class="tooltipped btn-floating waves-effect waves-light left" data-position="bottom" data-delay="0" data-tooltip="Add from saved sites">
+    <i class="material-icons" id="add_fav_link">sd_storage</i></a>
+    
+    <a id="favorite_link" class="tooltipped btn-floating waves-effect waves-light right" data-position="bottom" data-delay="0" data-tooltip="Save site">
+    <i class="material-icons" id="add_fav_link">star</i></a>
   </div>
   <div class="input-field col s6">
     <i class="material-icons prefix">local_offer</i>

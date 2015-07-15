@@ -2,10 +2,23 @@ from django.db import models
 from django.contrib.auth.models import User
 
 import urllib, json
+from datetime import time
 
 temp_user = User
+temp_time = time(0)
 
 # Create your models here.
+class FavoriteSites(models.Model):
+    site_url = models.URLField(default='')
+    submitted_user = models.ForeignKey(User, default=temp_user)
+    
+    def __unicode__(self):
+        return str(self.site_url)
+        
+    class Meta:
+        verbose_name_plural = 'Favorite Sites'
+
+
 class Series(models.Model):
     DAYS_CHOICES = (
         ('MONDAY', 'Monday'),
@@ -26,6 +39,8 @@ class Series(models.Model):
     cover_image_url = models.URLField(blank=True, help_text='Cover image URL.')
     current_episode = models.IntegerField(help_text='Current episode you are on.', default=1)
     tag = models.CharField(max_length=30, help_text='Relevent tag for the series, e.g., anime. Helps with generating a cover image.', default='anime')
+    time = models.TimeField(blank=True, help_text='Time when the show airs', default=temp_time)
+    season = models.IntegerField(default=1, blank=True, help_text='Season currently on.')
     
     def __unicode__(self):
         return self.title
@@ -36,15 +51,6 @@ class Series(models.Model):
         if self.description == 'No description provided.':
             self.description = get_wiki_description(self.title)
         super(Series, self).save()
-        
-    @property    
-    def as_json(self):
-        return dict(title=self.title,
-                    description=self.description,
-                    release_day=self.release_day,
-                    stream_site=self.stream_site,
-                    cover_image_url=self.cover_image_url,
-                    current_episode=self.current_episode)
 
     class Meta:
         verbose_name_plural = 'series'
