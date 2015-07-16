@@ -1,12 +1,11 @@
-{% extends 'tracker/base.html' %}
 
-{% block main_content %}
-<form class="col s12 form" role="form"  method="post" action="">
+<form class="col s12 form" role="form"  method="post" action="" id="update-series-form">
 {% csrf_token %}
 {{ form.non_field_errors }}
 {% for hidden in form.hidden_fields %}
 {{ hidden }}
 {% endfor %}
+<div id="error-div">
 {% if form.errors %}
 <ul class="collection red">
 {% for error in form.errors.values %}
@@ -14,6 +13,7 @@
 {% endfor %}
 </ul>
 {% endif %}
+</div>
 <div class="row">
   <div class="input-field col s6">
     <i class="material-icons prefix">star</i>
@@ -67,15 +67,11 @@
   <div class="input-field col s6">
     <i class="material-icons prefix">subject</i>
     {{ form.description }}
-   
   </div>
   {% if object %}
-<button type="submit" name="_save" value="Update" class="waves-effect waves-green btn-large right" /><i class="material-icons">check</i></button></button>
+<button id="update-button" type="submit" name="_save" value="Update" class="waves-effect waves-green btn-large right" /></button>
 {% else %}
-<button type="submit" value="Submit" class="waves-effect waves-green btn-large right" /><i class="material-icons">check</i></button></button>
+<button type="submit" value="Submit" class="waves-effect waves-green btn-large right" /><i class="material-icons">check</i></button>
 {% endif %}
 </div>
-
-    </form>
-
-{% endblock %}
+</form>

@@ -3,13 +3,26 @@ $(document).ready(function(){
 $("#preloader-form").hide();  
 $("#progress").hide();
 $('#menu-up').show();
-  
+
 var loc = window.location.pathname;
 var dir = loc.substring(0, loc.lastIndexOf('/'));
 if (dir === '/tracker/watch_episode'){
   $('#floaty-side-nav').append('<li><a href="/tracker/" class="waves-effect waves-circle waves-light btn-floating blue" id="home"><i class="material-icons">home</i></a></li>');
   $('#menu-up').hide();
   
+}
+
+var reloadCard = function(PK){
+  var pkDiv = '#' + PK + '-div';
+  $.ajax({
+    url: '/tracker/',
+    success: function(response){
+      $(pkDiv).html($(response).find(pkDiv).html());
+    },
+    error: function(response){
+      console.log(response);
+    }
+  });
 }
   
 $('.ep-done').on("click", function(){
@@ -61,9 +74,44 @@ form.submit(function(e){
     }
     
   });
-  return false;
-  
 });
+
+$('.update-form').on('click', function(e) {
+    e.preventDefault();
+    var updateSeriesPK = $(this).attr('pk');
+    var title = $(this).attr('title');
+    $.get('/tracker/update/' + updateSeriesPK, function(data){
+      $('#update-series-modal-content').html(data);
+      $('select').material_select();
+      $('#update-button').html('<i class="material-icons">check</i>');
+      $('#update-series-modal').openModal();
+      $('input').focus();
+      $('#update-series-form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+              url: '/tracker/update/' + updateSeriesPK,
+              type: 'POST',
+              data: $('#update-series-form').serialize(),
+              success: function(response){
+                if(response.includes('collection-item')){
+                  $('#error-div').html($(response).find('.collection').html());
+                }
+                else{
+                  $('#update-series-modal').closeModal();
+                  reloadCard(updateSeriesPK);
+                  Materialize.toast('<span>' + title + ' updated.</span>', 4000);
+                }
+              },
+              error: function(response){
+                alert('Error');
+              }
+            });
+        });
+      
+    });
+});
+
+
 
 
 $('#favorite_link').on('click', function(e) {

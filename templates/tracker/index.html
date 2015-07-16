@@ -1,6 +1,11 @@
 {% extends 'tracker/base.html' %}
 
 {% block main_content %}
+<!-- Modal Structure -->
+<div id="update-series-modal" class="modal">
+  <div class="modal-content" id="update-series-modal-content">
+  </div>
+</div>
 
 <div class="row">
         <a class="btn-floating dropdown-button btn right" data-activates='filter'><i class="material-icons">sort</i></a>
@@ -29,7 +34,7 @@
           {% endif %}
           <!-- Dropdown Structure -->
           <ul id='{{series.id}}_options' class='dropdown-content'>
-            <li><a href="{% url 'update_series' series.id %}" class="material-icons">edit</a></li>
+            <li><a href="{% url 'update_series' series.id %}" class="material-icons update-form" pk="{{series.id}}" title="{{series.title}}">edit</a></li>
             <li><a href="#!" class="material-icons">share</a></li>
             <li class="divider"></li>
             <li><a class="material-icons series-delete red" series-id="{{series.id}}">delete</a></li>
@@ -68,4 +73,7 @@
 {% endfor %}
 </div>
 <div style="clear: both"></div>
+
+
+          
 {% endblock %}
