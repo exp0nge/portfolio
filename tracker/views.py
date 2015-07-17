@@ -23,6 +23,7 @@ def index(request):
         context_dict['newUser'] = True
         
     all_series = Series.objects.filter(submitted_user=request.user)
+    _series = None
     
     if request.GET.get('sort'):
         weekday = request.GET.get('sort')
@@ -45,6 +46,43 @@ def index(request):
     context_dict['form'] = form
         
     return render(request, 'tracker/index.html', context_dict)
+    
+
+@login_required()
+def get_series_as_json(request):
+    if request.method == 'GET':
+        all_series = Series.objects.filter(submitted_user=request.user)
+        _series = None
+        
+        if request.GET.get('sort'):
+            weekday = request.GET.get('sort')
+            filtered_series = []
+            for a_series in all_series:
+                if a_series.release_day == weekday or a_series.release_day == 'UNKNOWN':
+                    filtered_series.append(a_series)
+            _series = filtered_series
+        elif request.GET.get('sort') == 'All':
+            _series = all_series
+        else:
+            _series = all_series
+        
+        jsonify_series = {}
+        for each_series in _series:
+            jsonify_series[each_series.title] = {
+                "id": each_series.id,
+                "title": each_series.title,
+                "description": each_series.description,
+                "release_day": each_series.release_day,
+                "stream_site": each_series.stream_site,
+                "cover_image_url": each_series.cover_image_url,
+                "current_episode": each_series.current_episode,
+                "tag": each_series.tag,
+                "time": (each_series.time).isoformat(),
+                "season": each_series.season
+                }
+                
+        return HttpResponse(json.dumps(jsonify_series), content_type='application/json')
+
 
 @login_required()
 def add_series(request):

@@ -14,6 +14,7 @@ $('.dropdown-sites').dropdown({
   }
 );
 
+
 $('#add_series_button').on('click', function() {
   $('.dropdown-sites').dropdown({belowOrigin: true});
     // Get favorite websites and load into dropdown
