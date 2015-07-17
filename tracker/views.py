@@ -55,15 +55,18 @@ def add_series(request):
             series = form.save(commit=False)
             message = request.POST['title']
             series.submitted_user = request.user
-            try:
-                if not form.cleaned_data['cover_image_url']:
+            
+            if not form.cleaned_data['cover_image_url']:
+                try:
                     img_url = image_search.search(request, form.cleaned_data['title'] + form.cleaned_data['tag'])
                     series.cover_image_url = img_url
-            except:
-                series.cover_image_url = '/static/images/avatar.png'
+                except:
+                    series.cover_image_url = '/static/images/avatar.png'
 
             series.save()
             return HttpResponse(series.title)
+        else:
+            return HttpResponse(str(form.errors))
     else:
         form = SeriesForm()
 

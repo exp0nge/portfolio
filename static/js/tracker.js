@@ -38,7 +38,6 @@ $('#add_series_button').on('click', function() {
     $('.dropdown-tag').dropdown({belowOrigin: true});
     for(var i = 0; i < tag_list.length; i++){
       $('#tags-dropdown').append('<li><a class="tag-item" href="#!">' + tag_list[i] + '</a></li>');
-      console.log(tag_list[i]);
     }
     $('.tag-item').on('click', function(e) {
         e.preventDefault();
@@ -114,15 +113,27 @@ form.submit(function(e){
     type: 'POST',
     data: form.serialize(),
     success: function(response){
-      $('#add-form').trigger('reset');
-      $("#preloader-form").hide();
-      $("#add_series_modal").closeModal();
-      Materialize.toast('<span>' + response + ' added.</span>', 4000);
+      if (response.includes('"errorlist"')){
+        $('#add-series-button').show();
+        $("#preloader-form").hide();
+        response = response.replace('release_day', '');
+        response = response.replace('tag', '');
+        response = response.replace('title', '');
+        $('#error-message').html('<div class="card-panel red">' + response + '</div>');
+        $('#add_series_modal').animate({ scrollTop: 0 }, 'slow');
+      }
+      else {
+        $('#add-form').trigger('reset');
+        $("#preloader-form").hide();
+        $("#add_series_modal").closeModal();
+        Materialize.toast('<span>' + response + ' added.</span>', 4000);
+      }
     },
     error: function(response){
       $("#preloader-form").hide();
       $('#add-series-button').show();
-      alert("Title and release day is required!");
+      console.log(response);
+      alert("Something went wrong.");
     }
     
   });

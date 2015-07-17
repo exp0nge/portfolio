@@ -41,18 +41,18 @@
           </ul>
         <div class="card small hoverable">
             <div class="card-image">
-                <img src="{{series.cover_image_url}}" width="300" height="250">
+                <img src="{{series.cover_image_url}}"  width="300" height="250">
                 <span class="card-title grey-text text-lighten-4">{{series.release_day}}</span>
             </div>
             <div class="card-content">
-                <p>{{series.title}}</p>
+                <p class="truncate">{{series.title}}</p>
             </div>
              <!-- Dropdown Structure -->
             <div class="card-action">
    <button class="waves-effect waves-light btn right ep-done left" series-id="{{series.id}}">#<strong id="ep-number-{{series.id}}">{{series.current_episode}}</strong><i class="material-icons left">done</i></button>
             </div>
           </div>
-
+      <div class="card-panel hoverable"><i class="material-icons left">access_alarm</i>{{ series.time }}</div>
           <ul class="collapsible popout hoverable" data-collapsible="accordion">
     <li>
       <div class="collapsible-header hoverable"><i class="material-icons">description</i>Description</div>
