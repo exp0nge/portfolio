@@ -15,6 +15,8 @@ $('.dropdown-sites').dropdown({
 );
 
 $('#add_series_button').on('click', function() {
+  $('.dropdown-sites').dropdown();
+    // Get favorite websites and load into dropdown
     $.ajax({
       url: '/tracker/get_favorite_sites/',
       type: 'GET',
@@ -31,6 +33,19 @@ $('#add_series_button').on('click', function() {
         console.log(response);
       }
     });
+    // Tag suggestions
+    var tag_list = ['anime', 'tv series', 'manga'];
+    $('.dropdown-tag').dropdown();
+    for(var i = 0; i < tag_list.length; i++){
+      $('#tags-dropdown').append('<li><a class="tag-item" href="#!">' + tag_list[i] + '</a></li>');
+      console.log(tag_list[i]);
+    }
+    $('.tag-item').on('click', function(e) {
+        e.preventDefault();
+        $('.dropdown-tag').focus();
+        $('.dropdown-tag').val($(this).html());
+    });
+    
 });
      
 

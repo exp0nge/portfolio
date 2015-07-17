@@ -119,8 +119,11 @@
   <div class="input-field col s6">
     <i class="material-icons prefix">videocam</i>
      <input class="dropdown-sites" placeholder="http://" id="stream_site_id" name="stream_site" type="url" data-activates='fav-sites-dropdown'>
-       <!-- Dropdown Structure -->
+       <!-- Favorite Sites Dropdown Structure -->
   <ul id='fav-sites-dropdown' class='dropdown-content'>
+  </ul>
+  <!-- Tag suggestion Dropdown Structure -->
+  <ul id='tags-dropdown' class='dropdown-content'>
   </ul>
     <label for="{{ form.stream_site.id_for_label }}">Stream Site</label>
     <a id="favorite_link" class="tooltipped btn-floating waves-effect waves-light right" data-position="bottom" data-delay="0" data-tooltip="Save site">
@@ -128,7 +131,7 @@
   </div>
   <div class="input-field col s6">
     <i class="material-icons prefix">local_offer</i>
-    {{ form.tag }}
+    <input type="text" id="tag_id" name="tag" data-activates='tags-dropdown' class="tag-input dropdown-tag">
     <label for="{{ form.tag.id_for_label }}">Tag</label>
   </div>
 </div>
