@@ -123,3 +123,12 @@ def add_favorite_site(request):
         favorite_site = FavoriteSites(submitted_user=request.user, site_url=site_url)
         favorite_site.save()
         return HttpResponse('Site added!')
+        
+@login_required()
+def get_favorite_sites(request):
+    if request.method == 'GET':
+        fav_sites = FavoriteSites.objects.filter(submitted_user=request.user)
+        json_dict = {}
+        for site in fav_sites:
+            json_dict[site.site_url] = site.site_url
+        return HttpResponse(json.dumps(json_dict), content_type='application/json')

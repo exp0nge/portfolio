@@ -118,12 +118,11 @@
   
   <div class="input-field col s6">
     <i class="material-icons prefix">videocam</i>
-     <input placeholder="http://" id="stream_site_id" name="stream_site" type="url">
+     <input class="dropdown-sites" placeholder="http://" id="stream_site_id" name="stream_site" type="url" data-activates='fav-sites-dropdown'>
+       <!-- Dropdown Structure -->
+  <ul id='fav-sites-dropdown' class='dropdown-content'>
+  </ul>
     <label for="{{ form.stream_site.id_for_label }}">Stream Site</label>
-    
-    <a id="add_from_favorite" class="tooltipped btn-floating waves-effect waves-light left" data-position="bottom" data-delay="0" data-tooltip="Add from saved sites">
-    <i class="material-icons" id="add_fav_link">sd_storage</i></a>
-    
     <a id="favorite_link" class="tooltipped btn-floating waves-effect waves-light right" data-position="bottom" data-delay="0" data-tooltip="Save site">
     <i class="material-icons" id="add_fav_link">star</i></a>
   </div>
@@ -139,7 +138,7 @@
     {{ form.description }}
    
   </div>
-   <button name="submit" type="submit" value="Submit" class="waves-effect waves-green btn-large right" />
+   <button id="add-series-button" name="submit" type="submit" value="Submit" class="waves-effect waves-green btn-large right" />
   <i class="material-icons">check</i></button>
   <div id="preloader-form"><div class="preloader-wrapper big active">
       <div class="spinner-layer spinner-blue">

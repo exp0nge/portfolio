@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^watch_episode/(?P<pk>[\w-]+)$', views.watch_episode, name='watch_episode'),
     url(r'^stream_missing/(?P<pk>[\w-]+)$', views.stream_missing, name='stream_missing'),
     url(r'^favorite_site/$', views.add_favorite_site, name='add_favorite_site'),
+    url(r'^get_favorite_sites/$', views.get_favorite_sites, name='get_favorite_sites'),
 
 ]

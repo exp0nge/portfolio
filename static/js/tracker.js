@@ -4,6 +4,36 @@ $("#preloader-form").hide();
 $("#progress").hide();
 $('#menu-up').show();
 
+$('.dropdown-sites').dropdown({
+    inDuration: 300,
+    outDuration: 225,
+    constrain_width: true, // Does not change width of dropdown to that of the activator
+    hover: false, // Activate on hover
+    gutter: 0, // Spacing from edge
+    belowOrigin: true // Displays dropdown below the button
+  }
+);
+
+$('#add_series_button').on('click', function() {
+    $.ajax({
+      url: '/tracker/get_favorite_sites/',
+      type: 'GET',
+      success: function(response){
+        $.each(response, function(index, value){
+          $('#fav-sites-dropdown').append('<li class="fav-item"><a href="#!">' + value + '</a></li>');
+        });
+        $('.fav-item').on('click', function() {
+           $('#stream_site_id').val($(this).html().replace('<a href="#!">', '').replace('</a>', '')); 
+        });
+      },
+      error: function(response){
+        alert(response);
+        console.log(response);
+      }
+    });
+});
+     
+
 var loc = window.location.pathname;
 var dir = loc.substring(0, loc.lastIndexOf('/'));
 if (dir === '/tracker/watch_episode'){
@@ -18,6 +48,11 @@ var reloadCard = function(PK){
     url: '/tracker/',
     success: function(response){
       $(pkDiv).html($(response).find(pkDiv).html());
+      
+      $('.dropdown-button').dropdown();
+      $('.collapsible').collapsible();
+      $('.tooltipped').tooltip();
+    
     },
     error: function(response){
       console.log(response);
@@ -57,6 +92,7 @@ $('.series-delete').on("click", function(){
 var form = $('#add-form');
 form.submit(function(e){
   e.preventDefault();
+  $('#add-series-button').hide();
   $("#preloader-form").show();
   $.ajax({
     url: '/tracker/add/',
@@ -70,6 +106,7 @@ form.submit(function(e){
     },
     error: function(response){
       $("#preloader-form").hide();
+      $('#add-series-button').show();
       alert("Title and release day is required!");
     }
     
@@ -88,12 +125,14 @@ $('.update-form').on('click', function(e) {
       $('input').focus();
       $('#update-series-form').on('submit', function(e) {
             e.preventDefault();
+            $('#update-button').hide()
             $.ajax({
               url: '/tracker/update/' + updateSeriesPK,
               type: 'POST',
               data: $('#update-series-form').serialize(),
               success: function(response){
                 if(response.includes('collection-item')){
+                  $('#update-button').show();
                   $('#error-div').html($(response).find('.collection').html());
                 }
                 else{
@@ -103,6 +142,7 @@ $('.update-form').on('click', function(e) {
                 }
               },
               error: function(response){
+                $('#update-button').show();
                 alert('Error');
               }
             });
@@ -110,8 +150,6 @@ $('.update-form').on('click', function(e) {
       
     });
 });
-
-
 
 
 $('#favorite_link').on('click', function(e) {
@@ -134,8 +172,8 @@ $('#favorite_link').on('click', function(e) {
     else{
       alert('Site url should include "http://"')
     }
-    
 });
+
 
 
 });

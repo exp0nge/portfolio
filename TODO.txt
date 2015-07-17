@@ -1,3 +1,4 @@
 + Tag suggestions
 + Better image search
 + View favs and select
++ sort by type

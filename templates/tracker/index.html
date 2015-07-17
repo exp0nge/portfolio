@@ -34,7 +34,7 @@
           {% endif %}
           <!-- Dropdown Structure -->
           <ul id='{{series.id}}_options' class='dropdown-content'>
-            <li><a href="{% url 'update_series' series.id %}" class="material-icons update-form" pk="{{series.id}}" title="{{series.title}}">edit</a></li>
+            <li><a class="material-icons update-form" pk="{{series.id}}" title="{{series.title}}">edit</a></li>
             <li><a href="#!" class="material-icons">share</a></li>
             <li class="divider"></li>
             <li><a class="material-icons series-delete red" series-id="{{series.id}}">delete</a></li>
@@ -58,7 +58,7 @@
       <div class="collapsible-header hoverable"><i class="material-icons">description</i>Description</div>
       <div class="collapsible-body">
         
-        <p><a href="{% url 'update_series' series.id %}" class="tooltipped material-icons" data-delay="50" data-tooltip="Edit entry.">edit</a>
+        <p><a href="{% url 'update_series' series.id %}" class="tooltipped material-icons update-form" data-delay="50" data-tooltip="Edit entry." pk="{{series.id}}" title="{{series.title}}">edit</a>
         </br>
         {{series.description}}</p>
       </div>
