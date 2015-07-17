@@ -1,4 +1,7 @@
-+ Tag suggestions
 + Better image search
 + Remove favs (userprofile?)
 + sort by type
+
+
+__future__
++ smart tag suggestions
