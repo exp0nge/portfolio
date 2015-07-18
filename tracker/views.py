@@ -77,7 +77,7 @@ def get_series_as_json(request):
                 "cover_image_url": each_series.cover_image_url,
                 "current_episode": each_series.current_episode,
                 "tag": each_series.tag,
-                "time": (each_series.time).isoformat(),
+                "time": each_series.time.isoformat(),
                 "season": each_series.season
                 }
                 

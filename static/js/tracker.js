@@ -14,6 +14,92 @@ $('.dropdown-sites').dropdown({
   }
 );
 
+var cardHtml = function(rowBool, cover_image_url, release_day, title , series_ID, current_episode, stream_site){
+  var mainBody = '<div class="card small hoverable"> \
+            <div class="card-image"> \
+                <img src="' + cover_image_url +'"  width="300" height="250"> \
+                <span class="card-title grey-text text-lighten-4">' + release_day + '</span> \
+            </div> \
+            <div class="card-content"> \
+                <p class="truncate">' + title + '</p> \
+            </div> \
+             <!-- Dropdown Structure --> \
+            <div class="card-action"> \
+          <button class="waves-effect waves-light btn right ep-done left" \
+          series-id="' + series_ID + '">#<strong id="ep-number-' + series_ID + '"> \
+      '+ current_episode + '</strong><i class="material-icons left">done</i></button> \
+            </div></div>';
+
+    var menuOptions = '<div class="col s3" id="'+ series_ID +'-div">' +
+        '<a class="waves-effect waves-light dropdown-button btn teal" data-activates="'+ series_ID + '_options">' +
+        '<i class="material-icons gray">settings</i></a>';
+
+    if (stream_site  === ''){
+      menuOptions += '<a href="/tracker/watch_episode/' + series_ID + '" class="waves-effect btn-flat modal-trigger gray disabled right"><i class="material-icons">play_arrow</i></a>';
+    }else{
+        menuOptions += '<a href="/tracker/watch_episode/' + series_ID + '" class="waves-effect btn modal-trigger red right"><i class="material-icons">play_arrow</i></a>';
+    }
+    menuOptions += ' <!-- Dropdown Structure for Settings -->' +
+        '<ul id="' + series_ID + '_options" class="dropdown-content">' +
+    '<li><a class="material-icons update-form" pk="' + series_ID + '" title="' + series_ID + '">edit</a></li> ' +
+    '<li><a href="#!" class="material-icons">share</a></li>' +
+    '<li class="divider"></li>' +
+    '<li><a class="material-icons series-delete red" series-id="' + series_ID +'">delete</a></li></ul>';
+
+    return menuOptions + mainBody + '</div>';
+};
+$.ajax({
+  url: '/tracker/get_series_as_json/',
+  type: 'GET',
+  data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
+  dataType: 'json',
+  success: function(response){
+    // clear deck
+    $("#series-deck").html('');
+      var rowBool = true;
+      var columnCount = 0;
+      var fullHtml = '';
+    for (var key in response){
+      if(response.hasOwnProperty(key)){
+        if (rowBool){
+            fullHtml += '<div class="row">';
+            rowBool = false;
+        }
+        var series = response[key];
+        fullHtml += cardHtml(rowBool, series.cover_image_url, series.release_day, series.title , series.id,
+            series.current_episode, series.stream_site);
+        columnCount++;
+        if(columnCount === 4) {
+            fullHtml += '</div>';
+            columnCount = 0;
+            rowBool = true;
+            $('#series-deck').append(fullHtml);
+            fullHtml = '';
+        }
+
+      }
+    }
+   $('.ep-done').on("click", function(){
+    var pk = $(this).attr("series-id");
+      $.ajax({
+        url: "/tracker/watched/" + pk,
+        type: "GET",
+        data: {pk: pk},
+        success: function(response){
+          $("#ep-number-" + pk).html(response)
+        }
+      });
+    });
+
+    $('.dropdown-button').dropdown();
+
+
+  },
+  error: function(response){
+    console.log(response);
+  }
+
+  });
 
 $('#add_series_button').on('click', function() {
   $('.dropdown-sites').dropdown({belowOrigin: true});
