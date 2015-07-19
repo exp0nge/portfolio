@@ -27,7 +27,7 @@ def search(request, query):
     query = urllib.quote(query)
     user_ip = str(get_ip(request))
     search_url = 'http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + query + \
-                 '&start=0&imgsz=large&safe=active&userip=' + user_ip
+                 '&start=0&safe=active&userip=' + user_ip
     f = fetcher.open(search_url)
     deserialized_output = simplejson.load(f)
     

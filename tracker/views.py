@@ -1,10 +1,8 @@
 import json
 
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
-from django.http import HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView
-from django.contrib.auth import logout as auth_logout
 
 from tracker.models import Series, FavoriteSites
 from tracker.forms import SeriesForm
@@ -53,7 +51,7 @@ def get_series_as_json(request):
     if request.method == 'GET':
         all_series = Series.objects.filter(submitted_user=request.user)
         _series = None
-        
+
         if request.GET.get('sort'):
             weekday = request.GET.get('sort')
             filtered_series = []
@@ -65,7 +63,7 @@ def get_series_as_json(request):
             _series = all_series
         else:
             _series = all_series
-        
+
         jsonify_series = {}
         for each_series in _series:
             jsonify_series[each_series.title] = {
@@ -80,7 +78,7 @@ def get_series_as_json(request):
                 "time": each_series.time.isoformat(),
                 "season": each_series.season
                 }
-                
+
         return HttpResponse(json.dumps(jsonify_series), content_type='application/json')
 
 
@@ -102,9 +100,22 @@ def add_series(request):
                     series.cover_image_url = '/static/images/avatar.png'
 
             series.save()
-            return HttpResponse(series.title)
+            jsonify_series = {0: {
+                "id": series.id,
+                "title": series.title,
+                "description": series.description,
+                "release_day": series.release_day,
+                "stream_site": series.stream_site,
+                "cover_image_url": series.cover_image_url,
+                "current_episode": series.current_episode,
+                "tag": series.tag,
+                "time": series.time.isoformat(),
+                "season": series.season
+            }}
+            return HttpResponse(json.dumps(jsonify_series), content_type='application/json')
         else:
-            return HttpResponse(str(form.errors))
+            jsonify_errors = {0: 'error', 'errors': [value for value in form.errors.keys()]}
+            return HttpResponse(json.dumps(jsonify_errors), content_type='application/json')
     else:
         form = SeriesForm()
 

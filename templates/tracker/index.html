@@ -23,62 +23,8 @@
   </ul>
   
     </div>
-<div id="series-deck">
 <div class="row">
-{% for series in series_list %}
-    <div class="col s3" id="{{series.id}}-div">
-        <a class="waves-effect waves-light dropdown-button btn teal" data-activates='{{series.id}}_options' ><i class="material-icons gray">settings</i></a>
-          {% if series.stream_site|length %}
-          <a href="{% url 'watch_episode' series.id %}" class="waves-effect btn modal-trigger red"><i class="material-icons">play_arrow</i></a>
-          {% else %}
-          <a href="{% url 'watch_episode' series.id %}" class="waves-effect btn-flat modal-trigger gray disabled"><i class="material-icons">play_arrow</i></a>
-          {% endif %}
-          <!-- Dropdown Structure -->
-          <ul id='{{series.id}}_options' class='dropdown-content'>
-            <li><a class="material-icons update-form" pk="{{series.id}}" title="{{series.title}}">edit</a></li>
-            <li><a href="#!" class="material-icons">share</a></li>
-            <li class="divider"></li>
-            <li><a class="material-icons series-delete red" series-id="{{series.id}}">delete</a></li>
-          </ul>
-        <div class="card small hoverable">
-            <div class="card-image">
-                <img src="{{series.cover_image_url}}"  width="300" height="250">
-                <span class="card-title grey-text text-lighten-4">{{series.release_day}}</span>
-            </div>
-            <div class="card-content">
-                <p class="truncate">{{series.title}}</p>
-            </div>
-             <!-- Dropdown Structure -->
-            <div class="card-action">
-   <button class="waves-effect waves-light btn right ep-done left" series-id="{{series.id}}">#<strong id="ep-number-{{series.id}}">{{series.current_episode}}</strong><i class="material-icons left">done</i></button>
-            </div>
-          </div>
-      <div class="card-panel hoverable"><i class="material-icons left">access_alarm</i>{{ series.time }}</div>
-          <ul class="collapsible popout hoverable" data-collapsible="accordion">
-    <li>
-      <div class="collapsible-header hoverable"><i class="material-icons">description</i>Description</div>
-      <div class="collapsible-body">
-        
-        <p><a href="{% url 'update_series' series.id %}" class="tooltipped material-icons update-form" data-delay="50" data-tooltip="Edit entry." pk="{{series.id}}" title="{{series.title}}">edit</a>
-        </br>
-        {{series.description}}</p>
-      </div>
-    </li>
-  </ul>
-        </div>
-
-{% if forloop.counter|divisibleby:4 %}
-    </div>
-<div class="row">
-    {% endif %}
-{% endfor %}
+    <div id="series-deck" class="col s6" style="width: 50%;"></div>
+    <div id="series-deck2" class="col s6" style="width: 50%;"></div>
 </div>
-</div> 
-<div style="clear: both"></div>
-
-<script type="text/javascript">
-  // Load card deck
-
-</script>
-          
 {% endblock %}
