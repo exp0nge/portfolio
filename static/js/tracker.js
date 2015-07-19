@@ -15,25 +15,22 @@ $('.dropdown-sites').dropdown({
 );
 
     var cardHtml = function (cover_image_url, release_day, title, series_ID, current_episode, stream_site) {
-        var mainBody = '<div series-id="' + series_ID + '"><button class="waves-effect waves-light btn ep-done  deep-orange lighten-1" series-id="' + series_ID + '">#' +
+        var mainBody = '<div series-id="' + series_ID + '" title="' + title + '">' +
+            '<button class="waves-effect waves-light btn ep-done  deep-orange lighten-1" series-id="' + series_ID + '">#' +
             '<strong id="ep-number-' + series_ID + '">' + current_episode + '</strong><i class="material-icons left">done</i></button>' +
             '<span>midnight</span>' +
             '<a href="/tracker/watch_episode/' + series_ID + '" class="waves-effect waves-light btn ep-done  deep-orange lighten-1 right" series-id="' + series_ID + '">' +
-            '<i class="material-icons">play_arrow</i></a></div>' +
+            '<i class="material-icons">play_arrow</i></a>' +
             '<li class="collection-item avatar" series-id="' + series_ID + '">' +
             ' <img src="' + cover_image_url + '" alt="" class="circle">' +
             '<span class="title">' + title + '</span>' +
             '<p>' + release_day + '</p>' +
-            '<div class="secondary-content"><a class="waves-effect waves-light dropdown-button btn-flat" ' +
-            'data-activates="' + series_ID + '_options"><i class="material-icons gray">settings</i></a></li>';
+            '<div class="secondary-content"><a class="waves-effect waves-light dropdown-button btn-flat settings-trigger" ' +
+            'series-id="' + series_ID + '"><i class="material-icons gray">settings</i></a></li></div>';
 
-        var settingsOptions = '<!-- Dropdown Structure -->' +
-        '<ul id="' + series_ID + '_options" class="dropdown-content">' +
-            '<li><a class="material-icons update-form" pk="' + series_ID + '" title="' + title + '">edit</a></li>' +
-            '<li><a href="#" class="material-icons">share</a></li> <li class="divider"></li> ' +
-            '<li><a class="material-icons series-delete red" series-id="' + series_ID + '">delete</a></li></ul>';
-        return mainBody + settingsOptions;
+        return mainBody;
 };
+
     var altBool = true;
 $.ajax({
   url: '/tracker/get_series_as_json/',
@@ -57,8 +54,6 @@ $.ajax({
         }
       }
     }
-      // initialize
-      $('.dropdown-button').dropdown();
 
   },
   error: function(response){
@@ -110,19 +105,17 @@ if (dir === '/tracker/watch_episode'){
 }
 
 var reloadCard = function(PK){
-  var pkDiv = '#' + PK + '-div';
   $.ajax({
-    url: '/tracker/',
+      dataType: 'json',
+      url: '/tracker/get_a_series/?pk=' + PK,
+      data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
     success: function(response){
-      $(pkDiv).html($(response).find(pkDiv).html());
-      
-      $('.dropdown-button').dropdown();
-      $('.collapsible').collapsible();
-      $('.tooltipped').tooltip();
-    
+        $('div[series-id="' + PK + '"]').html(cardHtml(response.cover_image_url, response.release_day, response.title,
+            response.id, response.current_episode, response.stream_site));
     },
     error: function(response){
       console.log(response);
+        alert('Error updating card');
     }
   });
 };
@@ -138,7 +131,24 @@ var reloadCard = function(PK){
                 $("#ep-number-" + pk).html(response)
             }
         });
-});
+    });
+
+    $(document.body).on('click', '.clear-button', function (e) {
+        e.preventDefault();
+        reloadCard($(this).attr('series-ID'));
+    });
+
+    $(document.body).on('click', '.settings-trigger', function () {
+        var series_ID = $(this).attr('series-id');
+        $('li[series-id=' + series_ID + ']').html(
+            '<a href="#" class="waves-effect waves-light btn btn-floating right clear-button" series-id="' + series_ID + '">' +
+            '<i class="material-icons">undo</i></a></br>' +
+            '<a class="waves-effect waves-light btn update-form" ' +
+            'pk="' + series_ID + '"><i class="material-icons">edit</i></a>' +
+            '<a href="#" class="waves-effect waves-light btn"><i class="material-icons">share</i></a>' +
+            '<a class="waves-effect waves-light btn series-delete red" series-id="' + series_ID + '">' +
+            '<i class="material-icons">delete</i></a>');
+    });
 
 
     $(document.body).on("click", '.series-delete', function () {
@@ -156,7 +166,6 @@ var reloadCard = function(PK){
   });
 });
 
-
 var form = $('#add-form');
 form.submit(function(e){
   e.preventDefault();
@@ -169,11 +178,12 @@ form.submit(function(e){
     data: form.serialize(),
     success: function(response){
         if (response[0] == 'error') {
-            console.log(response);
         $('#add-series-button').show();
         $("#preloader-form").hide();
             var errorDict = {'release_day': 'Day', 'tag': 'Tag', 'title': 'Title'};
+            $('#error-message').empty();
             for (var i = 0; i < response.errors.length; i++) {
+
                 $('#error-message').append('<li class="collection-item">' + errorDict[response.errors[i]] + ' is required.</li>');
             }
         $('#add_series_modal').animate({ scrollTop: 0 }, 'slow');
@@ -201,7 +211,7 @@ form.submit(function(e){
     $(document.body).on('click', '.update-form', function (e) {
     e.preventDefault();
     var updateSeriesPK = $(this).attr('pk');
-    var title = $(this).attr('title');
+        var title = $('div[series-id="' + updateSeriesPK + '"]').attr('title');
     $.get('/tracker/update/' + updateSeriesPK, function(data){
       $('#update-series-modal-content').html(data);
       $('select').material_select();

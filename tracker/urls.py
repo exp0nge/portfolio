@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^favorite_site/$', views.add_favorite_site, name='add_favorite_site'),
     url(r'^get_favorite_sites/$', views.get_favorite_sites, name='get_favorite_sites'),
     url(r'^get_series_as_json/$', views.get_series_as_json, name='get_series_as_json'),
+    url(r'^get_a_series/$', views.series_by_id_as_json, name='get_a_series_json'),
 
 ]
