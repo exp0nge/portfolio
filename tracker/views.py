@@ -6,7 +6,7 @@ from django.views.generic.edit import UpdateView
 
 from tracker.models import Series, FavoriteSites
 from tracker.forms import SeriesForm
-import image_search
+import search
 
 day_converter = {1: 'MONDAY', 2: 'TUESDAY', 3: 'WEDNESDAY', 4: 'THURSDAY',
                  5: 'FRIDAY', 6: 'SATURDAY', 0: 'SUNDAY'}
@@ -106,7 +106,7 @@ def add_series(request):
 
             if not form.cleaned_data['cover_image_url']:
                 try:
-                    img_url = image_search.search(request, form.cleaned_data['title'] + form.cleaned_data['tag'])
+                    img_url = search.img_search(request, form.cleaned_data['title'] + form.cleaned_data['tag'])
                     series.cover_image_url = img_url
                 except:
                     series.cover_image_url = '/static/images/avatar.png'
@@ -200,3 +200,14 @@ def get_favorite_sites(request):
         for site in fav_sites:
             json_dict[site.site_url] = site.site_url
         return HttpResponse(json.dumps(json_dict), content_type='application/json')
+
+
+@login_required()
+def fuzzy_series_search(request):
+    if request.method == 'GET':
+        query = request.GET.get('q')
+        try:
+            results = search.fuzzy_series_search(Series.objects.filter(submitted_user=request.user), query)
+            return HttpResponse(json.dumps({0: 'success', 'results': results}), content_type='application/json')
+        except search.NoResultError:
+            return HttpResponse(json.dumps({0: 'failure'}), content_type='application/json')

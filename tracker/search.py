@@ -3,6 +3,7 @@ import urllib
 
 from ipware.ip import get_ip
 import simplejson
+from fuzzywuzzy import process
 
 
 class NoResultError(Exception):
@@ -22,7 +23,7 @@ def check_blacklist(index, deserialized_output):
             raise NoResultError('No results found')
 
 
-def search(request, query):
+def img_search(request, query):
     fetcher = urllib2.build_opener()
     query = urllib.quote(query)
     user_ip = str(get_ip(request))
@@ -33,3 +34,16 @@ def search(request, query):
     
     # check_blacklist(0, deserialized_output)
     return deserialized_output['responseData']['results'][0]['unescapedUrl']
+
+
+def fuzzy_series_search(list_of_series, query):
+    series_list = []
+    for series in list_of_series:
+        series_list.append(series.title)
+    series_list = process.extract(query, series_list, limit=3)
+    if len(series_list) == 0:
+        raise NoResultError('No result found for series name')
+    filtered_list = []
+    for result in series_list:
+        filtered_list.append(result[0])
+    return filtered_list
