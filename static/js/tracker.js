@@ -13,11 +13,11 @@ $(document).ready(function(){
         belowOrigin: true // Displays dropdown below the button
     });
 
-    var cardHtml = function (cover_image_url, release_day, title, series_ID, current_episode, stream_site) {
+    var cardHtml = function (cover_image_url, release_day, title, series_ID, current_episode, stream_site, time, season) {
         var mainBody = '<div series-id="' + series_ID + '" title="' + title + '">' +
             '<button class="waves-effect waves-light btn ep-done  deep-orange lighten-1" series-id="' + series_ID + '">#' +
             '<strong id="ep-number-' + series_ID + '">' + current_episode + '</strong><i class="material-icons left">done</i></button>' +
-            '<span>midnight</span>';
+            '<span style="padding-left:25px;">' + time + '</span>';
         if (stream_site != '') {
             mainBody += '<a href="/tracker/watch_episode/' + series_ID + '" class="waves-effect waves-light btn deep-orange lighten-1 right" series-id="' + series_ID + '">' +
                 '<i class="material-icons">play_arrow</i></a>' +
@@ -57,7 +57,7 @@ $(document).ready(function(){
                     if (response.hasOwnProperty(key)) {
                         var series = response[key];
                         var fullHtml = cardHtml(series.cover_image_url, series.release_day, series.title, series.id,
-                            series.current_episode, series.stream_site);
+                            series.current_episode, series.stream_site, series.time, series.season);
                         if (altBool) {
                             $('#card-list').append(fullHtml);
                             leftContentCount++;
@@ -139,7 +139,7 @@ $(document).ready(function(){
             data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
             success: function (response) {
                 $('div[series-id="' + PK + '"]').html(cardHtml(response.cover_image_url, response.release_day, response.title,
-                    response.id, response.current_episode, response.stream_site));
+                    response.id, response.current_episode, response.stream_site, response.time, response.season));
             },
             error: function (response) {
                 console.log(response);
@@ -225,12 +225,12 @@ $(document).ready(function(){
                     var series = response[0];
                     if (leftContentCount <= rightContentCount) {
                         $('#card-list').append(cardHtml(series.cover_image_url, series.release_day, series.title, series.id,
-                            series.current_episode, series.stream_site));
+                            series.current_episode, series.stream_site, series.time, series.season));
                         leftContentCount++;
                     }
                     else {
                         $('#card-list2').append(cardHtml(series.cover_image_url, series.release_day, series.title, series.id,
-                            series.current_episode, series.stream_site));
+                            series.current_episode, series.stream_site, series.time, series.season));
                         rightContentCount++;
                     }
                     Materialize.toast('<span>' + series.title + ' added.</span>', 4000);
