@@ -3,7 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 TODO.txt
-db.sqlite
 # C extensions
 *.so
 .idea
