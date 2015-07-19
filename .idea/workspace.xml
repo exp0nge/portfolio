@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="956e7313-c6d8-47d9-8a36-042eae735211" name="Default" comment="Adding left/right content count to better add new card to stack.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+    <list default="true" id="956e7313-c6d8-47d9-8a36-042eae735211" name="Default" comment="Removing dq.sqlite">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="portfolio.iws" />
@@ -768,7 +767,13 @@
       <option name="project" value="LOCAL" />
       <updated>1437283049453</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Removing dq.sqlite">
+      <created>1437283211848</created>
+      <option name="number" value="00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1437283211848</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -832,7 +837,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="Changing basic layout, adding fixed-navbar, addinb labels." />
     <MESSAGE value="Images: avatar, bg, github&#10;" />
     <MESSAGE value="Adding favicon" />
     <MESSAGE value="Fixing icon paths" />
@@ -857,7 +861,8 @@
     <MESSAGE value="Moving series options to clear into card, adding functionality/fixing edit and adding back button." />
     <MESSAGE value="Adding sort functionality." />
     <MESSAGE value="Adding left/right content count to better add new card to stack." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding left/right content count to better add new card to stack." />
+    <MESSAGE value="Removing dq.sqlite" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removing dq.sqlite" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
