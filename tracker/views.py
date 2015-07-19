@@ -1,10 +1,8 @@
 import json
 
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
-from django.http import HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView
-from django.contrib.auth import logout as auth_logout
 
 from tracker.models import Series, FavoriteSites
 from tracker.forms import SeriesForm
@@ -16,15 +14,14 @@ day_converter = {1: 'MONDAY', 2: 'TUESDAY', 3: 'WEDNESDAY', 4: 'THURSDAY',
 
 @login_required()
 def index(request):
-    
     context_dict = {'username': request.user.username}
-                    
+
     if request.GET.get('new') == 'True':
         context_dict['newUser'] = True
-        
+
     all_series = Series.objects.filter(submitted_user=request.user)
     _series = None
-    
+
     if request.GET.get('sort'):
         weekday = request.GET.get('sort')
         filtered_series = []
@@ -36,36 +33,31 @@ def index(request):
         context_dict['series_list'] = all_series
     else:
         context_dict['series_list'] = all_series
-        
+
     if request.GET.get('newCard'):
         context_dict['newCard'] = request.GET.get('newCard')
 
-
     form = SeriesForm()
-    
+
     context_dict['form'] = form
-        
+
     return render(request, 'tracker/index.html', context_dict)
-    
+
 
 @login_required()
 def get_series_as_json(request):
     if request.method == 'GET':
         all_series = Series.objects.filter(submitted_user=request.user)
         _series = None
-        
-        if request.GET.get('sort'):
-            weekday = request.GET.get('sort')
-            filtered_series = []
-            for a_series in all_series:
-                if a_series.release_day == weekday or a_series.release_day == 'UNKNOWN':
-                    filtered_series.append(a_series)
-            _series = filtered_series
-        elif request.GET.get('sort') == 'All':
+        if request.GET.get('sort') == 'All':
             _series = all_series
+        elif request.GET.get('sort'):
+            weekday = request.GET.get('sort')
+            _series = all_series.filter(release_day=weekday)
+            print _series
         else:
             _series = all_series
-        
+
         jsonify_series = {}
         for each_series in _series:
             jsonify_series[each_series.title] = {
@@ -77,11 +69,29 @@ def get_series_as_json(request):
                 "cover_image_url": each_series.cover_image_url,
                 "current_episode": each_series.current_episode,
                 "tag": each_series.tag,
-                "time": (each_series.time).isoformat(),
+                "time": each_series.time.isoformat(),
                 "season": each_series.season
-                }
-                
+            }
+
         return HttpResponse(json.dumps(jsonify_series), content_type='application/json')
+
+
+@login_required()
+def series_by_id_as_json(request):
+    if request.method == 'GET':
+        series_id = request.GET.get('pk')
+        series = Series.objects.filter(submitted_user=request.user).get(pk=series_id)
+        return HttpResponse(json.dumps({"id": series.id,
+                                        "title": series.title,
+                                        "description": series.description,
+                                        "release_day": series.release_day,
+                                        "stream_site": series.stream_site,
+                                        "cover_image_url": series.cover_image_url,
+                                        "current_episode": series.current_episode,
+                                        "tag": series.tag,
+                                        "time": series.time.isoformat(),
+                                        "season": series.season}),
+                            content_type='application/json')
 
 
 @login_required()
@@ -93,7 +103,7 @@ def add_series(request):
             series = form.save(commit=False)
             message = request.POST['title']
             series.submitted_user = request.user
-            
+
             if not form.cleaned_data['cover_image_url']:
                 try:
                     img_url = image_search.search(request, form.cleaned_data['title'] + form.cleaned_data['tag'])
@@ -102,11 +112,25 @@ def add_series(request):
                     series.cover_image_url = '/static/images/avatar.png'
 
             series.save()
-            return HttpResponse(series.title)
+            jsonify_series = {0: {
+                "id": series.id,
+                "title": series.title,
+                "description": series.description,
+                "release_day": series.release_day,
+                "stream_site": series.stream_site,
+                "cover_image_url": series.cover_image_url,
+                "current_episode": series.current_episode,
+                "tag": series.tag,
+                "time": series.time.isoformat(),
+                "season": series.season
+            }}
+            return HttpResponse(json.dumps(jsonify_series), content_type='application/json')
         else:
-            return HttpResponse(str(form.errors))
+            jsonify_errors = {0: 'error', 'errors': [value for value in form.errors.keys()]}
+            return HttpResponse(json.dumps(jsonify_errors), content_type='application/json')
     else:
         form = SeriesForm()
+
 
 @login_required()
 def delete_series(request, pk):
@@ -114,7 +138,7 @@ def delete_series(request, pk):
     series_title = series.title
     series.delete()
     return HttpResponse(series_title)
-    
+
 
 @login_required()
 def update_episode(request, pk):
@@ -122,41 +146,43 @@ def update_episode(request, pk):
     series.current_episode = series.current_episode + 1
     series.save()
     return HttpResponse(series.current_episode)
-    
-    
+
+
 @login_required()
 def watch_episode(request, pk):
     series = Series.objects.filter(submitted_user=request.user).get(pk=pk)
-    
+
     if len(series.stream_site) < 7:
-        return HttpResponseRedirect('/tracker/stream_missing/' + pk  + '?title=' + series.title)
-        
+        return HttpResponseRedirect('/tracker/stream_missing/' + pk + '?title=' + series.title)
+
     context_dict = {'series': series}
-    
+
     if request.GET.get('newCard'):
         context_dict['newCard'] = request.GET.get('newCard')
 
     form = SeriesForm()
-    
+
     context_dict['form'] = form
-    
+
     return render(request, 'tracker/watch_episode.html', context_dict)
-    
+
+
 class SeriesUpdate(UpdateView):
     model = Series
     success_url = '/tracker/'
     form_class = SeriesForm
-    
+
     def get_object(self, queryset=None):
         series = Series.objects.filter(submitted_user=self.request.user).get(pk=self.kwargs['pk'])
         return series
+
 
 @login_required()
 def stream_missing(request, pk):
     context_dict = {'pk': pk, 'title': request.GET.get('title')}
     return render(request, 'tracker/stream_missing.html', context_dict)
-    
-    
+
+
 @login_required()
 def add_favorite_site(request):
     if request.method == 'POST':
@@ -164,7 +190,8 @@ def add_favorite_site(request):
         favorite_site = FavoriteSites(submitted_user=request.user, site_url=site_url)
         favorite_site.save()
         return HttpResponse('Site added!')
-        
+
+
 @login_required()
 def get_favorite_sites(request):
     if request.method == 'GET':

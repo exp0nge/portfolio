@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="{% static 'css/materialize.css' %}">
   <link rel="stylesheet" href="{% static 'css/tracker.css' %}" type="text/css" />
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-   <link rel="shortcut icon"type="image/png" href="{% static 'static/favicon.png' %}">
+    <link rel="icon" href="{% static 'images/favicon.png' %}?v=2" sizes="32x32">
     
 </head>
 <body>
@@ -20,6 +20,13 @@
   <nav>
     <div class="nav-wrapper red">
       <a href="{% url 'index' %}" id="home" class="brand-logo center">Series Tracker</a>
+
+        <form>
+            <div class="input-field">
+                <input id="search" placeholder="Type a series name..." type="search" required>
+                <label for="search"><i class="material-icons">search</i></label>
+            </div>
+        </form>
     </div>
   </nav>
     </div>
@@ -79,7 +86,7 @@
 {% endif %}
 
 <div class="row">
-  <div id="error-message"></div>
+    <ul id="error-message" class="collection red"></ul>
   <div class="input-field col s6">
     <i class="material-icons prefix">star</i>
     {{ form.title }}
@@ -175,15 +182,10 @@ $(document).ready(function(){
     {% if newUser %}
     Materialize.toast('<span>Hover over the button on the bottom-right, and click the plus to add a series. Swipe to dismiss.</span>', 9000);
     {% endif %}
-    
-    var dayArray = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY','SATURDAY']
+
+        var dayArray = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
 
     var day = new Date().getDay();
-    
-    $("#sort-today").on("click", function() {
-      window.location.replace('/tracker/' + '?sort=' + dayArray[day]);
-      
-    });  
 
     
     $("#home").click(function(e){
@@ -197,7 +199,8 @@ $(document).ready(function(){
     });
 
 
-});
+    }
+    )
 </script>
 </body>
 </html>
