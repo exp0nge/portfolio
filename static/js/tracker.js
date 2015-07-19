@@ -1,18 +1,17 @@
 $(document).ready(function(){
-  
-$("#preloader-form").hide();  
-$("#progress").hide();
-$('#menu-up').show();
 
-$('.dropdown-sites').dropdown({
-    inDuration: 300,
-    outDuration: 225,
-    constrain_width: true, // Does not change width of dropdown to that of the activator
-    hover: false, // Activate on hover
-    gutter: 0, // Spacing from edge
-    belowOrigin: true // Displays dropdown below the button
-  }
-);
+    $("#preloader-form").hide();
+    $("#progress").hide();
+    $('#menu-up').show();
+
+    $('.dropdown-sites').dropdown({
+        inDuration: 300,
+        outDuration: 225,
+        constrain_width: true, // Does not change width of dropdown to that of the activator
+        hover: false, // Activate on hover
+        gutter: 0, // Spacing from edge
+        belowOrigin: true // Displays dropdown below the button
+    });
 
     var cardHtml = function (cover_image_url, release_day, title, series_ID, current_episode, stream_site) {
         var mainBody = '<div series-id="' + series_ID + '" title="' + title + '">' +
@@ -42,6 +41,8 @@ $('.dropdown-sites').dropdown({
 
         return mainBody;
 };
+    var leftContentCount = 0;
+    var rightContentCount = 0;
     var loadMainContent = function (sort) {
         var altBool = true;
         $.ajax({
@@ -59,9 +60,11 @@ $('.dropdown-sites').dropdown({
                             series.current_episode, series.stream_site);
                         if (altBool) {
                             $('#card-list').append(fullHtml);
+                            leftContentCount++;
                             altBool = false;
                         } else {
                             $('#card-list2').append(fullHtml);
+                            rightContentCount++;
                             altBool = true;
                         }
                     }
@@ -83,64 +86,67 @@ $('.dropdown-sites').dropdown({
         var day = new Date().getDay();
         loadMainContent(dayArray[day]);
     });
-
-$('#add_series_button').on('click', function() {
-  $('.dropdown-sites').dropdown({belowOrigin: true});
-    // Get favorite websites and load into dropdown
-    $.ajax({
-      url: '/tracker/get_favorite_sites/',
-      type: 'GET',
-      success: function(response){
-        $.each(response, function(index, value){
-          $('#fav-sites-dropdown').append('<li class="fav-item"><a href="#!">' + value + '</a></li>');
-        });
-        $('.fav-item').on('click', function() {
-           $('#stream_site_id').val($(this).html().replace('<a href="#!">', '').replace('</a>', '')); 
-        });
-      },
-      error: function(response){
-        alert(response);
-        console.log(response);
-      }
-    });
-    // Tag suggestions
-    var tag_list = ['anime', 'tv series', 'manga'];
-    $('.dropdown-tag').dropdown({belowOrigin: true});
-    for(var i = 0; i < tag_list.length; i++){
-      $('#tags-dropdown').append('<li><a class="tag-item" href="#!">' + tag_list[i] + '</a></li>');
-    }
-    $('.tag-item').on('click', function(e) {
+    $(document.body).on('click', '#sort-all', function (e) {
         e.preventDefault();
-        $('.dropdown-tag').focus();
-        $('.dropdown-tag').val($(this).html());
+        loadMainContent('All');
     });
-    
-});
-     
 
-var loc = window.location.pathname;
-var dir = loc.substring(0, loc.lastIndexOf('/'));
-if (dir === '/tracker/watch_episode'){
-  $('#floaty-side-nav').append('<li><a href="/tracker/" class="waves-effect waves-circle waves-light btn-floating blue" id="home"><i class="material-icons">home</i></a></li>');
-  $('#menu-up').hide();
-  
-}
+    $('#add_series_button').on('click', function () {
+        $('.dropdown-sites').dropdown({belowOrigin: true});
+        // Get favorite websites and load into dropdown
+        $.ajax({
+            url: '/tracker/get_favorite_sites/',
+            type: 'GET',
+            success: function (response) {
+                $.each(response, function (index, value) {
+                    $('#fav-sites-dropdown').append('<li class="fav-item"><a href="#!">' + value + '</a></li>');
+                });
+                $('.fav-item').on('click', function () {
+                    $('#stream_site_id').val($(this).html().replace('<a href="#!">', '').replace('</a>', ''));
+                });
+            },
+            error: function (response) {
+                alert(response);
+                console.log(response);
+            }
+        });
+        // Tag suggestions
+        var tag_list = ['anime', 'tv series', 'manga'];
+        $('.dropdown-tag').dropdown({belowOrigin: true});
+        for (var i = 0; i < tag_list.length; i++) {
+            $('#tags-dropdown').append('<li><a class="tag-item" href="#!">' + tag_list[i] + '</a></li>');
+        }
+        $('.tag-item').on('click', function (e) {
+            e.preventDefault();
+            $('.dropdown-tag').focus();
+            $('.dropdown-tag').val($(this).html());
+        });
 
-var reloadCard = function(PK){
-  $.ajax({
-      dataType: 'json',
-      url: '/tracker/get_a_series/?pk=' + PK,
-      data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
-    success: function(response){
-        $('div[series-id="' + PK + '"]').html(cardHtml(response.cover_image_url, response.release_day, response.title,
-            response.id, response.current_episode, response.stream_site));
-    },
-    error: function(response){
-      console.log(response);
-        alert('Error updating card');
+    });
+
+
+    var loc = window.location.pathname;
+    var dir = loc.substring(0, loc.lastIndexOf('/'));
+    if (dir === '/tracker/watch_episode') {
+        $('#floaty-side-nav').append('<li><a href="/tracker/" class="waves-effect waves-circle waves-light btn-floating blue" id="home"><i class="material-icons">home</i></a></li>');
+        $('#menu-up').hide();
     }
-  });
-};
+
+    var reloadCard = function (PK) {
+        $.ajax({
+            dataType: 'json',
+            url: '/tracker/get_a_series/?pk=' + PK,
+            data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
+            success: function (response) {
+                $('div[series-id="' + PK + '"]').html(cardHtml(response.cover_image_url, response.release_day, response.title,
+                    response.id, response.current_episode, response.stream_site));
+            },
+            error: function (response) {
+                console.log(response);
+                alert('Error updating card');
+            }
+        });
+    };
 
     $(document.body).on("click", '.ep-done', function () {
         var pk = $(this).attr("series-id");
@@ -174,9 +180,9 @@ var reloadCard = function(PK){
 
 
     $(document.body).on("click", '.series-delete', function () {
-  var pk = $(this).attr("series-id");
-  
-  $.ajax({
+        var pk = $(this).attr("series-id");
+
+        $.ajax({
     url: "/tracker/delete/" + pk,
     type: "GET",
     data: {pk: pk},
@@ -185,50 +191,61 @@ var reloadCard = function(PK){
         $('li[series-id=' + pk + ']').remove();
       Materialize.toast('<span>' + response + ' deleted.</span>', 4000);
     }
-  });
-});
+        });
+    });
 
-var form = $('#add-form');
-form.submit(function(e){
-  e.preventDefault();
-  $('#add-series-button').hide();
-  $("#preloader-form").show();
-  $.ajax({
-      dataType: 'json',
-    url: '/tracker/add/',
-    type: 'POST',
-    data: form.serialize(),
-    success: function(response){
-        if (response[0] == 'error') {
-        $('#add-series-button').show();
-        $("#preloader-form").hide();
-            var errorDict = {'release_day': 'Day', 'tag': 'Tag', 'title': 'Title'};
-            $('#error-message').empty();
-            for (var i = 0; i < response.errors.length; i++) {
+    var form = $('#add-form');
+    form.submit(function (e) {
+        e.preventDefault();
+        $('#error-message').empty();
+        $('#add-series-button').hide();
+        $("#preloader-form").show();
+        $.ajax({
+            dataType: 'json',
+            url: '/tracker/add/',
+            type: 'POST',
+            data: form.serialize(),
+            success: function (response) {
+                if (response[0] == 'error') {
+                    $('#add-series-button').show();
+                    $("#preloader-form").hide();
+                    var errorDict = {'release_day': 'Day', 'tag': 'Tag', 'title': 'Title'};
+                    $('#error-message').empty();
+                    for (var i = 0; i < response.errors.length; i++) {
 
-                $('#error-message').append('<li class="collection-item">' + errorDict[response.errors[i]] + ' is required.</li>');
+                        $('#error-message').append('<li class="collection-item">' + errorDict[response.errors[i]] + ' is required.</li>');
+                    }
+                    $('#add_series_modal').animate({scrollTop: 0}, 'slow');
+                }
+                else {
+                    $('#add-form').trigger('reset');
+                    $("#preloader-form").hide();
+                    $("#add_series_modal").closeModal();
+                    $('#add-series-button').show();
+                    var series = response[0];
+                    if (leftContentCount <= rightContentCount) {
+                        $('#card-list').append(cardHtml(series.cover_image_url, series.release_day, series.title, series.id,
+                            series.current_episode, series.stream_site));
+                        leftContentCount++;
+                    }
+                    else {
+                        $('#card-list2').append(cardHtml(series.cover_image_url, series.release_day, series.title, series.id,
+                            series.current_episode, series.stream_site));
+                        rightContentCount++;
+                    }
+                    Materialize.toast('<span>' + series.title + ' added.</span>', 4000);
+
+                }
+            },
+            error: function (response) {
+                $("#preloader-form").hide();
+                $('#add-series-button').show();
+                console.log(response);
+                alert("Something went wrong.");
             }
-        $('#add_series_modal').animate({ scrollTop: 0 }, 'slow');
-      }
-      else {
-        $('#add-form').trigger('reset');
-        $("#preloader-form").hide();
-        $("#add_series_modal").closeModal();
-            var series = response[0];
-            $('#card-list').append(cardHtml(series.cover_image_url, series.release_day, series.title, series.id,
-                series.current_episode, series.stream_site));
-            Materialize.toast('<span>' + series.title + ' added.</span>', 4000);
-      }
-    },
-    error: function(response){
-      $("#preloader-form").hide();
-      $('#add-series-button').show();
-      console.log(response);
-      alert("Something went wrong.");
-    }
-    
-  });
-});
+
+        });
+    });
 
     $(document.body).on('click', '.update-form', function (e) {
     e.preventDefault();
