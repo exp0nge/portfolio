@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="956e7313-c6d8-47d9-8a36-042eae735211" name="Default" comment="Adding actual time">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tracker/base.html" afterPath="$PROJECT_DIR$/templates/tracker/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tracker/index.html" afterPath="$PROJECT_DIR$/templates/tracker/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/tracker.js" afterPath="$PROJECT_DIR$/static/js/tracker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tracker/views.py" afterPath="$PROJECT_DIR$/tracker/views.py" />
+    <list default="true" id="956e7313-c6d8-47d9-8a36-042eae735211" name="Default" comment="Adding search functionality.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="portfolio.iws" />
@@ -46,9 +42,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="62" column="59" selection-start-line="62" selection-start-column="59" selection-end-line="62" selection-end-column="59" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -113,7 +107,7 @@
             <state vertical-scroll-proportion="0.73903507">
               <caret line="325" column="51" selection-start-line="325" selection-start-column="51" selection-end-line="325" selection-end-column="51" />
               <folding>
-                <marker date="1437287984770" expanded="true" signature="950:968" placeholder="..." />
+                <marker date="1437288037203" expanded="true" signature="950:968" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -784,7 +778,13 @@
       <option name="project" value="LOCAL" />
       <updated>1437286174371</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Adding search functionality.">
+      <created>1437288037990</created>
+      <option name="number" value="00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1437288037990</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -848,7 +848,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="Fixing icon paths" />
     <MESSAGE value="Code cleanup" />
     <MESSAGE value="Switching to material layout" />
     <MESSAGE value="Changing background to bg-black." />
@@ -873,7 +872,8 @@
     <MESSAGE value="Removing dq.sqlite" />
     <MESSAGE value="Adding view, url, and search code for fuzzywuzzy." />
     <MESSAGE value="Adding actual time" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding actual time" />
+    <MESSAGE value="Adding search functionality." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding search functionality." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1222,9 +1222,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="62" column="59" selection-start-line="62" selection-start-column="59" selection-end-line="62" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1260,7 +1258,7 @@
         <state vertical-scroll-proportion="0.73903507">
           <caret line="325" column="51" selection-start-line="325" selection-start-column="51" selection-end-line="325" selection-end-column="51" />
           <folding>
-            <marker date="1437287984770" expanded="true" signature="950:968" placeholder="..." />
+            <marker date="1437288037203" expanded="true" signature="950:968" placeholder="..." />
           </folding>
         </state>
       </provider>
