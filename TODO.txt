@@ -11,23 +11,3 @@ __future__
 http://formtypemaker.appspot.com/
 
 http://materializecss.com/pagination.html#! or http://materializecss.com/scrollfire.html (pref)
-
-
-
-<!-- Search bar -->
-<div class="srow">
-    <nav>
-    <div class="nav-wrapper">
-      <form action=''>
-        <div class="input-field">
-          <input id="search" type="search" required>
-          <label for="search"><i class="material-icons">search</i></label>
-        </div>
-      </form>
-    </div>
-  </nav>
-  </br>
-</div>
-
-
-<!-- json cards -->

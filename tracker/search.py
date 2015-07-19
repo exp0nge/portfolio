@@ -39,11 +39,11 @@ def img_search(request, query):
 def fuzzy_series_search(list_of_series, query):
     series_list = []
     for series in list_of_series:
-        series_list.append(series.title)
-    series_list = process.extract(query, series_list, limit=3)
+        series_list.append(series.__unicode__())
+    series_list = process.extract(query, series_list, limit=4)
     if len(series_list) == 0:
         raise NoResultError('No result found for series name')
     filtered_list = []
     for result in series_list:
         filtered_list.append(result[0])
-    return filtered_list
+    return set(filtered_list)

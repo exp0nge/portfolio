@@ -52,11 +52,14 @@ def get_series_as_json(request):
 
         if request.GET.get('q'):
             query = request.GET.get('q')
-            results = search.fuzzy_series_search(Series.objects.filter(submitted_user=request.user), query)
+            results = search.fuzzy_series_search(all_series, query)
             jsonify_results = {}
-            _series = [Series.objects.filter(submitted_user=request.user).get(title=title) for title in results]
+            _series = []
+            for title in results:
+                for series in all_series.filter(title=title):
+                    _series.append(series)
             for each_series in _series:
-                jsonify_results[each_series.title] = {
+                jsonify_results[each_series.id] = {
                     "id": each_series.id,
                     "title": each_series.title,
                     "description": each_series.description,
@@ -68,7 +71,7 @@ def get_series_as_json(request):
                     "time": each_series.time.isoformat(),
                     "season": each_series.season
                 }
-                return HttpResponse(json.dumps(jsonify_results), content_type='application/json')
+            return HttpResponse(json.dumps(jsonify_results), content_type='application/json')
 
         if request.GET.get('sort') == 'All':
             _series = all_series
@@ -228,8 +231,11 @@ def fuzzy_series_search(request):
         query = request.GET.get('q')
         try:
             results = search.fuzzy_series_search(Series.objects.filter(submitted_user=request.user), query)
+            series_id = []
+            for title in results:
+                for series in Series.objects.filter(title=title):
+                    series_id.append(series.id)
             return HttpResponse(
-                json.dumps({0: 'success', 'results': [Series.objects.get(title=title).id for title in results]}),
-                content_type='application/json')
+                json.dumps({0: 'success', 'results': series_id}), content_type='application/json')
         except search.NoResultError:
             return HttpResponse(json.dumps({0: 'failure'}), content_type='application/json')
