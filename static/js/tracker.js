@@ -4,6 +4,7 @@ $(document).ready(function(){
     $("#progress").hide();
     $('#menu-up').show();
 
+
     $('.dropdown-sites').dropdown({
         inDuration: 300,
         outDuration: 225,
@@ -129,7 +130,6 @@ $(document).ready(function(){
     var loc = window.location.pathname;
     var dir = loc.substring(0, loc.lastIndexOf('/'));
     if (dir === '/tracker/watch_episode') {
-        $('#floaty-side-nav').append('<li><a href="/tracker/" class="waves-effect waves-circle waves-light btn-floating blue" id="home"><i class="material-icons">home</i></a></li>');
         $('#menu-up').hide();
     }
 
@@ -308,7 +308,6 @@ $(document).ready(function(){
             alert('Site url should include "http://"')
         }
     });
-
     $('#search-form').submit(function (e) {
         e.preventDefault();
         $.ajax({

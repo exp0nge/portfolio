@@ -19,12 +19,12 @@
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper red">
-      <a href="{% url 'index' %}" id="home" class="brand-logo center">Series Tracker</a>
+        <a href="{% url 'index' %}" class="brand-logo center">Series Tracker</a>
 
         <form id="search-form" action="">
             <div class="input-field">
                 <input id="search" placeholder="Type a series name..." type="search" required>
-                <label for="search"><i class="material-icons">search</i></label>
+                <label for="search"><i class="material-icons" id="search-icon">search</i></label>
             </div>
         </form>
     </div>
@@ -58,6 +58,8 @@
           {% endif %}
           <li><a href="#" class="waves-effect waves-circle waves-light btn-floating red" id="menu-up">
               <i class="material-icons">vertical_align_top</i></a></li>
+        <li><a href="/tracker/#series-deck" class="waves-effect waves-circle waves-light btn-floating blue" id="home">
+            <i class="material-icons">home</i></a></li>
     </ul>
     
   </div>
@@ -180,22 +182,6 @@ $(document).ready(function(){
     {% if newUser %}
     Materialize.toast('<span>Hover over the button on the bottom-right, and click the plus to add a series. Swipe to dismiss.</span>', 9000);
     {% endif %}
-
-        var dayArray = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
-
-    var day = new Date().getDay();
-
-    
-    $("#home").click(function(e){
-      e.preventDefault();
-      if(window.location == 'http://portfolio-exp0nge.c9.io/tracker/?sort=' + dayArray[day]){
-        window.location.replace('http://portfolio-exp0nge.c9.io/tracker/?sort=' + dayArray[day])
-      }
-      else{
-        window.location.replace('/tracker/')
-      }
-    });
-
 
     }
     )
