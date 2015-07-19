@@ -49,16 +49,12 @@ def get_series_as_json(request):
     if request.method == 'GET':
         all_series = Series.objects.filter(submitted_user=request.user)
         _series = None
-
-        if request.GET.get('sort'):
-            weekday = request.GET.get('sort')
-            filtered_series = []
-            for a_series in all_series:
-                if a_series.release_day == weekday or a_series.release_day == 'UNKNOWN':
-                    filtered_series.append(a_series)
-            _series = filtered_series
-        elif request.GET.get('sort') == 'All':
+        if request.GET.get('sort') == 'All':
             _series = all_series
+        elif request.GET.get('sort'):
+            weekday = request.GET.get('sort')
+            _series = all_series.filter(release_day=weekday)
+            print _series
         else:
             _series = all_series
 

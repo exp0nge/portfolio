@@ -179,11 +179,6 @@ $(document).ready(function(){
         var dayArray = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
 
     var day = new Date().getDay();
-    
-    $("#sort-today").on("click", function() {
-      window.location.replace('/tracker/' + '?sort=' + dayArray[day]);
-      
-    });  
 
     
     $("#home").click(function(e){

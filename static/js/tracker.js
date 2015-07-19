@@ -18,49 +18,71 @@ $('.dropdown-sites').dropdown({
         var mainBody = '<div series-id="' + series_ID + '" title="' + title + '">' +
             '<button class="waves-effect waves-light btn ep-done  deep-orange lighten-1" series-id="' + series_ID + '">#' +
             '<strong id="ep-number-' + series_ID + '">' + current_episode + '</strong><i class="material-icons left">done</i></button>' +
-            '<span>midnight</span>' +
-            '<a href="/tracker/watch_episode/' + series_ID + '" class="waves-effect waves-light btn ep-done  deep-orange lighten-1 right" series-id="' + series_ID + '">' +
-            '<i class="material-icons">play_arrow</i></a>' +
-            '<li class="collection-item avatar" series-id="' + series_ID + '">' +
-            ' <img src="' + cover_image_url + '" alt="" class="circle">' +
-            '<span class="title">' + title + '</span>' +
-            '<p>' + release_day + '</p>' +
-            '<div class="secondary-content"><a class="waves-effect waves-light dropdown-button btn-flat settings-trigger" ' +
-            'series-id="' + series_ID + '"><i class="material-icons gray">settings</i></a></li></div>';
+            '<span>midnight</span>';
+        if (stream_site != '') {
+            mainBody += '<a href="/tracker/watch_episode/' + series_ID + '" class="waves-effect waves-light btn deep-orange lighten-1 right" series-id="' + series_ID + '">' +
+                '<i class="material-icons">play_arrow</i></a>' +
+                '<li class="collection-item avatar" series-id="' + series_ID + '">' +
+                ' <img src="' + cover_image_url + '" alt="" class="circle">' +
+                '<span class="title">' + title + '</span>' +
+                '<p>' + release_day + '</p>' +
+                '<div class="secondary-content"><a class="waves-effect waves-light btn-flat settings-trigger" ' +
+                'series-id="' + series_ID + '"><i class="material-icons gray">settings</i></a></li></div>';
+        }
+        else {
+            mainBody += '<a href="/tracker/watch_episode/' + series_ID + '" class="waves-effect waves-light btn-flat right" series-id="' + series_ID + '">' +
+                '<i class="material-icons">play_arrow</i></a>' +
+                '<li class="collection-item avatar" series-id="' + series_ID + '">' +
+                ' <img src="' + cover_image_url + '" alt="" class="circle">' +
+                '<span class="title">' + title + '</span>' +
+                '<p>' + release_day + '</p>' +
+                '<div class="secondary-content"><a class="waves-effect waves-light btn-flat settings-trigger" ' +
+                'series-id="' + series_ID + '"><i class="material-icons gray">settings</i></a></li></div>';
+        }
 
         return mainBody;
 };
+    var loadMainContent = function (sort) {
+        var altBool = true;
+        $.ajax({
+            url: '/tracker/get_series_as_json/?sort=' + sort,
+            type: 'GET',
+            data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
+            dataType: 'json',
+            success: function (response) {
+                $('#series-deck').html('<ul class="collection" id="card-list"></ul>');
+                $('#series-deck2').html('<ul class="collection" id="card-list2"></ul>');
+                for (var key in response) {
+                    if (response.hasOwnProperty(key)) {
+                        var series = response[key];
+                        var fullHtml = cardHtml(series.cover_image_url, series.release_day, series.title, series.id,
+                            series.current_episode, series.stream_site);
+                        if (altBool) {
+                            $('#card-list').append(fullHtml);
+                            altBool = false;
+                        } else {
+                            $('#card-list2').append(fullHtml);
+                            altBool = true;
+                        }
+                    }
+                }
 
-    var altBool = true;
-$.ajax({
-  url: '/tracker/get_series_as_json/',
-  type: 'GET',
-  data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
-  dataType: 'json',
-  success: function(response){
-      $('#series-deck').html('<ul class="collection" id="card-list"></ul>');
-      $('#series-deck2').html('<ul class="collection" id="card-list2"></ul>');
-    for (var key in response){
-      if(response.hasOwnProperty(key)){
-        var series = response[key];
-          var fullHtml = cardHtml(series.cover_image_url, series.release_day, series.title, series.id,
-              series.current_episode, series.stream_site);
-          if (altBool) {
-              $('#card-list').append(fullHtml);
-              altBool = false;
-          } else {
-              $('#card-list2').append(fullHtml);
-              altBool = true;
-        }
-      }
-    }
+            },
+            error: function (response) {
+                console.log(response);
+            }
 
-  },
-  error: function(response){
-    console.log(response);
-  }
+        });
+    };
 
-  });
+    loadMainContent('All');
+
+    $(document.body).on('click', '#sort-today', function (e) {
+        e.preventDefault();
+        var dayArray = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+        var day = new Date().getDay();
+        loadMainContent(dayArray[day]);
+    });
 
 $('#add_series_button').on('click', function() {
   $('.dropdown-sites').dropdown({belowOrigin: true});
