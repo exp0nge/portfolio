@@ -21,7 +21,7 @@
     <div class="nav-wrapper red">
       <a href="{% url 'index' %}" id="home" class="brand-logo center">Series Tracker</a>
 
-        <form>
+        <form id="search-form" action="">
             <div class="input-field">
                 <input id="search" placeholder="Type a series name..." type="search" required>
                 <label for="search"><i class="material-icons">search</i></label>
@@ -40,7 +40,6 @@
        {% block main_content %}{% endblock %}
         </div>
       </div>
-    </div>
 <footer class="page-footer black">
   <div class="footer-copyright">
     <div class="container">

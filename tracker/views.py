@@ -49,12 +49,32 @@ def get_series_as_json(request):
     if request.method == 'GET':
         all_series = Series.objects.filter(submitted_user=request.user)
         _series = None
+
+        if request.GET.get('q'):
+            query = request.GET.get('q')
+            results = search.fuzzy_series_search(Series.objects.filter(submitted_user=request.user), query)
+            jsonify_results = {}
+            _series = [Series.objects.filter(submitted_user=request.user).get(title=title) for title in results]
+            for each_series in _series:
+                jsonify_results[each_series.title] = {
+                    "id": each_series.id,
+                    "title": each_series.title,
+                    "description": each_series.description,
+                    "release_day": each_series.release_day,
+                    "stream_site": each_series.stream_site,
+                    "cover_image_url": each_series.cover_image_url,
+                    "current_episode": each_series.current_episode,
+                    "tag": each_series.tag,
+                    "time": each_series.time.isoformat(),
+                    "season": each_series.season
+                }
+                return HttpResponse(json.dumps(jsonify_results), content_type='application/json')
+
         if request.GET.get('sort') == 'All':
             _series = all_series
         elif request.GET.get('sort'):
             weekday = request.GET.get('sort')
             _series = all_series.filter(release_day=weekday)
-            print _series
         else:
             _series = all_series
 
@@ -208,6 +228,8 @@ def fuzzy_series_search(request):
         query = request.GET.get('q')
         try:
             results = search.fuzzy_series_search(Series.objects.filter(submitted_user=request.user), query)
-            return HttpResponse(json.dumps({0: 'success', 'results': results}), content_type='application/json')
+            return HttpResponse(
+                json.dumps({0: 'success', 'results': [Series.objects.get(title=title).id for title in results]}),
+                content_type='application/json')
         except search.NoResultError:
             return HttpResponse(json.dumps({0: 'failure'}), content_type='application/json')

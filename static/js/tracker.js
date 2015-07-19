@@ -43,10 +43,11 @@ $(document).ready(function(){
 };
     var leftContentCount = 0;
     var rightContentCount = 0;
-    var loadMainContent = function (sort) {
+    var loadMainContent = function (sort, query) {
+        query = query || '';
         var altBool = true;
         $.ajax({
-            url: '/tracker/get_series_as_json/?sort=' + sort,
+            url: '/tracker/get_series_as_json/?sort=' + sort + '&q=' + query,
             type: 'GET',
             data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
             dataType: 'json',
@@ -281,34 +282,58 @@ $(document).ready(function(){
               }
             });
         });
-      
+
     });
-});
+    });
 
 
-$('#favorite_link').on('click', function(e) {
-    e.preventDefault();
-    var site_url = $('#stream_site_id').val();
-    if (site_url.length > 7 && site_url.includes("http://")){
-      $.ajax({
-        url: '/tracker/favorite_site/?site=' + site_url,
-        type: 'POST',
-        data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
-        success: function(response){
-          $('#add_fav_link').html('done')
-        },
-        error: function(response){
-          alert(response);
-          console.log(response);
+    $('#favorite_link').on('click', function (e) {
+        e.preventDefault();
+        var site_url = $('#stream_site_id').val();
+        if (site_url.length > 7 && site_url.includes("http://")) {
+            $.ajax({
+                url: '/tracker/favorite_site/?site=' + site_url,
+                type: 'POST',
+                data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
+                success: function (response) {
+                    $('#add_fav_link').html('done')
+                },
+                error: function (response) {
+                    alert(response);
+                    console.log(response);
+                }
+            });
         }
-      });
-    }
-    else{
-      alert('Site url should include "http://"')
-    }
-});
+        else {
+            alert('Site url should include "http://"')
+        }
+    });
 
+    $('#search-form').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            dataType: 'json',
+            data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
+            url: '/tracker/search/?q=' + $('#search').val(),
+            type: 'GET',
+            success: function (response) {
+                if (response[0] === 'error') {
+                    alert('No results');
+                }
+                else {
+                    loadMainContent('', $('#search').val());
+                    $('html,body').animate({
+                        scrollTop: $("#deck-results").offset().top
+                    });
+                }
 
+            },
+            error: function (response) {
+                console.log(response);
+                alert('Something went wrong.');
+            }
+        });
+    });
 
 });
 
