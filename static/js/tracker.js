@@ -18,7 +18,7 @@ $(document).ready(function(){
         var mainBody = '<div series-id="' + series_ID + '" title="' + title + '">' +
             '<button class="waves-effect waves-light btn ep-done  deep-orange lighten-1" series-id="' + series_ID + '">#' +
             '<strong id="ep-number-' + series_ID + '">' + current_episode + '</strong><i class="material-icons left">done</i></button>' +
-            '<span style="padding-left:25px;">' + time + '</span>';
+            '<a class="btn-flat disabled">' + time + '</a>';
         if (stream_site != '') {
             mainBody += '<a href="/tracker/watch_episode/' + series_ID + '" class="waves-effect waves-light btn deep-orange lighten-1 right" series-id="' + series_ID + '">' +
                 '<i class="material-icons">play_arrow</i></a>' +
