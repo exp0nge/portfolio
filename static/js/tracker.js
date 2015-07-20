@@ -35,8 +35,7 @@ $(document).ready(function(){
         goal.setSeconds(goalTime[2]);
 
         remaining.setMilliseconds(now - goal);
-        return remaining.getHours().toString() + ' Hours, ' + remaining.getMinutes().toString() + ' Minutes, ' +
-            dayDiff + ' Days';
+        return dayDiff + ' Days, ' + remaining.getHours().toString() + ' H, ' + remaining.getMinutes().toString() + ' Min';
     };
 
     var cardHtml = function (cover_image_url, release_day, title, series_ID, current_episode, stream_site, time, season) {

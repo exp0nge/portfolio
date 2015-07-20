@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="956e7313-c6d8-47d9-8a36-042eae735211" name="Default" comment="Adding time button.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite" afterPath="$PROJECT_DIR$/db.sqlite" />
+    <list default="true" id="956e7313-c6d8-47d9-8a36-042eae735211" name="Default" comment="Dynamic time added.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/tracker.js" afterPath="$PROJECT_DIR$/static/js/tracker.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -106,8 +105,8 @@
       <file leaf-file-name="tracker.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/js/tracker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45822102">
-              <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.7789757">
+              <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -802,7 +801,13 @@
       <option name="project" value="LOCAL" />
       <updated>1437351185072</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Dynamic time added.">
+      <created>1437355124766</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1437355124766</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -866,7 +871,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="Adding language type for projects" />
     <MESSAGE value="Adding stock photo for card." />
     <MESSAGE value="Adding material icons" />
     <MESSAGE value="Adding favicon, and fixing typo for github mark" />
@@ -891,7 +895,8 @@
     <MESSAGE value="Fixing search functionality to return all searches (max 3)." />
     <MESSAGE value="Adding home button to deck anchor&#10;" />
     <MESSAGE value="Adding time button." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding time button." />
+    <MESSAGE value="Dynamic time added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Dynamic time added." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1273,8 +1278,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/tracker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45822102">
-          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.7789757">
+          <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
           <folding />
         </state>
       </provider>
