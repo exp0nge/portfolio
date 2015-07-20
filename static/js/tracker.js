@@ -13,12 +13,37 @@ $(document).ready(function(){
         gutter: 0, // Spacing from edge
         belowOrigin: true // Displays dropdown below the button
     });
+    var dayArray = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+    var dayReverse = {
+        'SUNDAY': 0, 'MONDAY': 1, 'TUESDAY': 2, 'WEDNESDAY': 3, 'THURSDAY': 4, 'FRIDAY': 5, 'SATURDAY': 6,
+        'UNKNOWN': -1
+    };
+    var timer = function (goalTime) {
+        goalTime = goalTime.split(':');
+        var now = new Date();
+        var goal = new Date();
+        var remaining = new Date();
+        var goalDay = dayReverse[goalTime[3]];
+        if (goalDay === -1) {
+            dayDiff = '?';
+        }
+        else {
+            var dayDiff = goalDay - now.getDay();
+        }
+        goal.setHours(goalTime[0]);
+        goal.setMinutes(goalTime[1]);
+        goal.setSeconds(goalTime[2]);
+
+        remaining.setMilliseconds(now - goal);
+        return remaining.getHours().toString() + ' Hours, ' + remaining.getMinutes().toString() + ' Minutes, ' +
+            dayDiff + ' Days';
+    };
 
     var cardHtml = function (cover_image_url, release_day, title, series_ID, current_episode, stream_site, time, season) {
         var mainBody = '<div series-id="' + series_ID + '" title="' + title + '">' +
             '<button class="waves-effect waves-light btn ep-done  deep-orange lighten-1" series-id="' + series_ID + '">#' +
             '<strong id="ep-number-' + series_ID + '">' + current_episode + '</strong><i class="material-icons left">done</i></button>' +
-            '<a class="btn-flat disabled">' + time + '</a>';
+            '<a class="btn-flat disabled series-time" time="' + time + ':' + release_day + '">' + time + '</a>';
         if (stream_site != '') {
             mainBody += '<a href="/tracker/watch_episode/' + series_ID + '" class="waves-effect waves-light btn deep-orange lighten-1 right" series-id="' + series_ID + '">' +
                 '<i class="material-icons">play_arrow</i></a>' +
@@ -71,6 +96,10 @@ $(document).ready(function(){
                         }
                     }
                 }
+                $('.series-time').each(function () {
+                    var remaining = timer($(this).attr('time'));
+                    $(this).html(remaining);
+                });
 
             },
             error: function (response) {
@@ -80,11 +109,8 @@ $(document).ready(function(){
         });
     };
 
-    loadMainContent('All');
-
     $(document.body).on('click', '#sort-today', function (e) {
         e.preventDefault();
-        var dayArray = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
         var day = new Date().getDay();
         loadMainContent(dayArray[day]);
     });
@@ -333,6 +359,10 @@ $(document).ready(function(){
             }
         });
     });
+
+
+    // Initialize
+    loadMainContent('All');
 
 });
 
