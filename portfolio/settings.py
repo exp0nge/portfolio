@@ -31,7 +31,7 @@ with open('secret.txt') as f:
     SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = content[2]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
@@ -48,7 +48,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myportfolio',
     'registration',
     'tracker',
     'social.apps.django_app.default',
