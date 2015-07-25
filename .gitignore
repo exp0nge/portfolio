@@ -4,6 +4,9 @@ __pycache__/
 *$py.class
 TODO.txt
 db.sqlite
+.gitignore.swn
+.gitignore.swo
+.gitignore.swp
 # C extensions
 *.so
 .idea
