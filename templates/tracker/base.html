@@ -170,22 +170,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
    <script type="text/javascript" src="{% static 'js/tracker.js' %}"></script>
     <script src="http://materializecss.com/js/init.js"></script>
-<script type='text/javascript'>
-$(document).ready(function(){
-    {% if form_errors %}
-    document.getElementById("add_series_button").click();
-    {% endif %}
-    
-    {% if newCard %}
-    Materialize.toast('<span>New series, {{newCard}}, added!</span>', 6000);
-    {% endif %}
-    
-    {% if newUser %}
-    Materialize.toast('<span>Hover over the button on the bottom-right, and click the plus to add a series. Swipe to dismiss.</span>', 9000);
-    {% endif %}
-
-    }
-    )
-</script>
+    <script type='text/javascript'>
+      $(document).ready(function(){
+            {% if form_errors %}
+            document.getElementById("add_series_button").click();
+            {% endif %}
+            
+            {% if newCard %}
+            Materialize.toast('<span>New series, {{newCard}}, added!</span>', 6000);
+            {% endif %}
+            
+            {% if newUser %}
+            Materialize.toast('<span>Hover over the button on the bottom-right, and click the plus to add a series. Swipe to dismiss.</span>', 9000);
+            {% endif %}
+          });
+    </script>
 </body>
 </html>

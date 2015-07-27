@@ -25,6 +25,7 @@ class MyRegistrationView(RegistrationView):
 
 
 urlpatterns = [
+    url(r'^', include('tracker.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^tracker/', include('tracker.urls')),
     url(r'^accounts/register/$', MyRegistrationView.as_view(), name='registration_register'),
