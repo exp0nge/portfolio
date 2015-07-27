@@ -12,18 +12,21 @@
                   </div>
                 </div>
             <div class="row">
+              {{ form.username.errors }}
             <div class="input-field col s6">
               <input  placeholder="Username" id="id_username" maxlength="30" name="username" type="text" required autofocus="">
               <label for="id_username">Username</label>
             </div>
             </div>
             <div class="row">
+              {{ form.email.errors }}
             <div class="input-field col s6">
               <input  placeholder="Email" id="id_email" name="email" type="text" required autofocus="">
               <label for="id_email">Email</label>
             </div>
             </div>
             <div class="row">
+              {{ form.password2.errors }}
             <div class="input-field col s6">
               <input  id="id_password1" name="password1" type="password" placeholder="Enter password">
               <label for="id_password">Password</label>
