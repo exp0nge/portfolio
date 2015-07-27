@@ -20,13 +20,14 @@
   <nav>
     <div class="nav-wrapper red">
         <a href="{% url 'index' %}" class="brand-logo center">Series Tracker</a>
-
+        {% if user.is_authenticated %}
         <form id="search-form" action="">
             <div class="input-field">
                 <input id="search" placeholder="Type a series name..." type="search" required>
                 <label for="search"><i class="material-icons" id="search-icon">search</i></label>
             </div>
         </form>
+        {% endif %}
     </div>
   </nav>
     </div>

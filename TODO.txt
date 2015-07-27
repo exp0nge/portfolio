@@ -1,7 +1,6 @@
 + Better image search
 + Remove favs (userprofile?)
 + sort by type
-** Fix registration
 
 
 __future__
