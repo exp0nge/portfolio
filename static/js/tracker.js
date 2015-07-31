@@ -3,15 +3,6 @@ $(document).ready(function(){
     $("#preloader-form").hide();
     $('#menu-up').show();
 
-
-    $('.dropdown-sites').dropdown({
-        inDuration: 300,
-        outDuration: 225,
-        constrain_width: true, // Does not change width of dropdown to that of the activator
-        hover: false, // Activate on hover
-        gutter: 0, // Spacing from edge
-        belowOrigin: true // Displays dropdown below the button
-    });
     var dayArray = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
     var dayReverse = {
         'SUNDAY': 0, 'MONDAY': 1, 'TUESDAY': 2, 'WEDNESDAY': 3, 'THURSDAY': 4, 'FRIDAY': 5, 'SATURDAY': 6,
@@ -267,6 +258,10 @@ $(document).ready(function(){
                             series.current_episode, series.stream_site, series.time, series.season));
                         rightContentCount++;
                     }
+                     $('.series-time').each(function () {
+                        var remaining = timer($('div[series-id="' + series.id + '"] a.series-time').attr('time'));
+                        $('div[series-id="' + series.id + '"] a.series-time').html(remaining);
+                    });
                     Materialize.toast('<span>' + series.title + ' added.</span>', 4000);
 
                 }
@@ -372,7 +367,17 @@ $(document).ready(function(){
     loadMainContent(dayArray[now.getDay()]);
     
   $('.parallax').parallax();
+  $('.modal-trigger').leanModal();
   $('#progress').hide()
+  $('select').not('.disabled').material_select();
+  $('.dropdown-sites').dropdown({
+        inDuration: 300,
+        outDuration: 225,
+        constrain_width: true, // Does not change width of dropdown to that of the activator
+        hover: false, // Activate on hover
+        gutter: 0, // Spacing from edge
+        belowOrigin: true // Displays dropdown below the button
+    });
     
 });
 
