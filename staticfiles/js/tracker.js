@@ -3,15 +3,6 @@ $(document).ready(function(){
     $("#preloader-form").hide();
     $('#menu-up').show();
 
-
-    $('.dropdown-sites').dropdown({
-        inDuration: 300,
-        outDuration: 225,
-        constrain_width: true, // Does not change width of dropdown to that of the activator
-        hover: false, // Activate on hover
-        gutter: 0, // Spacing from edge
-        belowOrigin: true // Displays dropdown below the button
-    });
     var dayArray = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
     var dayReverse = {
         'SUNDAY': 0, 'MONDAY': 1, 'TUESDAY': 2, 'WEDNESDAY': 3, 'THURSDAY': 4, 'FRIDAY': 5, 'SATURDAY': 6,
@@ -121,6 +112,10 @@ $(document).ready(function(){
         e.preventDefault();
         loadMainContent('All');
     });
+    $(document.body).on('click', '#sort-tag', function(e) {
+       e.preventDefault();
+       loadMainContent('tag');
+    });
 
     $('#add_series_button').on('click', function () {
         $('.dropdown-sites').dropdown({belowOrigin: true});
@@ -170,6 +165,10 @@ $(document).ready(function(){
             success: function (response) {
                 $('div[series-id="' + PK + '"]').html(cardHtml(response.cover_image_url, response.release_day, response.title,
                     response.id, response.current_episode, response.stream_site, response.time, response.season));
+                $('.series-time').each(function () {
+                    var remaining = timer($('div[series-id="' + PK + '"] a.series-time').attr('time'));
+                    $('div[series-id="' + PK + '"] a.series-time').html(remaining);
+                });
             },
             error: function (response) {
                 console.log(response);
@@ -263,6 +262,10 @@ $(document).ready(function(){
                             series.current_episode, series.stream_site, series.time, series.season));
                         rightContentCount++;
                     }
+                     $('.series-time').each(function () {
+                        var remaining = timer($('div[series-id="' + series.id + '"] a.series-time').attr('time'));
+                        $('div[series-id="' + series.id + '"] a.series-time').html(remaining);
+                    });
                     Materialize.toast('<span>' + series.title + ' added.</span>', 4000);
 
                 }
@@ -280,7 +283,7 @@ $(document).ready(function(){
     $(document.body).on('click', '.update-form', function (e) {
     e.preventDefault();
     var updateSeriesPK = $(this).attr('pk');
-        var title = $('div[series-id="' + updateSeriesPK + '"]').attr('title');
+    var title = $('div[series-id="' + updateSeriesPK + '"]').attr('title');
     $.get('/tracker/update/' + updateSeriesPK, function(data){
       $('#update-series-modal-content').html(data);
       $('select').material_select();
@@ -367,9 +370,20 @@ $(document).ready(function(){
     // Initialize
     loadMainContent(dayArray[now.getDay()]);
     
+  $('.parallax').parallax();
+  $('.modal-trigger').leanModal();
+  $('select').not('.disabled').material_select();
+  $('.dropdown-sites').dropdown({
+        inDuration: 300,
+        outDuration: 225,
+        constrain_width: true, // Does not change width of dropdown to that of the activator
+        hover: false, // Activate on hover
+        gutter: 0, // Spacing from edge
+        belowOrigin: true // Displays dropdown below the button
+    });
     
   $('#progress').hide()
-
+    
 });
 
 

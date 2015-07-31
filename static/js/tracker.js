@@ -112,6 +112,10 @@ $(document).ready(function(){
         e.preventDefault();
         loadMainContent('All');
     });
+    $(document.body).on('click', '#sort-tag', function(e) {
+       e.preventDefault();
+       loadMainContent('tag');
+    });
 
     $('#add_series_button').on('click', function () {
         $('.dropdown-sites').dropdown({belowOrigin: true});
@@ -368,7 +372,6 @@ $(document).ready(function(){
     
   $('.parallax').parallax();
   $('.modal-trigger').leanModal();
-  $('#progress').hide()
   $('select').not('.disabled').material_select();
   $('.dropdown-sites').dropdown({
         inDuration: 300,
@@ -378,6 +381,8 @@ $(document).ready(function(){
         gutter: 0, // Spacing from edge
         belowOrigin: true // Displays dropdown below the button
     });
+    
+  $('#progress').hide()
     
 });
 

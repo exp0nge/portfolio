@@ -61,8 +61,11 @@ def get_series_as_json(request):
         if request.GET.get('sort') == 'All':
             _series = all_series
         elif request.GET.get('sort'):
-            weekday = request.GET.get('sort')
-            _series = all_series.filter(release_day=weekday)
+            sort_type = request.GET.get('sort')
+            if sort_type == 'tag':
+                _series = all_series.order_by('tag')
+            else:
+                _series = all_series.filter(release_day=sort_type)
         else:
             _series = all_series
 
