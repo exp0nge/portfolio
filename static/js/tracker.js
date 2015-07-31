@@ -33,9 +33,14 @@ $(document).ready(function(){
         goal.setHours(goalTime[0]);
         goal.setMinutes(goalTime[1]);
         goal.setSeconds(goalTime[2]);
-
-        remaining.setMilliseconds(now - goal);
-        return dayDiff + ' Days, ' + remaining.getHours().toString() + ' H, ' + remaining.getMinutes().toString() + ' Min';
+        
+        if(now.getDay() == goalDay){
+            remaining.setMilliseconds(now - goal);
+            return remaining.getHours().toString() + ' H, ' + remaining.getMinutes().toString() + ' Min';
+        }
+        else{
+            return goalTime[3].toString(); 
+        }
     };
 
     var cardHtml = function (cover_image_url, release_day, title, series_ID, current_episode, stream_site, time, season) {
@@ -65,7 +70,7 @@ $(document).ready(function(){
         }
 
         return mainBody;
-};
+    };
     var leftContentCount = 0;
     var rightContentCount = 0;
     var loadMainContent = function (sort, query) {

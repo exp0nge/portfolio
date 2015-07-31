@@ -19,21 +19,6 @@ def index(request):
     if request.GET.get('new') == 'True':
         context_dict['newUser'] = True
 
-    all_series = Series.objects.filter(submitted_user=request.user)
-    _series = None
-
-    if request.GET.get('sort'):
-        weekday = request.GET.get('sort')
-        filtered_series = []
-        for a_series in all_series:
-            if a_series.release_day == weekday or a_series.release_day == 'UNKNOWN':
-                filtered_series.append(a_series)
-        context_dict['series_list'] = filtered_series
-    elif request.GET.get('sort') == 'All':
-        context_dict['series_list'] = all_series
-    else:
-        context_dict['series_list'] = all_series
-
     if request.GET.get('newCard'):
         context_dict['newCard'] = request.GET.get('newCard')
 
