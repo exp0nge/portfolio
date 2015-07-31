@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('.parallax').parallax();
+    
     $("#preloader-form").hide();
     $('#menu-up').show();
 

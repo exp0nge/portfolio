@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('.parallax').parallax();
+    
     $("#preloader-form").hide();
     $('#menu-up').show();
 
@@ -170,6 +170,10 @@ $(document).ready(function(){
             success: function (response) {
                 $('div[series-id="' + PK + '"]').html(cardHtml(response.cover_image_url, response.release_day, response.title,
                     response.id, response.current_episode, response.stream_site, response.time, response.season));
+                $('.series-time').each(function () {
+                    var remaining = timer($('div[series-id="' + PK + '"] a.series-time').attr('time'));
+                    $('div[series-id="' + PK + '"] a.series-time').html(remaining);
+                });
             },
             error: function (response) {
                 console.log(response);
@@ -280,7 +284,7 @@ $(document).ready(function(){
     $(document.body).on('click', '.update-form', function (e) {
     e.preventDefault();
     var updateSeriesPK = $(this).attr('pk');
-        var title = $('div[series-id="' + updateSeriesPK + '"]').attr('title');
+    var title = $('div[series-id="' + updateSeriesPK + '"]').attr('title');
     $.get('/tracker/update/' + updateSeriesPK, function(data){
       $('#update-series-modal-content').html(data);
       $('select').material_select();
@@ -367,9 +371,9 @@ $(document).ready(function(){
     // Initialize
     loadMainContent(dayArray[now.getDay()]);
     
-    
+  $('.parallax').parallax();
   $('#progress').hide()
-
+    
 });
 
 
