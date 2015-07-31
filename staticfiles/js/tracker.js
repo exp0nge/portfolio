@@ -1,7 +1,6 @@
 $(document).ready(function(){
-
+    $('.parallax').parallax();
     $("#preloader-form").hide();
-    $("#progress").hide();
     $('#menu-up').show();
 
 
@@ -18,9 +17,9 @@ $(document).ready(function(){
         'SUNDAY': 0, 'MONDAY': 1, 'TUESDAY': 2, 'WEDNESDAY': 3, 'THURSDAY': 4, 'FRIDAY': 5, 'SATURDAY': 6,
         'UNKNOWN': -1
     };
+    var now = new Date();
     var timer = function (goalTime) {
         goalTime = goalTime.split(':');
-        var now = new Date();
         var goal = new Date();
         var remaining = new Date();
         var goalDay = dayReverse[goalTime[3]];
@@ -70,7 +69,7 @@ $(document).ready(function(){
         }
 
         return mainBody;
-};
+    };
     var leftContentCount = 0;
     var rightContentCount = 0;
     var loadMainContent = function (sort, query) {
@@ -366,7 +365,10 @@ $(document).ready(function(){
 
 
     // Initialize
-    loadMainContent('All');
+    loadMainContent(dayArray[now.getDay()]);
+    
+    
+  $('#progress').hide()
 
 });
 
