@@ -1,4 +1,5 @@
 import json
+from collections import OrderedDict
 
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -64,12 +65,13 @@ def get_series_as_json(request):
             sort_type = request.GET.get('sort')
             if sort_type == 'tag':
                 _series = all_series.order_by('tag')
+                print _series
             else:
                 _series = all_series.filter(release_day=sort_type)
         else:
             _series = all_series
 
-        jsonify_series = {}
+        jsonify_series = OrderedDict()
         for each_series in _series:
             jsonify_series[each_series.title] = {
                 "id": each_series.id,
@@ -83,7 +85,7 @@ def get_series_as_json(request):
                 "time": each_series.time.isoformat(),
                 "season": each_series.season
             }
-
+            
         return HttpResponse(json.dumps(jsonify_series), content_type='application/json')
 
 

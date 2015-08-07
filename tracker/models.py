@@ -54,7 +54,6 @@ class Series(models.Model):
 
     class Meta:
         verbose_name_plural = 'series'
-        ordering = ('tag',)
 
 
 def get_wiki_description(title):

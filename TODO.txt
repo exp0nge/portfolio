@@ -14,4 +14,4 @@ http://materializecss.com/pagination.html#! or http://materializecss.com/scrollf
 
 FIX
 -------
-+ results not in order
++ results/tag-sort not in order
