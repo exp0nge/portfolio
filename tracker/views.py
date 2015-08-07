@@ -229,3 +229,16 @@ def fuzzy_series_search(request):
                 json.dumps({0: 'success', 'results': series_id}), content_type='application/json')
         except search.NoResultError:
             return HttpResponse(json.dumps({0: 'failure'}), content_type='application/json')
+            
+
+@login_required()
+def make_public(request):
+    if request.method == 'POST':
+        series = Series.objects.get(pk=request.GET.get('id'))
+        if series.public:
+            series.public = False
+        else:
+            series.public = True
+        series.save()
+
+        return HttpResponse(series.public)

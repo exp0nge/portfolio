@@ -1,10 +1,8 @@
-+ Better image search
-+ Remove favs (userprofile?)
-
-
 __future__
 + smart tag suggestions
-
++ Better image search
++ Remove favs (userprofile?)
++ roll through public episodes
 
 
 http://formtypemaker.appspot.com/

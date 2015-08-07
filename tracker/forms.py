@@ -24,6 +24,7 @@ class SeriesForm(forms.ModelForm):
             field.error_messages = {'required':'{fieldname} is required.'.format(
                 fieldname=field.label.upper())}
 
+
 class FavoriteSitesForm(forms.ModelForm):
     class Meta:
         model = FavoriteSites

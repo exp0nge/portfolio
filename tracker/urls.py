@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^get_series_as_json/$', views.get_series_as_json, name='get_series_as_json'),
     url(r'^get_a_series/$', views.series_by_id_as_json, name='get_a_series_json'),
     url(r'^search/$', views.fuzzy_series_search, name='fuzzy_series_search'),
+    url(r'^share_series/$', views.make_public, name='make_public'),
 ]

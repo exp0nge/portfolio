@@ -62,6 +62,9 @@
 </footer>
     {% endblock %}
    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+     <div class="progress fixed red" id="progress">
+    <div class="indeterminate fixed orange"></div>
+    </div>
     <a class="btn-floating btn-large red {% if not user.is_authenticated %}disabled{% endif %}">
       <i class="large material-icons">more_vert</i></a>
     <ul id='floaty-side-nav'>
@@ -76,10 +79,6 @@
         <li><a href="/tracker/#series-deck" class="waves-effect waves-circle waves-light btn-floating blue" id="home">
             <i class="material-icons">home</i></a></li>
     </ul>
-    </br>
-    <div class="progress fixed red" id="progress">
-    <div class="indeterminate fixed orange"></div>
-    </div>
   </div>
   
   <!-- Modal Structure -->

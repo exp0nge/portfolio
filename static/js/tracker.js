@@ -189,7 +189,7 @@ $(document).ready(function(){
             type: "GET",
             data: {pk: pk},
             success: function (response) {
-                $("#ep-number-" + pk).html(response)
+                $("#ep-number-" + pk).html(response);
             }
         });
     });
@@ -201,14 +201,18 @@ $(document).ready(function(){
 
     $(document.body).on('click', '.settings-trigger', function () {
         var series_ID = $(this).attr('series-id');
+    
         $('li[series-id=' + series_ID + ']').html(
             '<a href="#" class="waves-effect waves-light btn btn-floating right clear-button" series-id="' + series_ID + '">' +
             '<i class="material-icons">undo</i></a></br>' +
             '<a class="waves-effect waves-light btn update-form" ' +
-            'pk="' + series_ID + '"><i class="material-icons">edit</i></a>' +
-            '<a href="#" class="waves-effect waves-light btn"><i class="material-icons">share</i></a>' +
+            'pk="' + series_ID + '"><i class="material-icons">edit</i></a>' + 
+            '<a role="button" href="#" class="waves-effect waves-light btn share-form tooltipped" pk="' + 
+            series_ID + '" data-position="bottom" data-delay="50" data-tooltip="Toggle public/private">' +
+            '<i class="material-icons">public</i></a>' +
             '<a class="waves-effect waves-light btn series-delete red" series-id="' + series_ID + '">' +
             '<i class="material-icons">delete</i></a>');
+        $('.tooltipped').tooltip();
     });
 
 
@@ -216,14 +220,38 @@ $(document).ready(function(){
         var pk = $(this).attr("series-id");
 
         $.ajax({
-    url: "/tracker/delete/" + pk,
-    type: "GET",
-    data: {pk: pk},
-    success: function(response){
-        $('div[series-id=' + pk + ']').remove();
-        $('li[series-id=' + pk + ']').remove();
-      Materialize.toast('<span>' + response + ' deleted.</span>', 4000);
-    }
+            url: "/tracker/delete/" + pk,
+            type: "GET",
+            data: {pk: pk},
+            success: function(response){
+                $('div[series-id=' + pk + ']').remove();
+                $('li[series-id=' + pk + ']').remove();
+              Materialize.toast('<span>' + response + ' deleted.</span>', 4000);
+            }
+        });
+    });
+    
+    $(document.body).on('click', '.share-form', function(e) {
+        e.preventDefault();
+        var pk = $(this).attr("pk");
+        var $i = $(this).children('i:first');
+        
+        $.ajax({
+            url: '/tracker/share_series/?id=' + pk,
+            type: "POST",
+            data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
+            success: function(response){
+                $i.html('check');
+                if (response == 'True'){
+                    Materialize.toast('<span>Broadcasting series.</span>', 3000);
+                }
+                else{
+                    Materialize.toast('<span>Series broadcasting stopped.</span>', 3000);
+                }
+            },
+            error: function(response){
+                console.log(response);
+            }
         });
     });
 
@@ -285,41 +313,41 @@ $(document).ready(function(){
     });
 
     $(document.body).on('click', '.update-form', function (e) {
-    e.preventDefault();
-    var updateSeriesPK = $(this).attr('pk');
-    var title = $('div[series-id="' + updateSeriesPK + '"]').attr('title');
-    $.get('/tracker/update/' + updateSeriesPK, function(data){
-      $('#update-series-modal-content').html(data);
-      $('select').material_select();
-      $('#update-button').html('<i class="material-icons">check</i>');
-      $('#update-series-modal').openModal();
-      $('input').focus();
-      $('#update-series-form').on('submit', function(e) {
-            e.preventDefault();
-          $('#update-button').hide();
-            $.ajax({
-              url: '/tracker/update/' + updateSeriesPK,
-              type: 'POST',
-              data: $('#update-series-form').serialize(),
-              success: function(response){
-                if(response.includes('collection-item')){
-                  $('#update-button').show();
-                  $('#error-div').html($(response).find('.collection').html());
-                }
-                else{
-                  $('#update-series-modal').closeModal();
-                  reloadCard(updateSeriesPK);
-                  Materialize.toast('<span>' + title + ' updated.</span>', 4000);
-                }
-              },
-              error: function(response){
-                $('#update-button').show();
-                alert('Error');
-              }
+        e.preventDefault();
+        var updateSeriesPK = $(this).attr('pk');
+        var title = $('div[series-id="' + updateSeriesPK + '"]').attr('title');
+        $.get('/tracker/update/' + updateSeriesPK, function(data){
+          $('#update-series-modal-content').html(data);
+          $('select').material_select();
+          $('#update-button').html('<i class="material-icons">check</i>');
+          $('#update-series-modal').openModal();
+          $('input').focus();
+          $('#update-series-form').on('submit', function(e) {
+                e.preventDefault();
+              $('#update-button').hide();
+                $.ajax({
+                  url: '/tracker/update/' + updateSeriesPK,
+                  type: 'POST',
+                  data: $('#update-series-form').serialize(),
+                  success: function(response){
+                    if(response.includes('collection-item')){
+                      $('#update-button').show();
+                      $('#error-div').html($(response).find('.collection').html());
+                    }
+                    else{
+                      $('#update-series-modal').closeModal();
+                      reloadCard(updateSeriesPK);
+                      Materialize.toast('<span>' + title + ' updated.</span>', 4000);
+                    }
+                  },
+                  error: function(response){
+                    $('#update-button').show();
+                    alert('Error');
+                  }
+                });
             });
+    
         });
-
-    });
     });
 
 
@@ -373,22 +401,21 @@ $(document).ready(function(){
 
     // Initialize
     loadMainContent(dayArray[now.getDay()]);
+    $('.parallax').parallax();
+    $('.modal-trigger').leanModal();
+    $('select').not('.disabled').material_select();
+    $('.dropdown-sites').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrain_width: true, // Does not change width of dropdown to that of the activator
+            hover: false, // Activate on hover
+            gutter: 0, // Spacing from edge
+            belowOrigin: true // Displays dropdown below the button
+        });
     
-  $('.parallax').parallax();
-  $('.modal-trigger').leanModal();
-  $('select').not('.disabled').material_select();
-  $('.dropdown-sites').dropdown({
-        inDuration: 300,
-        outDuration: 225,
-        constrain_width: true, // Does not change width of dropdown to that of the activator
-        hover: false, // Activate on hover
-        gutter: 0, // Spacing from edge
-        belowOrigin: true // Displays dropdown below the button
+    $(window).load(function(){
+        $('#progress').hide();
     });
-    
-  $(window).load(function(){
-      $('#progress').hide();
-  });
     
 });
 

@@ -8,6 +8,12 @@ temp_user = User
 temp_time = time(0)
 
 # Create your models here.
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    
+    def __unicode__(self):
+        return str(self.user)
+    
 class FavoriteSites(models.Model):
     site_url = models.URLField(default='')
     submitted_user = models.ForeignKey(User, default=temp_user)
@@ -41,6 +47,7 @@ class Series(models.Model):
     tag = models.CharField(max_length=30, help_text='Relevent tag for the series, e.g., anime. Helps with generating a cover image.', default='anime')
     time = models.TimeField(blank=True, help_text='Time when the show airs', default=temp_time)
     season = models.IntegerField(default=1, blank=True, help_text='Season currently on.')
+    public = models.BooleanField(default=False, blank=True)
     
     def __unicode__(self):
         return self.title
