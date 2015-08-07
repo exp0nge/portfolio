@@ -403,7 +403,9 @@ $(document).ready(function(){
         $.get('/tracker/public_series_list/', function(data) {
             for(var i = 0; i < data.length; i ++){
                 $('#discover-list').append('<li class="collection-item">' + 
-                                            data[i].title + ' - ' + data[i].release_day);
+                                            '<a href="/tracker/get_a_series/?pk=' +
+                                            data[i].id + '">' + data[i].title + '</a>' +
+                                            ' - ' + data[i].release_day);
             }
         });
     };
