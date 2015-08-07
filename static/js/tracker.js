@@ -94,6 +94,7 @@ $(document).ready(function(){
                     var remaining = timer($(this).attr('time'));
                     $(this).html(remaining);
                 });
+                $('#progress-2').hide();
 
             },
             error: function (response) {
@@ -104,17 +105,20 @@ $(document).ready(function(){
     };
 
     $(document.body).on('click', '#sort-today', function (e) {
+        $('#progress-2').show();
         e.preventDefault();
         var day = new Date().getDay();
         loadMainContent(dayArray[day]);
     });
     $(document.body).on('click', '#sort-all', function (e) {
+        $('#progress-2').show();
         e.preventDefault();
         loadMainContent('All');
     });
     $(document.body).on('click', '#sort-tag', function(e) {
-       e.preventDefault();
-       loadMainContent('tag');
+        $('#progress-2').show();
+        e.preventDefault();
+        loadMainContent('tag');
     });
 
     $('#add_series_button').on('click', function () {
@@ -382,7 +386,8 @@ $(document).ready(function(){
         belowOrigin: true // Displays dropdown below the button
     });
     
-  $('#progress').hide()
+  $('#progress').hide();
+  $('#progress-2').hide();
     
 });
 

@@ -1,6 +1,5 @@
 + Better image search
 + Remove favs (userprofile?)
-+ sort by type
 
 
 __future__
@@ -11,6 +10,7 @@ __future__
 http://formtypemaker.appspot.com/
 
 http://materializecss.com/pagination.html#! or http://materializecss.com/scrollfire.html (pref)
+
 
 FIX
 -------
