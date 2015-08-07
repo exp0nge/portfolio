@@ -42,25 +42,41 @@
   <main>
     </div>
   <div class="parallax-container">
-    {% if user.is_authenticated %}
-     <ul class="left collapsible popout" id="discover-list" data-collapsible="accordion">
+    <div class="parallax">
+      <img src="{% static 'images/parallax-obito.jpg' %}">
+      </div>
+  </div>
+    <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a class="active" href="#main">My Series</a></li>
+        <li class="tab col s3"><a  href="#explore" id="explore-link">Explore</a></li>
+      </ul>
+    </div>
+    <div class="row container">
+    <div class="col s12 m5">
+        <div class="card-panel red">
+          <span class="white-text">Hello, {{username}}!
+          </span>
+        </div>
+      </div> 
+  </div>
+      <div class="container" id="main">
+      <div class="section">
+       {% block main_content %}{% endblock %}
+        </div>
+      </div>
+    <div id="explore" class="col s8 offset-s2 container">
+      <div class="section">
+     <ul class="collapsible popout" id="discover-list" data-collapsible="accordion">
         <li class="card-panel"><h4><a href="#">
         <i class="material-icons prefix">public</i></a>
         Explore</h4></li>
       </ul>
-    {% endif %}
-    <div class="parallax">
-      
-      <img src="{% static 'images/parallax-obito.jpg' %}">
-      </div>
+    </div>
+    </div>
   </div>
-  <div class="container">
-    <div class="section">
-      
-       {% block main_content %}{% endblock %}
-       
-        </div>
-      </div>
+  
       <div height="100px" class="container"></div>
       </main>
 <footer class="page-footer black">

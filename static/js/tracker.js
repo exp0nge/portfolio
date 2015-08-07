@@ -431,7 +431,10 @@ $(document).ready(function(){
             belowOrigin: true // Displays dropdown below the button
         });
     
-    seriesSlider();
+    $('#explore-link').on('click', function() {
+        seriesSlider();
+        $('#explore-link').off();
+    });
     
     $(window).load(function(){
         $('#progress').hide();
