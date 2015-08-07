@@ -39,13 +39,13 @@ def get_series_as_json(request):
         if request.GET.get('q'):
             query = request.GET.get('q')
             results = search.fuzzy_series_search(all_series, query)
-            jsonify_results = {}
+            jsonify_results = OrderedDict()
             _series = []
             for title in results:
                 for series in all_series.filter(title=title):
                     _series.append(series)
             for each_series in _series:
-                jsonify_results[each_series.id] = {
+                jsonify_results[each_series.title] = {
                     "id": each_series.id,
                     "title": each_series.title,
                     "description": each_series.description,

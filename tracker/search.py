@@ -1,5 +1,6 @@
 import urllib2
 import urllib
+from collections import OrderedDict
 
 from ipware.ip import get_ip
 import simplejson
@@ -46,4 +47,4 @@ def fuzzy_series_search(list_of_series, query):
     filtered_list = []
     for result in series_list:
         filtered_list.append(result[0])
-    return set(filtered_list)
+    return filtered_list
