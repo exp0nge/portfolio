@@ -22,9 +22,6 @@
 </head>
 <body>
   <header>
-  <div class="progress fixed red" id="progress">
-    <div class="indeterminate fixed orange"></div>
-  </div>
   {% block iframe_block %}
 <div class="navbar-fixed">
   <nav>
@@ -65,7 +62,8 @@
 </footer>
     {% endblock %}
    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red {% if not user.is_authenticated %}disabled{% endif %}"><i class="large material-icons">more_vert</i></a>
+    <a class="btn-floating btn-large red {% if not user.is_authenticated %}disabled{% endif %}">
+      <i class="large material-icons">more_vert</i></a>
     <ul id='floaty-side-nav'>
         {% if user.is_authenticated %}
         <li><a href="#add_series_modal" class="waves-effect waves-circle waves-light btn-floating modal-trigger red" id='add_series_button'>
@@ -78,9 +76,11 @@
         <li><a href="/tracker/#series-deck" class="waves-effect waves-circle waves-light btn-floating blue" id="home">
             <i class="material-icons">home</i></a></li>
     </ul>
-    
+    </br>
+    <div class="progress fixed red" id="progress">
+    <div class="indeterminate fixed orange"></div>
+    </div>
   </div>
-  
   
   <!-- Modal Structure -->
 <div id="add_series_modal" class="modal">
@@ -181,7 +181,6 @@
 </div>
 </form>
  </div>
-  
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
    <script type="text/javascript" src="{% static 'js/tracker.js' %}"></script>

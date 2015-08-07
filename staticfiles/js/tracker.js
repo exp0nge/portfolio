@@ -386,8 +386,9 @@ $(document).ready(function(){
         belowOrigin: true // Displays dropdown below the button
     });
     
-  $('#progress').hide();
-  $('#progress-2').hide();
+  $(window).load(function(){
+      $('#progress').hide();
+  });
     
 });
 
