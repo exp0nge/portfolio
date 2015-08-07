@@ -43,13 +43,11 @@
     </div>
   <div class="parallax-container">
     {% if user.is_authenticated %}
-      <div class="fixed">
-     <ul class="collection with-header left" id="discover-list">
-        <li class="collection-header"><h4><a href="{% url 'public_series_list' %}"
+     <ul class="left collapsible popout" id="discover-list" data-collapsible="accordion">
+        <li class="card-panel"><h4><a href="#">
         <i class="material-icons prefix">public</i></a>
         Explore</h4></li>
       </ul>
-      </div>
     {% endif %}
     <div class="parallax">
       

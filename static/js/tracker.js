@@ -402,12 +402,17 @@ $(document).ready(function(){
         
         $.get('/tracker/public_series_list/', function(data) {
             for(var i = 0; i < data.length; i ++){
-                $('#discover-list').append('<li class="collection-item">' + 
-                                            '<a href="/tracker/get_a_series/?pk=' +
-                                            data[i].id + '">' + data[i].title + '</a>' +
-                                            ' - ' + data[i].release_day);
+                $('#discover-list').append('<li><div class="collapsible-header"><i class="material-icons">explore</i>' +
+                                            data[i].title + '</div>' + 
+                                            '<div class="collapsible-body card-panel">' +
+                                            data[i].title + '</a>' +
+                                            ' - ' + data[i].release_day +
+                                            '</div></li>');
             }
+            $('.collapsible').collapsible();
         });
+        
+        
     };
 
 
@@ -415,6 +420,7 @@ $(document).ready(function(){
     loadMainContent(dayArray[now.getDay()]);
     $('.parallax').parallax();
     $('.modal-trigger').leanModal();
+    $('.collapsible').collapsible();
     $('select').not('.disabled').material_select();
     $('.dropdown-sites').dropdown({
             inDuration: 300,
@@ -426,6 +432,7 @@ $(document).ready(function(){
         });
     
     seriesSlider();
+    
     $(window).load(function(){
         $('#progress').hide();
     });
