@@ -1,5 +1,6 @@
 import json
 from collections import OrderedDict
+import random
 
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -242,3 +243,22 @@ def make_public(request):
         series.save()
 
         return HttpResponse(series.public)
+
+
+@login_required()
+def get_public_series_list(request):
+    if request.method == 'GET':
+        _series = sorted(Series.objects.filter(public=True).order_by('?')[:5], key=lambda x: random.random())
+        jsonify_series = []
+        for each_series in _series:
+            jsonify_series.append(dict({
+                "id": each_series.id,
+                "title": each_series.title,
+                "description": each_series.description,
+                "release_day": each_series.release_day,
+                "cover_image_url": each_series.cover_image_url,
+                "tag": each_series.tag,
+                "time": each_series.time.isoformat()
+            }))
+            
+        return HttpResponse(json.dumps(jsonify_series), content_type='application/json')

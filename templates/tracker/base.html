@@ -36,14 +36,26 @@
         </form>
         {% endif %}
     </div>
+    
   </nav>
   </header>
   <main>
     </div>
   <div class="parallax-container">
-    <div class="parallax"><img src="{% static 'images/parallax-obito.jpg' %}"></div>
+    {% if user.is_authenticated %}
+      <div class="fixed">
+     <ul class="collection with-header left" id="discover-list">
+        <li class="collection-header"><h4><a href="{% url 'public_series_list' %}"
+        <i class="material-icons prefix">public</i></a>
+        Explore</h4></li>
+      </ul>
+      </div>
+    {% endif %}
+    <div class="parallax">
+      
+      <img src="{% static 'images/parallax-obito.jpg' %}">
+      </div>
   </div>
-
   <div class="container">
     <div class="section">
       

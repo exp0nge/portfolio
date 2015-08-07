@@ -397,6 +397,16 @@ $(document).ready(function(){
             }
         });
     });
+    
+    var seriesSlider = function(){
+        
+        $.get('/tracker/public_series_list/', function(data) {
+            for(var i = 0; i < data.length; i ++){
+                $('#discover-list').append('<li class="collection-item">' + 
+                                            data[i].title + ' - ' + data[i].release_day);
+            }
+        });
+    };
 
 
     // Initialize
@@ -413,6 +423,7 @@ $(document).ready(function(){
             belowOrigin: true // Displays dropdown below the button
         });
     
+    seriesSlider();
     $(window).load(function(){
         $('#progress').hide();
     });
