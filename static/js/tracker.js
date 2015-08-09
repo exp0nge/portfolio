@@ -1,6 +1,7 @@
 $(document).ready(function(){
     
     $("#preloader-form").hide();
+    $('#progress-explore').hide()
     $('#menu-up').show();
 
     var dayArray = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
@@ -410,6 +411,8 @@ $(document).ready(function(){
                                             '</div></li>');
             }
             $('.collapsible').collapsible();
+            $('#progress-explore').hide();
+            
         });
         
         
@@ -432,6 +435,7 @@ $(document).ready(function(){
         });
     
     $('#explore-link').on('click', function() {
+        $('#progress-explore').show();
         seriesSlider();
         $('#explore-link').off();
     });

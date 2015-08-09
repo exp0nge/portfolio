@@ -6,12 +6,8 @@
   <div class="modal-content" id="update-series-modal-content">
   </div>
 </div>
-
 <div class="row">
-  <div class="progress" id="progress-2">
-      <div class="indeterminate"></div>
-  </div>
-      
+
     <a class="btn-floating dropdown-button btn right" data-activates='filter'><i class="material-icons">sort</i></a>
 
     <ul id='filter' class='dropdown-content'>
@@ -27,4 +23,12 @@
     <div id="series-deck" class="col s6" style="width: 50%;"></div>
     <div id="series-deck2" class="col s6" style="width: 50%;"></div>
 </div>
+{% endblock %}
+{% block explore_block %}
+<ul class="collapsible popout" id="discover-list" data-collapsible="accordion">
+        <li class="card-panel"><h4><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Hit the settings icon, and then the globe icon to make your series public.">
+        <i class="material-icons prefix">public</i></a>
+        See what others are tracking</h4></li>
+      </ul>
+      
 {% endblock %}

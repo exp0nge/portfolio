@@ -3,6 +3,7 @@ __future__
 + Better image search
 + Remove favs (userprofile?)
 + roll through public episodes
++ Chat
 
 
 http://formtypemaker.appspot.com/

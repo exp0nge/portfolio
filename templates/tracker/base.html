@@ -62,17 +62,19 @@
       </div> 
   </div>
       <div class="container" id="main">
+            <div class="progress" id="progress-2">
+                <div class="indeterminate"></div>
+            </div>
       <div class="section">
        {% block main_content %}{% endblock %}
         </div>
       </div>
     <div id="explore" class="col s8 offset-s2 container">
       <div class="section">
-     <ul class="collapsible popout" id="discover-list" data-collapsible="accordion">
-        <li class="card-panel"><h4><a href="#">
-        <i class="material-icons prefix">public</i></a>
-        Explore</h4></li>
-      </ul>
+        <div class="progress" id="progress-explore">
+                <div class="indeterminate"></div>
+            </div>
+     {% block explore_block %}{% endblock %}
     </div>
     </div>
   </div>
