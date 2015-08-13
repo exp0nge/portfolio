@@ -144,6 +144,7 @@ $(document).ready(function(){
         // Tag suggestions
         var tag_list = ['anime', 'tv series', 'manga'];
         $('.dropdown-tag').dropdown({belowOrigin: true});
+        $('#tags-dropdown').html('');
         for (var i = 0; i < tag_list.length; i++) {
             $('#tags-dropdown').append('<li><a class="tag-item" href="#!">' + tag_list[i] + '</a></li>');
         }

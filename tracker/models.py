@@ -24,6 +24,17 @@ class FavoriteSites(models.Model):
     class Meta:
         verbose_name_plural = 'Favorite Sites'
 
+def get_wiki_description(title):
+    url = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + urllib.quote(title)
+    response = urllib.urlopen(url)
+    data = json.loads(response.read())
+    description = 'No description provided. I was unable to autogenerate one.'
+    try:
+        description = data['query']['pages'].values()[0]['extract']
+    except KeyError:
+        pass
+    return description
+
 
 class Series(models.Model):
     DAYS_CHOICES = (
@@ -62,14 +73,3 @@ class Series(models.Model):
     class Meta:
         verbose_name_plural = 'series'
 
-
-def get_wiki_description(title):
-    url = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + urllib.quote(title)
-    response = urllib.urlopen(url)
-    data = json.loads(response.read())
-    description = 'No description provided. I was unable to autogenerate one.'
-    try:
-        description = data['query']['pages'].values()[0]['extract']
-    except KeyError:
-        pass
-    return description

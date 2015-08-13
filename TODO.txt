@@ -1,8 +1,8 @@
 __future__
++ shelve
 + smart tag suggestions
 + Better image search
 + Remove favs (userprofile?)
-+ roll through public episodes
 + Chat
 
 
