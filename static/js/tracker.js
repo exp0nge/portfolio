@@ -409,6 +409,8 @@ $(document).ready(function(){
                                             '<div class="collapsible-body card-panel">' +
                                             data[i].title + '</a>' +
                                             ' - ' + data[i].release_day +
+                                            '<div>Submitted by: ' + 
+                                            data[i].user + '</div>' +
                                             '</div></li>');
             }
             $('.collapsible').collapsible();

@@ -258,7 +258,8 @@ def get_public_series_list(request):
                 "release_day": each_series.release_day,
                 "cover_image_url": each_series.cover_image_url,
                 "tag": each_series.tag,
-                "time": each_series.time.isoformat()
+                "time": each_series.time.isoformat(),
+                "user": each_series.submitted_user.username
             }))
             
         return HttpResponse(json.dumps(jsonify_series), content_type='application/json')
