@@ -1,8 +1,9 @@
+import urllib
+import json
+from datetime import time
+
 from django.db import models
 from django.contrib.auth.models import User
-
-import urllib, json
-from datetime import time
 
 temp_user = User
 temp_time = time(0)

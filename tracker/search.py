@@ -1,6 +1,5 @@
 import urllib2
 import urllib
-from collections import OrderedDict
 
 from ipware.ip import get_ip
 import simplejson

@@ -1,7 +1,7 @@
 $(document).ready(function(){
     
     $("#preloader-form").hide();
-    $('#progress-explore').hide()
+    $('#progress-explore').hide();;;
     $('#menu-up').show();
 
     var dayArray = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];

@@ -300,7 +300,6 @@ jQuery.extend( jQuery.easing,
     }), v
 }(window.jQuery || window.Zepto || window, window, document)
 });
-;
 !function (a, b, c, d) {
     "use strict";
     function k(a, b, c) {
@@ -5741,9 +5740,7 @@ DatePicker.prototype.navigate = function( type, value, options ) {
 
     return value
 };; //DatePicker.prototype.navigate
-
-
-/**
+    /**
  * Normalize a date by setting the hours to midnight.
  */
 DatePicker.prototype.normalize = function( value/*, options*/ ) {
@@ -5907,9 +5904,7 @@ DatePicker.prototype.validate = function( type, dateObject, options ) {
     // Return the date object settled on.
     return dateObject
 };; //DatePicker.prototype.validate
-
-
-/**
+    /**
  * Check if a date is disabled.
  */
 DatePicker.prototype.disabled = function( dateToVerify ) {
