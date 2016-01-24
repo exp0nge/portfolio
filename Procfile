@@ -1,1 +1,1 @@
-web: gunicorn series-tracker-dev.wsgi --log-file -
+web: python manage.py runserver --log-file -
