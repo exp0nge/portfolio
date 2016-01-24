@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Series Tracker</title>
-  
+
   <link rel="stylesheet" href="{% static 'css/materialize.css' %}">
   <link rel="stylesheet" href="{% static 'css/tracker.css' %}" type="text/css" />
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -36,7 +36,7 @@
         </form>
         {% endif %}
     </div>
-    
+
   </nav>
   </header>
   <main>
@@ -53,14 +53,16 @@
         <li class="tab col s3"><a  href="#explore" id="explore-link">Explore</a></li>
       </ul>
     </div>
+    {% if user.is_authenticated %}
     <div class="row container">
     <div class="col s12 m5">
         <div class="card-panel red">
           <span class="white-text">Hello, {{username}}!
           </span>
         </div>
-      </div> 
+      </div>
   </div>
+  {% endif %}
       <div class="container" id="main">
             <div class="progress" id="progress-2">
                 <div class="indeterminate"></div>
@@ -78,7 +80,7 @@
     </div>
     </div>
   </div>
-  
+
       <div height="100px" class="container"></div>
       </main>
 <footer class="page-footer black">
@@ -109,7 +111,7 @@
             <i class="material-icons">home</i></a></li>
     </ul>
   </div>
-  
+
   <!-- Modal Structure -->
 <div id="add_series_modal" class="modal">
 <div class="modal-content">
@@ -140,7 +142,7 @@
   <div class="input-field col s6">
     {{ form.release_day }}
     <label for="{{ form.release_day.id_for_label }}">Day*</label>
-    
+
   </div>
 </div>
 <div class="row">
@@ -168,7 +170,7 @@
   </div>
 </div>
 <div class="row">
-  
+
   <div class="input-field col s6">
     <i class="material-icons prefix">videocam</i>
      <input class="dropdown-sites" placeholder="http://" id="stream_site_id" name="stream_site" type="url" data-activates='fav-sites-dropdown'>
@@ -192,7 +194,7 @@
   <div class="input-field col s6">
     <i class="material-icons prefix">subject</i>
     {{ form.description }}
-   
+
   </div>
    <button id="add-series-button" name="submit" type="submit" value="Submit" class="waves-effect waves-green btn-large right" />
   <i class="material-icons">check</i></button>
@@ -217,11 +219,11 @@
             {% if form_errors %}
             document.getElementById("add_series_button").click();
             {% endif %}
-            
+
             {% if newCard %}
             Materialize.toast('<span>New series, {{newCard}}, added!</span>', 6000);
             {% endif %}
-            
+
             {% if newUser %}
             Materialize.toast('<span>Hover over the button on the bottom-right, and click the plus to add a series. Swipe to dismiss.</span>', 9000);
             {% endif %}
