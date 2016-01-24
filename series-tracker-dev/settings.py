@@ -24,11 +24,16 @@ SECRET_KEY = None
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = None
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = None
 
-with open('secret.txt') as f:
-    content = f.readlines()
-    SECRET_KEY = content[0]
-    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = content[1].replace('\n', '')
-    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = content[2]
+try:
+    with open('secret.txt') as f:
+        content = f.readlines()
+        SECRET_KEY = content[0]
+        SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = content[1].replace('\n', '')
+        SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = content[2]
+except IOError:
+    SECRET_KEY = os.environ['SECRET']
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_KEY']
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
