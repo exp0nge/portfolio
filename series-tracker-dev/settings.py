@@ -136,4 +136,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-ALLOWED_HOSTS = ['series-tracker-dev-exp0nge.c9.io', '0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ['series-tracker-dev-exp0nge.c9.io', '0.0.0.0', 'localhost', '127.0.0.1']

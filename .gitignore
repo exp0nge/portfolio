@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 TODO.txt
+venv
 db.sqlite
 .gitignore.swn
 .gitignore.swo
