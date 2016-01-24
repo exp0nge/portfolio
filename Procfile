@@ -1,1 +1,1 @@
-web: gunicorn series-tracker-dev.wsgi:application --log-file -
+web: gunicorn seriestrackerdev.wsgi:application --log-file -

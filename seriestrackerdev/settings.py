@@ -83,7 +83,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'series-tracker-dev.urls'
+ROOT_URLCONF = 'seriestrackerdev.urls'
 
 TEMPLATES = [
     {
@@ -103,7 +103,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'series-tracker-dev.wsgi.application'
+WSGI_APPLICATION = 'seriestrackerdev.wsgi.application'
 
 
 # Database
@@ -141,4 +141,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-ALLOWED_HOSTS = ['series-tracker-dev.herokuapp.com', '0.0.0.0', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['seriestrackerdev.herokuapp.com', '0.0.0.0', 'localhost', '127.0.0.1']
